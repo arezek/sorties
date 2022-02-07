@@ -1,0 +1,31 @@
+//______________________________________ Imports //
+
+
+//______________________________________ Variables //
+
+$couleurBody: rgb(78, 158, 250);
+$couleurHeader: rgba(30, 45, 255, 0.212);
+
+//______________________________________ Mixins //
+
+@mixin borderTest {
+    border: 2px solid black;
+}
+
+@mixin paddGeneral {
+    padding: 0.5em;
+}
+
+@mixin styleGeneral {
+    border-radius: 0.5em;
+    margin-bottom: 0.5em;
+}
+
+//**********************************************************//
+//                           CSS                            //
+//__________________________________________________________//
+
+* {
+    box-sizing: border-box;
+    padding: 0.2em;
+}
