@@ -49,4 +49,19 @@ class MainController extends AbstractController
     {
         return $this->render('main/profil/editProfil.html.twig');
     }
+
+    /**
+     * @Route("/Villes", name="main_villes")
+     */
+    public function villes(): Response
+    {
+        return $this->render('main/campus.html.twig');
+    }
+    /**
+     * @Route("/Campus", name="main_campus")
+     */
+    public function campus(): Response
+    {
+        return $this->render('main/campus.html.twig');
+    }
 }

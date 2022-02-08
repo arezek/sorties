@@ -35,13 +35,20 @@
                 </a>
             </div>
             <ul>
-                <li><a class="btnNav" href="{{ path('main_index') }}">Villes</a></li>
-                <li><a class="btnNav" href="{{ path('main_index') }}">Campus</a></li>
+                <li><a class="btnNav" href="{{ path('main_villes') }}">Villes</a></li>
+                <li><a class="btnNav" href="{{ path('main_campus') }}">Campus</a></li>
                 <li><a class="btnNav" href="{{ path('main_index') }}">Accueil</a></li>
                 <li><a class="btnNav" href="{{ path('main_profil' ,{ id : 2}) }}">Mon Profil</a></li>
                 <li><a class="btnNav" href="{{ path('main_index') }}"> Se Déconnecter</a></li>
                 <li><a class="btnNav" href="{{ path('main_index') }}"> Se Connecter</a></li>
                 <li><a class="btnNav" href="{{ path('main_index') }}"> S'inscrire</a></li>
+                <li><a class="btnNav" href="{{ path('sorties_details') }}"> afficherSorties</a></li>
+                <li><a class="btnNav" href="{{ path('sorties_cree') }}"> crée Sorties </a></li>
+                <li><a class="btnNav" href="{{ path('sorties_cancel') }}"> annuler Sorties</a></li>
+                <li><a class="btnNav" href="{{ path('sorties_edit') }}"> modifier Sorties</a></li>
+                <li><a class="btnNav" href="{{ path('sorties_history') }}"> historiques Sorties</a></li>
+
+
             </ul>
         </nav>
     </header>
