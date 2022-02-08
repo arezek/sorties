@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Repository\CampusRepository;
+use App\Repository\VilleRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -53,15 +55,30 @@ class MainController extends AbstractController
     /**
      * @Route("/Villes", name="main_villes")
      */
-    public function villes(): Response
+    public function ville(VilleRepository $villeRepository): Response
     {
-        return $this->render('main/campus.html.twig');
+        $ville = $villeRepository->findBy(['nom', 'codePostal', 25]);
+
+
+        return $this->render('main/campus.html.twig', [
+
+            "ville" => $ville
+
+        ]);
     }
     /**
      * @Route("/Campus", name="main_campus")
      */
-    public function campus(): Response
+    public function campus(CampusRepository $campusRepository): Response
     {
-        return $this->render('main/campus.html.twig');
+        $campus = $campusRepository->findBy(['nom', 25]);
+
+
+
+        return $this->render('main/campus.html.twig', [
+
+            "campus" => $campus
+
+    ]);
     }
 }
