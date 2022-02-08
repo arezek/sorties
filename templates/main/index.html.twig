@@ -3,9 +3,6 @@
 {% block title %}Accueil{% endblock %}
 
 {% block body %}
-    <style>
-        th{border: 1px solid white;}
-    </style>
 <div>
     <div>
         <h4>Date du jour : {{ dateDuJour }}</h4>
@@ -62,11 +59,11 @@
             <tr>
                 {% for i in 0..7 %}
                     {% if valeur[i] == 'Afficher' %}
-                        <td style="border: 2px solid white;">
+                        <td>
                             <a href="{{ path('app_register') }}">{{ valeur[i]}}</a>
                         </td>
                     {% else %}
-                            <td style="border: 2px solid white;">{{ valeur[i]}}</td>
+                            <td>{{ valeur[i]}}</td>
                     {% endif %}
                 {% endfor %}
             </tr>

@@ -1,15 +1,16 @@
     <header>
-        <nav>
             <div class="logoPrincipal" >
                 <a href="{{ path('main_index') }}">
                     <img class="logoPrincipalimg" src="{{ asset('img/logo/logoSortir.png')}}" title="Accueil" alt="Logo du site">
                 </a>
             </div>
+        <nav>
+            <div class="liens">
             <ul>
-                <li><a class="btnNav" href="{{ path('main_villes') }}">Villes</a></li>
-                <li><a class="btnNav" href="{{ path('main_campus') }}">Campus</a></li>
                 <li><a class="btnNav" href="{{ path('main_index') }}">Accueil</a></li>
                 <li><a class="btnNav" href="{{ path('main_profil' ,{ id : 2}) }}">Mon Profil</a></li>
+                <li><a class="btnNav" href="{{ path('main_villes') }}">Villes</a></li>
+                <li><a class="btnNav" href="{{ path('main_campus') }}">Campus</a></li>
                 <li><a class="btnNav" href="{{ path('app_logout') }}"> Se Déconnecter</a></li>
                 <li><a class="btnNav" href="{{ path('app_login') }}"> Se Connecter</a></li>
                 <li><a class="btnNav" href="{{ path('app_register') }}"> S'inscrire</a></li>
@@ -19,7 +20,7 @@
                 <li><a class="btnNav" href="{{ path('sorties_edit') }}"> modifier Sorties</a></li>
                 <li><a class="btnNav" href="{{ path('sorties_history') }}"> historiques Sorties</a></li>
                 {# {% if app.user%}<a href="{{ path('app_logout') }}">Déconnexion</a>{% endif%} #}
-
             </ul>
+            </div>
         </nav>
     </header>

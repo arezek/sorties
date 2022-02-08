@@ -2,36 +2,26 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
         <link rel="icon" type="image/png" sizes="20x20" href="img/logo/logoSortir.png">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}{{ encore_entry_link_tags('app') }}{% endblock %}
-
-        {% block javascripts %}{{ encore_entry_script_tags('app') }}        {% endblock %}
-        {# <style>
-            .logoPrincipal{display: flex;margin: 10px;justify-content: left}
-            .logoPrincipalimg{width: 100px; margin-left: -5px;}
-            header{margin-top: 15px}
-            body{background-color: #1B1B1B; margin-left: 30px; margin-right: 30px}
-            li,p,h1,h2,h3,h4,h5, div,label{color: white}
-            nav {display: flex;margin: 10px;justify-content: space-between;padding-bottom: 20px;}
-            ul {list-style-type: none;margin-top : 20px;padding: 0;overflow: auto;}
-            li {float: left;color: #000;text-decoration: none;padding: 5px;margin-right: 10px;margin-left: 10px;font-weight: bolder;}
-            li .btnNav {display: block;color: white;text-align: center;padding: 14px 16px;text-decoration: none;border-radius: 7%;}
-            li .btnNav:hover {background-color: #437d83;}
-            .btnNav:link {text-decoration: none;border: none;}
-        </style> #}
+        {# {% block stylesheets %}{{ encore_entry_link_tags('app') }}{% endblock %} #}
+        {# {% block javascripts %}{{ encore_entry_script_tags('app') }}{% endblock %} #}
         <link rel="stylesheet" href="{{ asset('../public/css/style.css') }}">
+        <title>{% block title %}Welcome!{% endblock %}</title>
     </head>
 
-    {# //_______________________________________footer #}
-    {% include "main/incl/header.html.twig" %}
 
     <body>
+    {# //_______________________________________Header #}
+    {% include "main/incl/header.html.twig" %}
+
+    {# //_______________________________________Section #}
+    <section>
         {% block body %}{% endblock %}
+    </section>
+    {# //_______________________________________Footer #}
+    {% include "main/incl/footer.html.twig" %}
     </body>
     
-    {# //_______________________________________footer #}
-    {% include "main/incl/footer.html.twig" %}
 
 </html>
