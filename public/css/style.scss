@@ -3,7 +3,7 @@
 
 //______________________________________ Variables //
 
-$couleurBody: rgb(78, 158, 250);
+$couleurSectionPrincipale: rgba(34, 34, 34, 0.356);
 $couleurHeader: rgba(30, 45, 255, 0.212);
 
 //______________________________________ Mixins //
@@ -12,9 +12,6 @@ $couleurHeader: rgba(30, 45, 255, 0.212);
     border: 2px solid black;
 }
 
-@mixin PaddGeneral {
-    padding: 0.5em;
-}
 @mixin GapGeneral {
     gap: 1em;
 }
@@ -32,58 +29,75 @@ $couleurHeader: rgba(30, 45, 255, 0.212);
 }
 
 body {
-
-    @include borderTest;
-    background-color: #424242;
+    background-image: url('../img/back-color.jpg');
+    // @include borderTest;
+    // background-color: #424242;
     display: grid;
-    grid-template-rows: 3fr 7fr 2fr;
+    grid-template-rows: 2fr 6fr 1fr;
     @include GapGeneral;
 
     //___________________________________________________Header
     header {
-        @include borderTest;
+        // @include borderTest;
+        background-color: $couleurSectionPrincipale;
         display: grid;
         gap: 0.2em;
 
         .logoPrincipal {
-            @include borderTest;
+            // @include borderTest;
 
             .logoPrincipalimg {
                 @include borderTest;
                 width: 100px;
-                // margin-left: -5px;
             }
         }
 
         nav {
-            @include borderTest;
-            
-            .liens {
-                
-                a{
-                    list-style-type: none;
-                    text-decoration: none;
-                    color: white;
-                }
+            // @include borderTest;
+            display: flex;
+            flex-wrap: wrap;
 
+            a {
+                // @include borderTest;
+                color: white;
+                list-style-type: none;
+
+                text-decoration: none;
+                text-align: center;
+
+                height: 3em;
             }
+
         }
     }
 
     //___________________________________________________Section
     section {
-        @include borderTest;
+        // @include borderTest;
+        background-color: $couleurSectionPrincipale;
 
     }
 
     //___________________________________________________Section
     footer {
-        @include borderTest;
+        background-color: $couleurSectionPrincipale;
+        // @include borderTest;
         text-align: center;
+        align-items: center;
     }
 
 
 
-    li,p,h1,h2,h3,h4,h5,div,label{color: white}
+    li,
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    div,
+    label {
+        color: white
+    }
 
 }
