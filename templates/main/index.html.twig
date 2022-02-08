@@ -63,7 +63,7 @@
                 {% for i in 0..7 %}
                     {% if valeur[i] == 'Afficher' %}
                         <td style="border: 2px solid white;">
-                            <a href="./../public/register">{{ valeur[i]}}</a>
+                            <a href="{{ path('app_register') }}">{{ valeur[i]}}</a>
                         </td>
                     {% else %}
                             <td style="border: 2px solid white;">{{ valeur[i]}}</td>

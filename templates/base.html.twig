@@ -30,16 +30,18 @@
     <header>
         <nav>
             <div class="logoPrincipal" >
-                <a href="/projets/sorties/public">
-                    <img class="logoPrincipalimg" src="img/logo/logoSortir.png" title="Accueil" alt="Logo du site">
+                <a href="{{ path('main_index') }}">
+                    <img class="logoPrincipalimg" src="{{ asset('img/logo/logoSortir.png')}}" title="Accueil" alt="Logo du site">
                 </a>
             </div>
             <ul>
-                <li hidden><a class="btnNav" onclick="window.location.href='/projets/sorties/public';">Villes</a></li>
-                <li hidden><a class="btnNav" onclick="window.location.href='/projets/sorties/public';">Campus</a></li>
-                <li><a class="btnNav" onclick="window.location.href='/projets/sorties/public';">Accueil</a></li>
-                <li><a class="btnNav" onclick="window.location.href='/projets/sorties/public/Profil/2';">Mon Profil</a></li>
-                <li><a class="btnNav" onclick="window.location.href='/projets/sorties/public/register';">var etatConnection</a></li>
+                <li><a class="btnNav" href="{{ path('main_index') }}">Villes</a></li>
+                <li><a class="btnNav" href="{{ path('main_index') }}">Campus</a></li>
+                <li><a class="btnNav" href="{{ path('main_index') }}">Accueil</a></li>
+                <li><a class="btnNav" href="{{ path('main_profil' ,{ id : 2}) }}">Mon Profil</a></li>
+                <li><a class="btnNav" href="{{ path('main_index') }}"> Se Déconnecter</a></li>
+                <li><a class="btnNav" href="{{ path('main_index') }}"> Se Connecter</a></li>
+                <li><a class="btnNav" href="{{ path('main_index') }}"> S'inscrire</a></li>
             </ul>
         </nav>
     </header>
