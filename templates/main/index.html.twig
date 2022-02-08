@@ -1,0 +1,83 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+    <style>
+        th{border: 1px solid white;}
+    </style>
+<div>
+    <div>
+        <h4>Date du jour : {{ dateDuJour }}</h4>
+        <h4>Participant : {{ participantPrenom }} {{ participantNom }}</h4>
+    </div>
+    <h4>Filtrer les sorties : </h4>
+    <div>
+        <div>
+            <label>Campus : </label>
+            <select>
+                {% for option in options %}
+                    <option value="{{ option }}">{{ option }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div>
+            <label>Le nom de la sortie contient : </label>
+            <input>
+        </div>
+        <div>
+            <label>Entre : </label>
+            <input type="date">
+            <img alt="logo calendrier">
+            <label>et</label>
+            <input type="date">
+            <img alt="logo calendrier">
+        </div>
+    </div>
+    <div>
+        <div>
+            <input type="checkbox" value="1">
+            <label>Sorties dont je suis l'organisateur.trice</label>
+        </div>
+        <div>
+            <input type="checkbox" value="2">
+            <label>Sorties auxquelles je suis inscrite.e</label>
+        </div>
+        <div>
+            <input type="checkbox" value="3" checked>
+            <label >Sorties auxquelles je ne suis pas inscrit.e</label>
+        </div>
+        <div>
+            <input type="checkbox" value="4">
+            <label>Sorties passées</label>
+        </div>
+    </div>
+    <div>
+        <button type="submit">Rechercher</button>
+    </div>
+
+    <table>
+        <tr><th>Nom de la sortie</th><th>Date de la sortie</th><th>Clôture</th><th>Inscrits/places</th><th>Etat</th><th>Inscrit</th><th>Organisateur</th><th>Actions</th></tr>
+        {% for valeur in valeurs %}
+            <tr>
+                {% for i in 0..7 %}
+                    {% if valeur[i] == 'Afficher' %}
+                        <td style="border: 2px solid white;">
+                            <a href="./../public/register">{{ valeur[i]}}</a>
+                        </td>
+                    {% else %}
+                            <td style="border: 2px solid white;">{{ valeur[i]}}</td>
+                    {% endif %}
+                {% endfor %}
+            </tr>
+        {% endfor %}
+    </table>
+    <div>
+        <button type="submit">
+            <a class="btnNav" onclick="window.location.href='/projets/sorties/public';">Creer une sortie</a>
+        </button>
+    </div>
+
+
+</div>
+{% endblock %}
