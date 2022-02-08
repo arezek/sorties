@@ -5,40 +5,48 @@
 }
 
 body {
-  border: 2px solid black;
-  background-color: #424242;
+  background-image: url("../img/back-color.jpg");
   display: grid;
-  grid-template-rows: 3fr 7fr 2fr;
+  grid-template-rows: 2fr 6fr 1fr;
   gap: 1em;
 }
 body header {
-  border: 2px solid black;
+  background-color: rgba(34, 34, 34, 0.356);
   display: grid;
   gap: 0.2em;
-}
-body header .logoPrincipal {
-  border: 2px solid black;
 }
 body header .logoPrincipal .logoPrincipalimg {
   border: 2px solid black;
   width: 100px;
 }
 body header nav {
-  border: 2px solid black;
+  display: flex;
+  flex-wrap: wrap;
 }
-body header nav .liens a {
+body header nav a {
+  color: white;
   list-style-type: none;
   text-decoration: none;
-  color: white;
+  text-align: center;
+  height: 3em;
 }
 body section {
-  border: 2px solid black;
+  background-color: rgba(34, 34, 34, 0.356);
 }
 body footer {
-  border: 2px solid black;
+  background-color: rgba(34, 34, 34, 0.356);
   text-align: center;
+  align-items: center;
 }
-body li, body p, body h1, body h2, body h3, body h4, body h5, body div, body label {
+body li,
+body p,
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body div,
+body label {
   color: white;
 }
 
