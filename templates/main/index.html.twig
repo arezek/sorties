@@ -62,6 +62,10 @@
                         <td>
                             <a href="{{ path('sorties_details',{ id : sortie[0]}) }}">{{ sortie[i]}}</a>
                         </td>
+                    {% elseif sortie[i] == 'Modifier' %}
+                        <td>
+                            <a href="{{ path('sorties_edit',{ id : sortie[0]}) }}">{{ sortie[i]}}</a>
+                        </td>
                     {% else %}
                             <td>{{ sortie[i]}}</td>
                     {% endif %}
