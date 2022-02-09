@@ -12,10 +12,13 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+/**
+ * @Route("/sorties", name="sorties_")
+ */
 class SortiesController extends AbstractController
 {
     /**
-     * @Route("/sorties", name="sorties_details")
+     * @Route("/sorties", name="details")
      */
     public function sorties(): Response
     {
@@ -24,7 +27,7 @@ class SortiesController extends AbstractController
         ]);
     }
     /**
-     * @Route("/CreerSortie", name="sorties_creer")
+     * @Route("/CreerSortie", name="creer")
      */
     public function creerSortie(Request $request, EntityManagerInterface $entityManager): Response
     {
@@ -46,7 +49,7 @@ class SortiesController extends AbstractController
     }
 
     /**
-     * @Route("/sorties", name="sorties_cancel")
+     * @Route("/sorties", name="cancel")
      */
     public function cancel(): Response
     {
@@ -55,7 +58,7 @@ class SortiesController extends AbstractController
         ]);
     }
     /**
-     * @Route("/sorties", name="sorties_edit")
+     * @Route("/sorties", name="edit")
      */
     public function edit(): Response
     {
@@ -64,7 +67,7 @@ class SortiesController extends AbstractController
         ]);
     }
     /**
-     * @Route("/sorties", name="sorties_history")
+     * @Route("/sorties", name="history")
      */
     public function history(): Response
     {
