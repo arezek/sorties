@@ -6,9 +6,9 @@
 <div>
     <div>
         <h4>Date du jour : {{ dateDuJour }}</h4>
-        <!-- Rajouter un if on est connecté ou non
-
-        <h4>Participant : { app.user.prenom } { app.user.nom  }}</h4>-->
+        {% if app.user %}
+            <h4>Participant : {{  app.user.prenom }} {{ app.user.nom }}</h4>
+        {% endif %}
     </div>
     <h4>Filtrer les sorties : </h4>
     <div>
@@ -75,8 +75,10 @@
                     {{ sortie.etat }}
                 </td>
                 <td>
-                    {% if app.user.mail == "mail récupéré via relation" %}
-                        X
+                    {% if app.user %}
+                        {% if app.user.mail == "" %}
+                            X
+                        {% endif %}
                     {% endif %}
                 </td>
             </tr>
