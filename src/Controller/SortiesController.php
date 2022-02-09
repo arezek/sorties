@@ -6,6 +6,7 @@ use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\RegistrationFormType;
 use App\Form\SortieFormType;
+use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -18,12 +19,15 @@ use Symfony\Component\Routing\Annotation\Route;
 class SortiesController extends AbstractController
 {
     /**
-     * @Route("/sorties", name="details")
+     * @Route("/detail/{nom}", name="details")
      */
-    public function sorties(): Response
+    public function detail(string $nom, SortieRepository $sortieRepository): Response
     {
+
+        $sortie = $sortieRepository->find($nom);
+
         return $this->render('sorties/details.html.twig', [
-            'controller_name' => 'SortiesController',
+            'sortie' => $sortie,
         ]);
     }
     /**
@@ -32,6 +36,7 @@ class SortiesController extends AbstractController
     public function creerSortie(Request $request, EntityManagerInterface $entityManager): Response
     {
         $sortie = new Sortie();
+        $sortie->setEtat('publié');
         $sortieForm = $this->createForm(SortieFormType::class, $sortie);
         $sortieForm->handleRequest($request);
 
@@ -41,6 +46,8 @@ class SortiesController extends AbstractController
             $entityManager->persist($sortie);
             $entityManager->flush();
             $this->addFlash('success', 'Sortie ajoutée');
+
+            return $this->redirectToRoute('main_index');
 
         }
         return $this->render('sorties/creer.html.twig', [
