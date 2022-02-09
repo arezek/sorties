@@ -1,5 +1,9 @@
 {% extends 'base.html.twig' %}
 {% block body %}
 
-    {{ sortie.nom }}
+    <h3>{{ sortie.nom }}</h3>
+
+    <div>Date et heure de la sortie : {{ sortie.dateHeureDebut | date("d/m à h:m") }}</div>
+    <div>Date limite d'inscription : {{ sortie.dateLimiteInscription | date("d/m à h:m") }}</div>
+
 {% endblock %}
