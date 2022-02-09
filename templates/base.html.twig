@@ -9,12 +9,22 @@
         <link rel="stylesheet" href="{{ asset('../public/css/style.css') }}">
         <title>{% block title %}Sortie{% endblock %}</title>
     </head>
+
     <body>
-    {# //_______________________________________Header #}
+        {# //_______________________________________Header #}
     {% include "main/incl/header.html.twig" %}
 
     {# //_______________________________________Section #}
     <section>
+        {# read and display all flash messages #}
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div
+                    class="flash-{{ label }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
         {% block body %}{% endblock %}
     </section>
     {# //_______________________________________Footer #}

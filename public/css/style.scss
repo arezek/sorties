@@ -44,6 +44,7 @@ $couleurSectionPrincipale: rgba(0, 195, 255, 0.631);
 
 body {
     background-image: url('../img/back-color.jpg');
+    background-size: cover;
     background-attachment: scroll;
     background-repeat: no-repeat;
     // @include borderTest;

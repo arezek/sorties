@@ -20,6 +20,7 @@
 
 body {
   background-image: url("../img/back-color.jpg");
+  background-size: cover;
   background-attachment: scroll;
   background-repeat: no-repeat;
   display: grid;
