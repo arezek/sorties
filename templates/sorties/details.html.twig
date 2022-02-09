@@ -31,11 +31,11 @@
         {% endfor %}
     </table>
     {% if app.user %}
-        <button type="submit">
-            <a href="{{ path('app_login') }}">Modifier</a>
+        <button type="submit" name="modifier" value="modifier">
+            <a href="{{ path('sorties_edit',{'id' : sortie.id} )}}" >Modifier</a>
         </button>
-        <button type="submit">
-            <a href="{{ path('app_login') }}">Annuler</a>
+        <button type="submit" name="annuler" value="annuler">
+            <a href="{{ path('sorties_annuler') }}">Annuler</a>
         </button>
     {% endif %}
 

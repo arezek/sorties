@@ -89,6 +89,7 @@
                         {% if app.user.mail == "cjumelinee@tutanota.com" %}
                             {% if sortie.etat == 'créée' %}
                                 <a href="{{ path('sorties_edit',{'id' : sortie.id} )}}">Publier</a>
+                                <a href="{{ path('sorties_edit',{'id' : sortie.id} )}}">Modifier</a>
                             {% endif %}
                             {% if sortie.etat == 'ouverte' %}
                                 <a href="">Annuler</a>
