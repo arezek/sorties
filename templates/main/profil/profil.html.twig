@@ -18,13 +18,9 @@
     <div>Téléphone : {{ participant.telephone}}</div>
     <div>Email : {{ participant.mail}}</div>
     <div>Campus: CAMPUS</div>
-    <button>Retour</button>
-    <button>Modifier</button>
+    <button><a href="{{ path('main_index') }}">Retour</a></button>
+    <button><a href="{{ path('main_profil_edit') }}">Modifier</a></button>
     <button>Supprimer</button>
-
-
-
-
 
 </div>
 {% endblock %}

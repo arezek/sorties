@@ -67,6 +67,10 @@ class MainController extends AbstractController
      */
     public function editProfil(): Response
     {
+
+
+
+
         return $this->render('main/profil/editProfil.html.twig');
     }
 
