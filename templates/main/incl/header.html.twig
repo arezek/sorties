@@ -7,18 +7,18 @@
         <nav>
             <div class="liens">
                 <a class="btnNav" href="{{ path('main_index') }}">Accueil</a>
+                {% if app.user%}
                 <a class="btnNav" href="{{ path('main_profil' ,{ id : 2}) }}">Mon Profil</a>
-                <a class="btnNav" href="{{ path('main_villes') }}">Villes</a>
-                <a class="btnNav" href="{{ path('main_campus') }}">Campus</a>
-                <a class="btnNav" href="{{ path('app_logout') }}"> Se Déconnecter</a>
+                <a class="btnNav" href="{{ path('sorties_details') }}"> Afficher Sorties</a>
+                <a class="btnNav" href="{{ path('sorties_cree') }}"> Crée Sorties </a>
+                <a class="btnNav" href="{{ path('sorties_cancel') }}"> Annuler Sorties</a>
+                <a class="btnNav" href="{{ path('sorties_edit') }}"> Modifier Sorties</a>
+                <a href="{{ path('app_logout') }}">Déconnexion</a>
+                {% endif%}
                 <a class="btnNav" href="{{ path('app_login') }}"> Se Connecter</a>
                 <a class="btnNav" href="{{ path('app_register') }}"> S'inscrire</a>
-                <a class="btnNav" href="{{ path('sorties_details') }}"> afficherSorties</a>
-                <a class="btnNav" href="{{ path('sorties_creer') }}"> crée Sorties </a>
-                <a class="btnNav" href="{{ path('sorties_cancel') }}"> annuler Sorties</a>
-                <a class="btnNav" href="{{ path('sorties_edit') }}"> modifier Sorties</a>
-                <a class="btnNav" href="{{ path('sorties_history') }}"> historiques Sorties</a>
-                {# {% if app.user%}<a href="{{ path('app_logout') }}">Déconnexion</a>{% endif%} #}
-            </div>
+                <a class="btnNav" href="{{ path('sorties_history') }}"> Historiques Sorties</a>
+                <a class="btnNav" href="{{ path('main_villes') }}">Villes</a>
+                <a class="btnNav" href="{{ path('main_campus') }}">Campus</a>
         </nav>
     </header>
