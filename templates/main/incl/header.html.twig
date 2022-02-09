@@ -5,6 +5,7 @@
                 </a>
             </div>
         <nav>
+            <div class="liens">
                 <a class="btnNav" href="{{ path('main_index') }}">Accueil</a>
                 {% if app.user%}
                 <a class="btnNav" href="{{ path('main_profil' ,{ id : 2}) }}">Mon Profil</a>
