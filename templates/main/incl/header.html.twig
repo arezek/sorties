@@ -9,8 +9,7 @@
                 {% if app.user%}
                 <a class="btnNav" href="{{ path('main_profil', {'id' : app.user.id})}}">Mon Profil </a>
                 <a class="btnNav" href="{{ path('main_profil_edit') }}">Modifier mon Profil</a>
-                <a class="btnNav" href="{{ path('sorties_details',{'id' : app.user.id} )}}"> Afficher Sorties</a>
-                <a class="btnNav" href="{{ path('sorties_creer') }}"> Crée Sorties </a>
+
                 <a class="btnNav" href="{{ path('sorties_cancel') }}"> Annuler Sorties</a>
                 <a class="btnNav" href="{{ path('sorties_edit') }}"> Modifier Sorties</a>
                 <a href="{{ path('app_logout') }}">Déconnexion</a>
