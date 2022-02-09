@@ -4,8 +4,14 @@
 
 {% block body %}
 <div>
+    {#
+    <a href = "{{  path('main_profil', {'id' : participant.id}) }}"
+    src="{{ asset('img/photos/' ~ participant.photo)}}  #}
+    <img src="{{ asset('img/logo/logoSortir.png') }}">
+    {% for participants in participant %}
 
-    Afficher un profil
+    {{  participants.pseudo }}
+    {% endfor %}
 
 </div>
 {% endblock %}

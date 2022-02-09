@@ -7,6 +7,7 @@ use App\Entity\Ville;
 use App\Form\CampusType;
 use App\Form\VilleType;
 use App\Repository\CampusRepository;
+use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use App\Repository\VilleRepository;
 use Doctrine\ORM\EntityManager;
@@ -49,13 +50,19 @@ class MainController extends AbstractController
     /**
      * @Route("/Profil/{id}", name="main_profil")
      */
-    public function profil(): Response
+    public function profil(ParticipantRepository $repository,int $id): Response
     {
         //todo: afficher le nom du profil en title, si id = le miens un bouton apparait pour modifier le profil.
         //todo: modifier le chemin de navbar car redirige vers le '2'
         //todo : problème d'affichage du logo juste sur cette page...
+        // $participant = $repository->findAll();
+        $participant = $repository->find($id);
 
-        return $this->render('main/profil/profil.html.twig');
+
+
+        return $this->render('main/profil/profil.html.twig',[
+            'participant'=> $participant
+        ]);
     }
 
     /**
