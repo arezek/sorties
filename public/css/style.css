@@ -27,7 +27,7 @@ body {
   gap: 1em;
 }
 body header {
-  background-color: rgba(34, 34, 34, 0.356);
+  background-color: rgba(0, 195, 255, 0.631);
   display: grid;
   gap: 0.2em;
 }
@@ -46,10 +46,10 @@ body header nav a {
   height: 3em;
 }
 body section {
-  background-color: rgba(34, 34, 34, 0.356);
+  background-color: rgba(0, 195, 255, 0.631);
 }
 body footer {
-  background-color: rgba(34, 34, 34, 0.356);
+  background-color: rgba(0, 195, 255, 0.631);
   text-align: center;
   align-items: center;
 }

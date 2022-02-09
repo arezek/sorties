@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Campus;
+use App\Entity\Ville;
 use App\Form\CampusType;
+use App\Form\VilleType;
 use App\Repository\CampusRepository;
 use App\Repository\VilleRepository;
 use Doctrine\ORM\EntityManager;
@@ -60,16 +62,28 @@ class MainController extends AbstractController
     /**
      * @Route("/Villes", name="main_villes")
      */
-    public function ville(VilleRepository $villeRepository): Response
+    public function ville(Request $request, EntityManagerInterface $entityManager, VilleRepository $villeRepository): Response
     {
+        $ville = new Ville();
+        $villeForm = $this->createForm(VilleType::class, $ville);
+        $villeForm->handleRequest($request);
+
+        if ($villeForm->isSubmitted() && $villeForm->isValid()) {
+
+            //  $campus->setNom();
+
+            $entityManager->persist($ville);
+            $entityManager->flush();
+            $this->addFlash('success', 'Ville ajoutée');
+            return $this->redirectToRoute('main_campus', ['id' =>$ville->getId()]);
+
+        }
+        return $this->render('main/campus.html.twig', [
+            'villeForm' => $villeForm->createView()
+        ]);
       //  $ville = $villeRepository->findBy(['nom', 'codePostal', 25]);
 
 
-        return $this->render('main/campus.html.twig', [
-
-          //  "ville" => $ville
-
-        ]);
     }
     /**
      * @Route("/Campus", name="main_campus")
