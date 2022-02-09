@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Campus{% endblock %}
+
+{% block body %}
+
+    <div>
+        <h1>Ville</h1>
+
+        {{ form_start(villeForm) }}
+
+        {{ form_widget(villeForm) }}
+        <button type="submit" class="btn">Ajouter</button>
+        <button class="btn">Modifier</button>
+        <button class="btn">Supprimer</button>
+
+        {{ form_end(villeForm) }}
+
+    </div>
+
+{% endblock %}

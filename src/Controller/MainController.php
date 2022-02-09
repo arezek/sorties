@@ -82,10 +82,10 @@ class MainController extends AbstractController
             $entityManager->persist($ville);
             $entityManager->flush();
             $this->addFlash('success', 'Ville ajoutée');
-            return $this->redirectToRoute('main_campus', ['id' =>$ville->getId()]);
+            return $this->redirectToRoute('main_villes', ['id' =>$ville->getId()]);
 
         }
-        return $this->render('main/campus.html.twig', [
+        return $this->render('main/ville.html.twig', [
             'villeForm' => $villeForm->createView()
         ]);
       //  $ville = $villeRepository->findBy(['nom', 'codePostal', 25]);
@@ -103,7 +103,7 @@ class MainController extends AbstractController
 
         if ($campusForm->isSubmitted() && $campusForm->isValid()) {
 
-          //  $campus->setNom();
+           // $campus->setNom();
 
             $entityManager->persist($campus);
             $entityManager->flush();
@@ -111,6 +111,8 @@ class MainController extends AbstractController
             return $this->redirectToRoute('main_campus', ['id' =>$campus->getId()]);
 
         }
+
+
         return $this->render('main/campus.html.twig', [
             'campusForm' => $campusForm->createView()
         ]);
@@ -119,3 +121,7 @@ class MainController extends AbstractController
 
     }
 }
+
+
+
+
