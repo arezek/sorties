@@ -19,6 +19,7 @@
 }
 
 body {
+  background-color: black;
   background-image: url("../img/back-color.jpg");
   background-size: cover;
   background-attachment: scroll;
