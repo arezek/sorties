@@ -85,9 +85,15 @@
         {% endfor %}
     </table>
     <div>
-        <button type="submit">
-            <a class="btnNav" href="{{ path('sorties_creer') }}">Creer une sortie</a>
-        </button>
+        {% if app.user %}
+            <button type="submit">
+                <a class="btnNav" href="{{ path('sorties_creer') }}">Creer une sortie</a>
+            </button>
+        {% elseif app.user == false %}
+            <button type="submit">
+                <a class="btnNav" href="{{ path('app_login') }}">Me connecter pour créer une sortie</a>
+            </button>
+        {% endif %}
     </div>
 
 
