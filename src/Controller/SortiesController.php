@@ -35,7 +35,13 @@ class SortiesController extends AbstractController
     public function creerSortie(Request $request, EntityManagerInterface $entityManager): Response
     {
         $sortie = new Sortie();
-        $sortie->setEtat('publié');
+
+        if (isset($_POST['enregistrer'])) {
+            $sortie->setEtat('enregistré');
+        } else if (isset($_POST['publier'])) {
+            $sortie->setEtat('publié');
+        }
+
         $sortieForm = $this->createForm(SortieFormType::class, $sortie);
         $sortieForm->handleRequest($request);
 
