@@ -59,7 +59,7 @@
         {% for sortie in sorties %}
             <tr>
                 <td>
-                    {{ sortie.nom }}
+                    <a href="{{ path('sorties_details',{ id : sortie.id}) }}">{{ sortie.nom }}</a>
                 </td>
                 <td>
                     {{ sortie.dateHeureDebut | date("Y / m / d") }}
