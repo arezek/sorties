@@ -7,6 +7,8 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+// use Rollerworks\Component\PasswordStrength\Validator\Constraints as RollerworksPassword;
 
 /**
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
@@ -22,6 +24,16 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private $id;
 
     /**
+     * @Assert\NotBlank(message="Vous devez saisir un mail")
+     * @Assert\Email(
+     *     message = "Votre Email '{{ value }}' est non valide."
+     * )
+     * @Assert\Length(
+     * min = 5,
+     * max = 25,
+     * minMessage = "Votre mail doit contenir au minimum  {{ limit }} caractéres",
+     * maxMessage = "Votre mail doit contenir au maximum {{ limit }} caractéres"
+     * )
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $mail;
@@ -34,22 +46,42 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\Regex(pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/i",message="Le mot de pass doit contenir au moins un caractère special")
+     *
      */
     private $password;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Length(
+     * min = 3,
+     * max = 50,
+     * minMessage = "Votre nom doit contenir au minimum  {{ limit }} caractéres",
+     * maxMessage = "Votre nom doit contenir au maximum {{ limit }} caractéres"
+     * )
      * @ORM\Column(type="string", length=50)
      */
     private $nom;
 
     /**
+     * @Assert\NotBlank
+     * @Assert\Length(
+     * min = 3,
+     * max = 50,
+     * minMessage = "Votre prénom doit contenir au minimum  {{ limit }} caractéres",
+     * maxMessage = "Votre prénom doit contenir au maximum {{ limit }} caractéres"
+     * )
      * @ORM\Column(type="string", length=50)
      */
     private $prenom;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="integer")
+     * @Assert\Regex(pattern="/^(33|0)?[1-9]\d{8}$/",message="numéro de téléphone non valide")
+     *
      */
+
     private $telephone;
 
 
