@@ -26,10 +26,27 @@ $couleurHeader: rgba(30, 45, 255, 0.212);
     box-sizing: border-box;
     padding: 0.2em;
     border-radius: 0.8em;
+
+    label{
+        display: block;
+    }
+       li,
+       p,
+       h1,
+       h2,
+       h3,
+       h4,
+       h5,
+       div,
+       label {
+           color: white
+       }
 }
 
 body {
     background-image: url('../img/back-color.jpg');
+    background-attachment: scroll;
+    background-repeat: no-repeat;
     // @include borderTest;
     // background-color: #424242;
     display: grid;
@@ -47,8 +64,8 @@ body {
             // @include borderTest;
 
             .logoPrincipalimg {
-                @include borderTest;
-                width: 100px;
+                // @include borderTest;
+                width: 10em;
             }
         }
 
@@ -88,16 +105,6 @@ body {
 
 
 
-    li,
-    p,
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    div,
-    label {
-        color: white
-    }
+ 
 
 }
