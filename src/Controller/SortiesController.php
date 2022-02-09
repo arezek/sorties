@@ -19,12 +19,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class SortiesController extends AbstractController
 {
     /**
-     * @Route("/detail/{nom}", name="details")
+     * @Route("/detail/{id}", name="details")
      */
-    public function detail(string $nom, SortieRepository $sortieRepository): Response
+    public function detail(string $id, SortieRepository $sortieRepository): Response
     {
-
-        $sortie = $sortieRepository->find($nom);
+        $sortie = $sortieRepository->find($id);
 
         return $this->render('sorties/details.html.twig', [
             'sortie' => $sortie,
@@ -56,25 +55,25 @@ class SortiesController extends AbstractController
     }
 
     /**
-     * @Route("/sorties", name="cancel")
+     * @Route("/cancel", name="cancel")
      */
     public function cancel(): Response
     {
-        return $this->render('sorties/details.html.twig', [
+        return $this->render('sorties/cancel.html.twig', [
             'controller_name' => 'SortiesController',
         ]);
     }
     /**
-     * @Route("/sorties", name="edit")
+     * @Route("/modifier", name="edit")
      */
     public function edit(): Response
     {
-        return $this->render('sorties/details.html.twig', [
+        return $this->render('sorties/edit.html.twig', [
             'controller_name' => 'SortiesController',
         ]);
     }
     /**
-     * @Route("/sorties", name="history")
+     * @Route("/historique", name="history")
      */
     public function history(): Response
     {
