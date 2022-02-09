@@ -43,13 +43,12 @@ $couleurSectionPrincipale: rgba(0, 195, 255, 0.631);
 }
 
 body {
+    // @include borderTest;
     background-color: black;
     background-image: url('../img/back-color.jpg');
     background-size: cover;
     background-attachment: scroll;
     background-repeat: no-repeat;
-    // @include borderTest;
-    // background-color: #424242;
     display: grid;
     grid-template-rows: 2fr 6fr 1fr;
     @include GapGeneral;
@@ -60,13 +59,23 @@ body {
         background-color: $couleurSectionPrincipale;
         display: grid;
         gap: 0.2em;
-
+        
         .logoPrincipal {
             // @include borderTest;
+            display: grid;
+            grid-template-columns: 4fr 8fr;
+            align-items: center;
+            gap: 1em;
+            height: 100%;
 
             .logoPrincipalimg {
                 // @include borderTest;
                 width: 10em;
+            }
+            h1{
+                // @include borderTest;
+                text-align: left;
+                width: 100%;
             }
         }
 

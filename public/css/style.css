@@ -33,8 +33,19 @@ body header {
   display: grid;
   gap: 0.2em;
 }
+body header .logoPrincipal {
+  display: grid;
+  grid-template-columns: 4fr 8fr;
+  align-items: center;
+  gap: 1em;
+  height: 100%;
+}
 body header .logoPrincipal .logoPrincipalimg {
   width: 10em;
+}
+body header .logoPrincipal h1 {
+  text-align: left;
+  width: 100%;
 }
 body header nav {
   display: flex;
