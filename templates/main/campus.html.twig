@@ -5,16 +5,37 @@
 {% block body %}
 
   <div>
-    <h1>Campus</h1>
+    <h1>Gérer les Campus</h1>
+    <div>
+      <button type="submit">Rechercher</button>
+    </div>
 
-      {{ form_start(campusForm) }}
+    <table>
+      <tr><th>Campus</th><th>Actions</th></tr>
+      <tr>
+          <td>
+            <a>Nom du Campus</a>
+          </td>
+          <td>
+              <button class="btn">Modifier</button>
+              <button class="btn">Supprimer</button>
+          </td>
+      </tr>
 
-      {{ form_widget(campusForm) }}
-    <button type="submit" class="btn">Ajouter</button>
-    <button class="btn">Modifier</button>
-    <button class="btn">Supprimer</button>
+        <tr>
+          <td>
+            {{ form_start(campusForm) }}
 
-      {{ form_end(campusForm) }}
+            {{ form_widget(campusForm) }}
+            <button type="submit" class="btn">Ajouter</button>
+
+
+            {{ form_end(campusForm) }}
+          </td>
+        </tr>
+
+    </table>
+
 
   </div>
 
