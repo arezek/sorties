@@ -21,14 +21,19 @@ class SortiesController extends AbstractController
     /**
      * @Route("/detail/{id}", name="details")
      */
-    public function detail(string $id, SortieRepository $sortieRepository): Response
+    public function detail(int $id, SortieRepository $sortieRepository): Response
     {
         $sortie = $sortieRepository->find($id);
+        $pseudo1 = array('Clemodd', 'clement');
+        $pseudo2 = array('XEXE', 'Jacques');
+        $pseudos = array($pseudo1, $pseudo2);
 
         return $this->render('sorties/details.html.twig', [
             'sortie' => $sortie,
+            'pseudos' => $pseudos
         ]);
     }
+
     /**
      * @Route("/CreerSortie", name="creer")
      */
@@ -36,10 +41,12 @@ class SortiesController extends AbstractController
     {
         $sortie = new Sortie();
 
-        if (isset($_POST['enregistrer'])) {
-            $sortie->setEtat('enregistré');
-        } else if (isset($_POST['publier'])) {
-            $sortie->setEtat('publié');
+        if (isset($_POST['créée'])) {
+            $sortie->setEtat('créée');
+        } else if (isset($_POST['ouverte'])) {
+            $sortie->setEtat('ouverte');
+        } else if (isset($_POST['annulée'])) {
+            $sortie->setEtat('annulée');
         }
 
         $sortieForm = $this->createForm(SortieFormType::class, $sortie);
@@ -61,14 +68,29 @@ class SortiesController extends AbstractController
     }
 
     /**
-     * @Route("/cancel", name="cancel")
+     * @Route("/annuler", name="annuler")
      */
-    public function cancel(): Response
+    public function annuler(): Response
     {
-        return $this->render('sorties/cancel.html.twig', [
+
+        return $this->render('sorties/annuler.html.twig', [
             'controller_name' => 'SortiesController',
         ]);
     }
+
+    /**
+     * @Route("/supprimer/{id}", name="supprimer")
+     */
+    public function supprimer(Sortie $sortie, EntityManagerInterface $entityManager): Response
+    {
+        $entityManager->remove($sortie);
+        $entityManager->flush();
+
+        return $this->render('main/index.html.twig', [
+            'controller_name' => 'SortiesController',
+        ]);
+    }
+
     /**
      * @Route("/modifier", name="edit")
      */

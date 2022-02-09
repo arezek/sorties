@@ -6,9 +6,9 @@
 
     {{ form_start(sortieForm) }}
     {{ form_widget(sortieForm) }}
-    <button type="submit" class="btn" name="enregistrer" value="enregistrer" >Enregistrer</button>
-    <button type="submit" class="btn" name="publier" value="publier">Publier la sortie</button>
-    <button class="btn">Annuler</button>
+    <button type="submit" class="btn" name="créée" value="créée" >Enregistrer</button>
+    <button type="submit" class="btn" name="ouverte" value="ouverte">Publier la sortie</button>
+    <button onclick="history.back()">Annuler</button>
     {{ form_end(sortieForm) }}
 
 {% endblock %}

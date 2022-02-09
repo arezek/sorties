@@ -3,7 +3,42 @@
 
     <h3>{{ sortie.nom }}</h3>
 
+    <div>Organisateur : {relation organisateur} </div>
     <div>Date et heure de la sortie : {{ sortie.dateHeureDebut | date("d/m à h:m") }}</div>
     <div>Date limite d'inscription : {{ sortie.dateLimiteInscription | date("d/m à h:m") }}</div>
+    <div>Nombre de places : {{ sortie.nbInscriptionsMax }} (reste {relation inscrit} places)</div>
+    <div>Durée : {{ sortie.duree }} minutes {% if sortie.duree%60 == 0  %}({{ sortie.duree%60 }} h {% endif %})</div>
+    <div>Description et infos : {{ sortie.infosSortie }} </div>
+    <div>Campus :  </div>
+    <div>Lieu :  </div>
+    <div>Rue :  </div>
+    <div>Code Postal :  </div>
+    <div>Latitude : Non renseignée</div>
+    <div>Longitude : Non renseignée</div>
+
+    <h4>Liste des participants inscrits :</h4>
+    <table>
+        <tr><th>Pseudo</th><th>Nom</th></tr>
+        {% for pseudo in pseudos %}
+            <tr>
+                <td>
+                    <a>{{ pseudo[0] }}</a>
+                </td>
+                <td>
+                    <a>{{ pseudo[1] }}</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
+    {% if app.user %}
+        <button type="submit">
+            <a href="{{ path('app_login') }}">Modifier</a>
+        </button>
+        <button type="submit">
+            <a href="{{ path('app_login') }}">Annuler</a>
+        </button>
+    {% endif %}
+
+    <button onclick="history.back()">Retour</button>
 
 {% endblock %}
