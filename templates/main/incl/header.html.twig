@@ -7,7 +7,8 @@
         <nav>
                 <a class="btnNav" href="{{ path('main_index') }}">Accueil</a>
                 {% if app.user%}
-                <a class="btnNav" href="{{ path('main_profil' ,{ id : 2}) }}">Mon Profil</a>
+                <a class="btnNav" href="{{ path('main_profil' ,{ id : 2}) }}">Mon Profil </a>
+                <a class="btnNav" href="{{ path('main_profil_edit') }}">Modifier mon Profil</a>
                 <a class="btnNav" href="{{ path('sorties_details',{ id : 1}) }}"> Afficher Sorties</a>
                 <a class="btnNav" href="{{ path('sorties_creer') }}"> Crée Sorties </a>
                 <a class="btnNav" href="{{ path('sorties_cancel') }}"> Annuler Sorties</a>

@@ -59,7 +59,7 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/MonProfil", name="main_editprofil")
+     * @Route("/MonProfil", name="main_profil_edit")
      */
     public function editProfil(): Response
     {
