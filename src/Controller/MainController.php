@@ -3,14 +3,15 @@
 namespace App\Controller;
 
 use App\Entity\Campus;
+use App\Entity\Participant;
 use App\Entity\Ville;
 use App\Form\CampusType;
+use App\Form\ParticipantType;
 use App\Form\VilleType;
 use App\Repository\CampusRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use App\Repository\VilleRepository;
-use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -63,15 +64,27 @@ class MainController extends AbstractController
     }
 
     /**
-     * @Route("/MonProfil", name="main_profil_edit")
+     * @Route("/MonProfil", name="main_profil_edit",methods={"GET", "POST"})
      */
-    public function editProfil(): Response
+    public function editProfil(Request $request,EntityManagerInterface $entityManager,Participant $participant): Response
     {
 
+        $form = $this->createForm(ParticipantType::class, $participant);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager->flush();
+            return $this->redirectToRoute('main_index');
+        }
+
+        return $this->renderForm('main/profil/editProfil.html.twig', [
+            'participant' => $participant,
+            'form' => $form,
+        ]);
 
 
 
-        return $this->render('main/profil/editProfil.html.twig');
+
     }
 
     /**
