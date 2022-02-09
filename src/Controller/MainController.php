@@ -28,7 +28,6 @@ class MainController extends AbstractController
         //todo: modifier pour afficher la date du jour, le nom d'un participant
 
         $sorties = $sortieRepository->findAll();
-        dump($sorties);
 
 
         $options = array('campus1', 'campus2', 'campus3');
@@ -57,8 +56,6 @@ class MainController extends AbstractController
         //todo : problème d'affichage du logo juste sur cette page...
         // $participant = $repository->findAll();
         $participant = $repository->find($id);
-
-
 
         return $this->render('main/profil/profil.html.twig',[
             'participant'=> $participant
