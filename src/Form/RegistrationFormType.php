@@ -19,9 +19,24 @@ class RegistrationFormType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
+            ->add('pseudo')
             ->add('prenom')
             ->add('nom')
+            ->add('telephone', TelType::class)
             ->add('mail')
+            ->add('password', RepeatedType::class, [
+                'type' => PasswordType::class,
+                'invalid_message' => 'les deux mots de passe ne correspondent pas',
+                'options' => ['attr' => ['class' => 'password-field']],
+                'required' => true,
+                'first_options'  => ['label' => 'Mot de pass'],
+                'second_options' => ['label' => 'Répéter le mot de pass'],
+            ])
+            /*
+            ->add('campus')
+            ->add('photo') */
+
+
 
             /* ->add('MotDePasse', PasswordType::class, [
                 // instead of being set onto the object directly,
@@ -41,17 +56,10 @@ class RegistrationFormType extends AbstractType
 
                 ],
             ]) */
-          ->add('password', RepeatedType::class, [
-               'type' => PasswordType::class,
-               'invalid_message' => 'les deux mots de passe ne correspondent pas',
-               'options' => ['attr' => ['class' => 'password-field']],
-               'required' => true,
-               'first_options'  => ['label' => 'Mot de pass'],
-               'second_options' => ['label' => 'Répéter le mot de pass'],
-           ])
 
-            ->add('telephone', TelType::class)
-            ->add('pseudo')
+
+
+
         ;
     }
 
