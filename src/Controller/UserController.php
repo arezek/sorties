@@ -9,6 +9,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
+
+
     /**
      * @Route("/user", name="user")
      */
@@ -18,18 +20,19 @@ class UserController extends AbstractController
             'controller_name' => 'UserController',
         ]);
     }
-    /*  METHODE REPOSITORY SELECT
+
     /**
      * @Route("/repo", name="repo")
      */
-    /*
+
     public function list(ParticipantRepository $part) : Response
     {
-        $series = $part->findAll();
+
+        $series = $part->findBy(['pseudo' => 'sdsdss']);
         dump($series);
         return $this->render('main/rep.html.twig', [
             'series' => $series
         ]);
     }
-    */
+
 }

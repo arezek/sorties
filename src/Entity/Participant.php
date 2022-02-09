@@ -8,11 +8,12 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
-// use Rollerworks\Component\PasswordStrength\Validator\Constraints as RollerworksPassword;
+
 
 /**
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
- * @UniqueEntity(fields={"mail"}, message="There is already an account with this mail")
+ * @UniqueEntity(fields={"mail"}, message="Votre mail est déjà utilisé")
+ * @UniqueEntity(fields="pseudo", message="Votre Pseudo est déjà pris.")
  */
 class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 {
@@ -34,7 +35,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      * minMessage = "Votre mail doit contenir au minimum  {{ limit }} caractéres",
      * maxMessage = "Votre mail doit contenir au maximum {{ limit }} caractéres"
      * )
-     * @ORM\Column(type="string", length=180, unique=true)
+     * @ORM\Column(type="string", length=180)
      */
     private $mail;
 
@@ -46,7 +47,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Assert\Regex(pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/i",message="Le mot de pass doit contenir au moins un caractère special")
+     * @Assert\Regex(pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/i",message="Le mot de pass doit contenir au moins : -Une majuscule -Une minuscule -Une lettre -Un caractère special")
      *
      */
     private $password;
@@ -94,6 +95,18 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="boolean")
      */
     private $actif;
+
+    /**
+     * @Assert\NotBlank(message="Vous devez saisir un pseudo")
+     * @Assert\Length(
+     * min = 5,
+     * max = 25,
+     * minMessage = "Votre pseudo doit contenir au minimum  {{ limit }} caractéres",
+     * maxMessage = "Votre pseudo doit contenir au maximum {{ limit }} caractéres"
+     * )
+     * @ORM\Column(type="string", length=180, unique = true)
+     */
+    private $pseudo;
 
     public function getId(): ?int
     {
@@ -242,6 +255,18 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     public function setActif(bool $actif): self
     {
         $this->actif = $actif;
+
+        return $this;
+    }
+
+    public function getPseudo(): ?string
+    {
+        return $this->pseudo;
+    }
+
+    public function setPseudo(string $pseudo): self
+    {
+        $this->pseudo = $pseudo;
 
         return $this;
     }
