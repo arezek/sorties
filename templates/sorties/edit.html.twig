@@ -1,6 +1,31 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <div>
-Modifier la sortie
-    </div>
+
+    <h3>Modifier une sortie </h3>
+    <form method="post">
+        <div>Nom de la sortie :
+          <input type="text" value="{{ sortie.nom }}" name="nom" required="required" maxlength="50"></div>
+        <div>Organisateur : {{ app.user.pseudo }}</div>
+        <div>Date et heure de la sortie :
+            <input type=text  value="{{ sortie.dateHeureDebut | date("Y-m-d h:m:00") }}" name="dateHeureDebut"></div>
+        <div>Date limite d'inscription :
+            <input type=text  value="{{ sortie.dateLimiteInscription | date("Y-m-d h:m:00") }}" name="dateLimiteInscription"></div>
+        <div>Nombre de places :
+          <input type="number" value="{{ sortie.nbInscriptionsMax }}" name="nbInscriptionsMax" required="required" maxlength="50"></div>
+        <div>Durée :
+          <input type="number" value="{{ sortie.duree }}" name="duree" required="required" maxlength="50"></div>
+        <div>Description et infos :
+            <textarea>{{ sortie.infosSortie }}</textarea></div>
+        <div>Campus :  </div>
+        <div>Lieu :  </div>
+        <div>Rue :  </div>
+        <div>Code Postal :  </div>
+        <div>Latitude : Non renseignée</div>
+        <div>Longitude : Non renseignée</div>
+
+        <button type="submit" class="btn" name="créée" value="créée" >Enregistrer</button>
+        <button type="submit" class="btn" name="ouverte" value="ouverte">Publier la sortie</button>
+        <button type="submit" class="btn" name="ouverte" value="ouverte">Publier la sortie</button>
+        <button onclick="history.back()">Annuler</button>
+    </form>
 {% endblock %}

@@ -92,12 +92,16 @@ class SortiesController extends AbstractController
     }
 
     /**
-     * @Route("/modifier", name="edit")
+     * @Route("/modifier/{id}", name="edit")
      */
-    public function edit(): Response
+    public function edit(int $id, SortieRepository $sortieRepository): Response
     {
+        $sortie = $sortieRepository->find($id);
+        dump($sortie);
+
         return $this->render('sorties/edit.html.twig', [
             'controller_name' => 'SortiesController',
+            'sortie' => $sortie,
         ]);
     }
     /**
