@@ -82,10 +82,12 @@ class MainController extends AbstractController
 
         if ($campusForm->isSubmitted() && $campusForm->isValid()) {
 
+          //  $campus->setNom();
 
             $entityManager->persist($campus);
             $entityManager->flush();
             $this->addFlash('success', 'Campus ajoutée');
+            return $this->redirectToRoute('main_campus', ['id' =>$campus->getId()]);
 
         }
         return $this->render('main/campus.html.twig', [
