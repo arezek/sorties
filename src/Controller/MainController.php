@@ -26,8 +26,10 @@ class MainController extends AbstractController
         //todo: modifier pour afficher la date du jour, le nom d'un participant
 
         $options = array('campus1', 'campus2', 'campus3');
-        $valeur = array('Parc', '10/11/2023', '31/12/2024', '3/5', 'En cours', 'X', 'Jacques', 'Afficher');
-        $valeurs = array($valeur, $valeur, $valeur);
+        $valeur = array(1,'Parc', '10/11/2023', '31/12/2024', '3/5', 'En cours', 'X', 'Jacques', 'Afficher');
+        $valeur2 = array(2,'Parc2', '10/11/2023', '31/12/2024', '3/5', 'En cours', 'X', 'Jacques', 'Modifier');
+        $valeur3 = array(3,'Parc3', '10/11/2023', '31/12/2024', '3/5', 'En cours', 'X', 'Jacques', 'Afficher');
+        $sorties = array($valeur, $valeur2, $valeur3);
 
         return $this->render('main/index.html.twig', [
             'controller_name' => 'MainController',
@@ -35,7 +37,7 @@ class MainController extends AbstractController
             'participantPrenom' => 'Clement',
             'participantNom' => 'J.',
             'options' => $options,
-            'valeurs' => $valeurs
+            'sorties' => $sorties
         ]);
     }
 

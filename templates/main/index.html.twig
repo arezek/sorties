@@ -55,15 +55,17 @@
 
     <table>
         <tr><th>Nom de la sortie</th><th>Date de la sortie</th><th>Clôture</th><th>Inscrits/places</th><th>Etat</th><th>Inscrit</th><th>Organisateur</th><th>Actions</th></tr>
-        {% for valeur in valeurs %}
+        {% for sortie in sorties %}
             <tr>
-                {% for i in 0..7 %}
-                    {% if valeur[i] == 'Afficher' %}
+                {% for i in 1..8 %}
+                    {% if sortie[i] == 'Afficher' %}
                         <td>
-                            <a href="{{ path('app_register') }}">{{ valeur[i]}}</a>
+                            <a href="{{ path('sorties_details',{ id : sortie[0]}) }}">{{ sortie[i]}}</a>
                         </td>
+                    {% elseif %}
+
                     {% else %}
-                            <td>{{ valeur[i]}}</td>
+                            <td>{{ sortie[i]}}</td>
                     {% endif %}
                 {% endfor %}
             </tr>
