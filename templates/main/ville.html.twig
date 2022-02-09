@@ -5,16 +5,38 @@
 {% block body %}
 
     <div>
-        <h1>Ville</h1>
+        <h1>Gérer les Villes</h1>
+        <div>
+            <button type="submit">Rechercher</button>
+        </div>
+        <table>
+            <tr><th>Ville</th><th>Code postal</th><th>Actions</th></tr>
+            <tr>
+                <td>
+                    <a>Nom de la Ville</a>
+                </td>
+                <td>
+                    <a>code postal</a>
+                </td>
+                <td>
+                    <button class="btn">Modifier</button>
+                    <button class="btn">Supprimer</button>
+                </td>
+            </tr>
 
-        {{ form_start(villeForm) }}
+            <tr>
+                <td>
+                    {{ form_start(villeForm) }}
 
-        {{ form_widget(villeForm) }}
-        <button type="submit" class="btn">Ajouter</button>
-        <button class="btn">Modifier</button>
-        <button class="btn">Supprimer</button>
+                    {{ form_widget(villeForm) }}
+                    <button type="submit" class="btn">Ajouter</button>
 
-        {{ form_end(villeForm) }}
+                    {{ form_end(villeForm) }}
+                </td>
+            </tr>
+
+        </table>
+
 
     </div>
 
