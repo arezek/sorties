@@ -2,9 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Campus;
+use App\Form\CampusType;
 use App\Repository\CampusRepository;
 use App\Repository\VilleRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -57,28 +62,37 @@ class MainController extends AbstractController
      */
     public function ville(VilleRepository $villeRepository): Response
     {
-        $ville = $villeRepository->findBy(['nom', 'codePostal', 25]);
+      //  $ville = $villeRepository->findBy(['nom', 'codePostal', 25]);
 
 
         return $this->render('main/campus.html.twig', [
 
-            "ville" => $ville
+          //  "ville" => $ville
 
         ]);
     }
     /**
      * @Route("/Campus", name="main_campus")
      */
-    public function campus(CampusRepository $campusRepository): Response
+    public function campus(Request $request, EntityManagerInterface $entityManager, CampusRepository  $campusRepository): Response
     {
-        $campus = $campusRepository->findBy(['nom', 25]);
+        $campus = new Campus();
+        $campusForm = $this->createForm(CampusType::class, $campus);
+        $campusForm->handleRequest($request);
+
+        if ($campusForm->isSubmitted() && $campusForm->isValid()) {
 
 
+            $entityManager->persist($campus);
+            $entityManager->flush();
+            $this->addFlash('success', 'Campus ajoutée');
 
+        }
         return $this->render('main/campus.html.twig', [
+            'campusForm' => $campusForm->createView()
+        ]);
+       // $campus = $campusRepository->findBy(['nom', 25]);
 
-            "campus" => $campus
 
-    ]);
     }
 }

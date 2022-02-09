@@ -8,6 +8,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+// use Rollerworks\Component\PasswordStrength\Validator\Constraints as RollerworksPassword;
 
 /**
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
@@ -45,7 +46,8 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
-     * @Assert\Regex(pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/",message="Le mot de pass doit contenir au moins un caractère special")
+     * @Assert\Regex(pattern="/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$/i",message="Le mot de pass doit contenir au moins un caractère special")
+     *
      */
     private $password;
 
@@ -76,7 +78,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @Assert\NotBlank
      * @ORM\Column(type="integer")
-     * @Assert\Regex(pattern="/^(33|0)?(1|2|3|4|5|6|7|8|9)\d{8}$/",message="numéro de téléphone non valide")
+     * @Assert\Regex(pattern="/^(33|0)?[1-9]\d{8}$/",message="numéro de téléphone non valide")
      *
      */
 
