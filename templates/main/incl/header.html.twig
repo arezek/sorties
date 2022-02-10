@@ -22,13 +22,12 @@
 				href="{{ path('main_profil_edit') }}">Modifier mon Profil</a>
 			<a
 				href="{{ path('app_logout') }}">Déconnexion</a>
-			{% endif%}
+		{% else %}
 			<a
-				href="{{ path('app_login') }}">
-				Se Connecter</a>
+				href="{{ path('app_login') }}">Se Connecter</a>
 			<a
-				href="{{ path('app_register') }}">
-				S'inscrire</a>
+				href="{{ path('app_register') }}">S'inscrire</a>
+		{% endif%}
 			<a
 				href="{{ path('sorties_history') }}">
 				Historiques Sorties</a>
