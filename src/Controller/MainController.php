@@ -32,9 +32,9 @@ class MainController extends AbstractController
 
 
         $options = array('campus1', 'campus2', 'campus3');
-        $valeur = array(1,'Parc', '10/11/2023', '31/12/2024', '3/5', 'En cours', 'X', 'Jacques', 'Afficher');
-        $valeur2 = array(2,'Parc2', '10/11/2023', '31/12/2024', '3/5', 'En cours', 'X', 'Jacques', 'Modifier');
-        $valeur3 = array(3,'Parc3', '10/11/2023', '31/12/2024', '3/5', 'En cours', 'X', 'Jacques', 'Afficher');
+        $valeur = array(1, 'Parc', '10/11/2023', '31/12/2024', '3/5', 'En cours', 'X', 'Jacques', 'Afficher');
+        $valeur2 = array(2, 'Parc2', '10/11/2023', '31/12/2024', '3/5', 'En cours', 'X', 'Jacques', 'Modifier');
+        $valeur3 = array(3, 'Parc3', '10/11/2023', '31/12/2024', '3/5', 'En cours', 'X', 'Jacques', 'Afficher');
         //$sorties = array($valeur, $valeur2, $valeur3);
 
         return $this->render('main/index.html.twig', [
@@ -71,7 +71,8 @@ class MainController extends AbstractController
             'villeForm' => $villeForm->createView()
         ]);
     }
-      //  $ville = $villeRepository->findBy(['nom', 'codePostal', 25]);
+
+    //  $ville = $villeRepository->findBy(['nom', 'codePostal', 25]);
     public function suppVille(Request $request, Ville $ville, EntityManagerInterface $entityManager): Response
     {
         {
@@ -82,12 +83,10 @@ class MainController extends AbstractController
     }
 
 
-
-
     /**
      * @Route("/Campus", name="main_campus")
      */
-    public function campus(Request $request, EntityManagerInterface $entityManager, CampusRepository  $campusRepository): Response
+    public function campus(Request $request, EntityManagerInterface $entityManager, CampusRepository $campusRepository): Response
     {
         $campus = new Campus();
         $campusForm = $this->createForm(CampusType::class, $campus);
@@ -120,7 +119,38 @@ class MainController extends AbstractController
         return $this->redirectToRoute('main_campus');
     }
 
+
+    /**
+     * @Route("/AffCampus", name="main_affCampus")
+     */
+    public function affCampus(CampusRepository $campusRepository): Response
+    {
+
+        $campus = $campusRepository->findAll();
+
+
+
+        return $this->render('main/campusAfficher.html.twig', [
+            'campus' => $campus
+        ]);
+    }
+
+    /**
+     * @Route("/ModifCampus", name="main_modifCampus")
+     */
+    public function modifCampus(CampusRepository $campusRepository, int $id): Response
+    {
+
+        $campus = $campusRepository->find($id);
+
+
+
+        return $this->render('main/campusModifier.html.twig', [
+            'campus' => $campus
+        ]);
+    }
 }
+
 
 
 

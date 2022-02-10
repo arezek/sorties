@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Campus{% endblock %}
+
+{% block body %}
+
+    <div>
+        <h1>Gérer les Campus</h1>
+        {% for campus in campus%}
+
+            {{ campus.nom}}
+<a href="{{ path('main_modifCampus', "campus") }}"> Modifier</a>
+
+        {% endfor %}
+
+    </div>
+
+{% endblock %}
