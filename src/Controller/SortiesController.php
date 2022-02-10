@@ -128,6 +128,12 @@ class SortiesController extends AbstractController
             return $this->redirectToRoute('main_index');
         }
 
+        if (isset($_POST['modifier']) || isset($_POST['ouverte'])) {
+
+            $entityManager->flush();
+            return $this->redirectToRoute('main_index');
+        }
+
         return $this->render('sorties/edit.html.twig', [
             'controller_name' => 'SortiesController',
             'sortie'=> $sortie
@@ -142,4 +148,5 @@ class SortiesController extends AbstractController
             'controller_name' => 'SortiesController',
         ]);
     }
+
 }

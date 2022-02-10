@@ -111,15 +111,15 @@
                         {% if app.user.mail != "cjumelinee@tutanota.com" %}
                             {% if sortie.etat == 'ouverte' %}
                                 {% if app.user.actif == 0 %}
-                                    <a href="{{ path('sorties_edit',{'id' : sortie.id} )}}">Participer</a>
+                                    <a href="{{ path('sorties_details',{'id' : sortie.id} )}}">Participer</a>
                                 {% endif %}
                                 {% if app.user.actif == 1  %}
-                                    <a href="{{ path('sorties_edit',{'id' : sortie.id} )}}">Se désister</a>
+                                    <a href="{{ path('sorties_details',{'id' : sortie.id} )}}">Se désister</a>
                                 {% endif %}
                             {% endif %}
                             {% if sortie.etat == 'cloturé' %}
                                 {% if app.user.actif == 1  %}
-                                    <a href="{{ path('sorties_edit',{'id' : sortie.id} )}}">Se désister</a>
+                                    <a href="{{ path('sorties_details',{'id' : sortie.id} )}}">Se désister</a>
                                 {% endif %}
                             {% endif %}
                         {% endif %}

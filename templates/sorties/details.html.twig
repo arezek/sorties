@@ -7,7 +7,7 @@
     <div>Date et heure de la sortie : {{ sortie.dateHeureDebut | date("d/m à h:m") }}</div>
     <div>Date limite d'inscription : {{ sortie.dateLimiteInscription | date("d/m à h:m") }}</div>
     <div>Nombre de places : {{ sortie.nbInscriptionsMax }} (reste {relation inscrit} places)</div>
-    <div>Durée : {{ sortie.duree }} minutes {% if sortie.duree%60 == 0  %}({{ sortie.duree%60 }} h {% endif %})</div>
+    <div>Durée : {{ sortie.duree }} minutes {% if sortie.duree%60 == 0  %}({{ sortie.duree%60 }} h){% endif %}</div>
     <div>Description et infos : {{ sortie.infosSortie }} </div>
     <div>Campus :  </div>
     <div>Lieu :  </div>
@@ -42,15 +42,18 @@
             <a href="{{ path('sorties_annuler',{'id' : sortie.id})}}">Annuler</a>
         </button>
     {% endif %}
-    {% if app.user and app.user.mail != "cjumelinee@tutanota.com" %}
-        <!--if si je ne participte pas-->
-        <button type="submit" name="modifier" value="modifier">
-            <a href="{{ path('sorties_edit',{'id' : sortie.id} )}}" >Participer</a>
-        </button>
-        <button type="submit" name="annuler" value="annuler">
-            <a href="{{ path('sorties_annuler') }}">Se désister</a>
-        </button>
+    {% if app.user.mail != "cjumelinee@tutanota.com" %}
+        {% if sortie.etat == 'ouverte' %}
+            {# todo: ajouter un if ( participant.actif == true ou participant.id == sortie.participant.id)}
+            todo : Savoir s'il participe ou pas pour afficher les bons boutons#}
+            {# if participant.id == sortie.participant.id #}
+            <button type="submit" class="btn" name="desister" value="desister">Se désister</button>
+            {# elseif #}
+            <button type="submit" class="btn" name="participer" value="participer">Participer</button>
+            {# endif #}
+        {% endif %}
     {% endif %}
+
 
     <button onclick="history.back()">Retour</button>
 
