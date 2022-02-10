@@ -17,21 +17,27 @@
         <div>Description et infos :
             <textarea type="text" name="infosSortie" >{{ sortie.infosSortie }}</textarea></div>
         <div>Campus :
-            <select type="text" name="campus"  maxlength="50"></select></div>
+            <select type="text" name="campus" maxlength="50"></select></div>
         <div>Lieu :  </div>
         <div>Rue :  </div>
         <div>Code Postal :  </div>
         <div>Latitude : Non renseignée</div>
         <div>Longitude : Non renseignée</div>
 
-        {% if sortie.etat != 'ouverte' %}
-            <button type="submit" class="btn" name="ouverte" value="ouverte">Publier la sortie</button>
-            <button type="submit" class="btn" name="modifier" value="modifier" >Enregistrer les modifications</button>
+        {% if sortie.etat != 'annulé' %}
+            {% if sortie.etat != 'ouverte' %}
+                <button type="submit" class="btn" name="modifier" value="modifier" >Enregistrer les modifications</button>
+            {% endif %}
+            {% if sortie.etat == 'ouverte' %}
+                <button type="submit" class="btn" name="ouverte" value="ouverte">Publier les modifications</button>
+            {% endif %}
+            <button ><a href="{{ path('sorties_annuler',{'id' : sortie.id})}}">Annuler la sortie</a></button>
         {% endif %}
-        {% if sortie.etat == 'ouverte' %}
-            <button type="submit" class="btn" name="ouverte" value="ouverte">Publier les modifications</button>
+
+        {% if sortie.etat == 'annulé' %}
+            <button type="submit" class="btn" name="ouverte" value="ouverte">Publier à nouveau</button>
+            {#  todo : dans un bouton#}
+            <a href="{{ path('sorties_supprimer',{'id' : sortie.id} )}}">Supprimer la sortie</a>
         {% endif %}
-        <button type="submit" class="btn" name="supprimer" value="supprimer">Supprimer la sortie</button>
-        <button ><a href="{{ path('sorties_annuler',{'id' : sortie.id})}}">Annuler la sortie</a></button>
     </form>
 {% endblock %}

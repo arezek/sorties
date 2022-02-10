@@ -97,9 +97,7 @@ class SortiesController extends AbstractController
         $entityManager->remove($sortie);
         $entityManager->flush();
 
-        return $this->render('main/index.html.twig', [
-            'controller_name' => 'SortiesController',
-        ]);
+        return $this->redirectToRoute('main_index', [], Response::HTTP_SEE_OTHER);
     }
 
     /**

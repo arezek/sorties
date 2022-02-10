@@ -105,6 +105,7 @@
                             {% endif %}
                             {% if sortie.etat == 'annulé' %}
                                 <a href="{{ path('sorties_edit',{'id' : sortie.id} )}}">Modifier</a>
+                                <a href="{{ path('sorties_supprimer',{'id' : sortie.id} )}}">Supprimer</a>
                             {% endif %}
                         {% endif %}
                         {% if app.user.mail != "cjumelinee@tutanota.com" %}
