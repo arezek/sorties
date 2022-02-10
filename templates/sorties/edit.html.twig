@@ -7,16 +7,17 @@
           <input type="text" value="{{ sortie.nom }}" name="nom" required="required" maxlength="50"></div>
         <div>Organisateur : {{ app.user.pseudo }}</div>
         <div>Date et heure de la sortie :
-            <input type=text  value="{{ sortie.dateHeureDebut | date("Y-m-d h:m:00") }}" name="dateHeureDebut"></div>
+            <input type="text"  value="{{ sortie.dateHeureDebut | date("Y-m-d H:m") }}" name="dateHeureDebut"></div>
         <div>Date limite d'inscription :
-            <input type=text  value="{{ sortie.dateLimiteInscription | date("Y-m-d h:m:00") }}" name="dateLimiteInscription"></div>
+            <input type="text"  value="{{ sortie.dateLimiteInscription | date("Y-m-d h:m") }}" name="dateLimiteInscription"></div>
         <div>Nombre de places :
           <input type="number" value="{{ sortie.nbInscriptionsMax }}" name="nbInscriptionsMax" required="required" maxlength="50"></div>
         <div>Durée :
           <input type="number" value="{{ sortie.duree }}" name="duree" required="required" maxlength="50"></div>
         <div>Description et infos :
-            <textarea>{{ sortie.infosSortie }}</textarea></div>
-        <div>Campus :  </div>
+            <textarea type="text" name="infosSortie" >{{ sortie.infosSortie }}</textarea></div>
+        <div>Campus :
+            <select type="text" name="campus" required="required" maxlength="50"></select></div>
         <div>Lieu :  </div>
         <div>Rue :  </div>
         <div>Code Postal :  </div>

@@ -14,6 +14,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @Route("/sorties", name="sorties_")
@@ -51,14 +52,11 @@ class SortiesController extends AbstractController
             $sortie->setEtat('annulée');
         }
 
-
-
         $sortieForm = $this->createForm(SortieFormType::class, $sortie);
         $sortieForm->handleRequest($request);
 
         if ($sortieForm->isSubmitted() && $sortieForm->isValid()) {
             // encode the plain password
-
             $entityManager->persist($sortie);
             $entityManager->flush();
             $this->addFlash('success', 'Sortie ajoutée');
@@ -98,32 +96,30 @@ class SortiesController extends AbstractController
     /**
      * @Route("/modifier/{id}", name="edit")
      */
-    public function edit(int $id, ManagerRegistry $doctrine, SortieRepository $sortieRepository, EntityManagerInterface $entityManagerI): Response
+    public function edit(int $id, ManagerRegistry $doctrine, SortieRepository $sortieRepository, Request $request): Response
     {
         $sortieBDD = $sortieRepository->find($id);
-
         $entityManager = $doctrine->getManager();
-
         $sortie = $entityManager->getRepository(Sortie::class)->find($id);
         $sortieLieu = $entityManager->getRepository(Lieu::class)->find($id);
 
-        if (!$sortie) {
-            throw $this->createNotFoundException(
-                'No product found for id '.$id
-            );
-        }
-
-        if($_SERVER["REQUEST_METHOD"]  === 'POST')
-
-        {
-
-            $adr = $_POST['adresse'];}
-
         if (isset($_POST['modifier'])) {
+            //2022-06-01T12:06
+            //dump($sortie);
+            //die();
+            //$dateArrondie = new DateTime(date('Y-m-d H:00',$_POST['dateHeureDebut']));
+            dump(new \DateTime($_POST['dateLimiteInscription']));
 
-            $sortie->setNom();
+            $sortie->setNom($_POST['nom']);
+            $sortie->setDateHeureDebut(new \DateTime($_POST['dateHeureDebut']));
+            $sortie->setDateLimiteInscription(new \DateTime($_POST['dateLimiteInscription']));
+            $sortie->setNbInscriptionsMax($_POST['nbInscriptionsMax']);
+            $sortie->setDuree($_POST['duree']);
+            $sortie->setInfosSortie($_POST['infosSortie']);
+
+            //strtotime($_POST['dateHeureDebut']);
+            //setDueDate(\DateTime::createFromFormat('Y-m-d', "2018-09-09"));
             $entityManager->flush();
-
             return $this->redirectToRoute('main_index');
         }
 
