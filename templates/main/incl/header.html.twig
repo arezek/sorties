@@ -12,25 +12,20 @@
 		</h1>
 	</div>
 	<nav>
-		<a
-			href="{{ path('main_index') }}">Accueil</a>
+			<a  href="{{ path('main_index') }}">Accueil</a>
 		{% if app.user%}
 			<a
-				href="{{ path('main_profil', {'id' : app.user.id})}}">Mon Profil
-			</a>
+				href="{{ path('main_profil', {'id' : app.user.id})}}">Mon Profil</a>
 			<a
 				href="{{ path('main_profil_edit') }}">Modifier mon Profil</a>
 			<a
 				href="{{ path('app_logout') }}">Déconnexion</a>
 		{% else %}
 			<a
-				href="{{ path('app_login') }}">Se Connecter</a>
-			<a
-				href="{{ path('app_register') }}">S'inscrire</a>
+				href="{{ path('app_login') }}">Se Connecter / S'incrire</a>
 		{% endif%}
 			<a
-				href="{{ path('sorties_history') }}">
-				Historiques Sorties</a>
+				href="{{ path('sorties_history') }}">Historiques Sorties</a>
 			<a
 				href="{{ path('main_villes') }}">Villes</a>
 			<a

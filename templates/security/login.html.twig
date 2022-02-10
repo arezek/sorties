@@ -14,7 +14,10 @@
         </div>
     {% endif %}
 
-    <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
+   <div>
+       <h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
+       <a href="{{ path('app_register') }}">Me créer un compte : ici</a>
+   </div>
     <label for="inputMail">eMail</label>
     <input type="text" value="{{ last_username }}" name="mail" id="inputMail" class="form-control" autocomplete="username" required autofocus>
     <label for="inputPassword">Mot de Passe</label>
