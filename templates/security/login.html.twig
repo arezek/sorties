@@ -4,70 +4,43 @@
 {% endblock %}
 
 {% block body %}
-	<form
-		method="post"
-		class="FormConnexion">
+	<form method="post" class="FormConnexion">
+	<div class="inscription">
+		<a href="{{ path('app_register') }}">Inscription</a>
+	</div>
 		{% if error %}
-			<div
-				class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+			<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
 		{% endif %}
 
 		{% if app.user %}
-			<div
-				class="mb-3">
+			<div class="mb-3">
 				You are logged in as
 				{{ app.user.username }},
-				<a
-					href="{{ path('app_logout') }}">Logout</a>
+				<a href="{{ path('app_logout') }}">Logout</a>
 			</div>
+
 		{% endif %}
 
 		<div>
-			<h1
-				class="h3 mb-3 font-weight-normal">Connexion</h1>
-		</div>
-		<label
-			for="inputMail">eMail</label>
-		<input
-			type="text"
-			value="{{ last_username }}" name="mail"
-			id="inputMail"
-			class="form-control"
-			autocomplete="username"
-			required
-			autofocus>
-		<label
-			for="inputPassword">Mot de Passe</label>
-		<input
-			type="password"
-			name="password"
-			id="inputPassword"
-			class="form-control"
-			autocomplete="current-password"
-			required>
+			<h1 class="h3 mb-3 font-weight-normal">Connexion</h1>
+			<div class="mdpEmail">
+			<label for="inputMail">eMail</label>
+			<input type="text" value="{{ last_username }}" name="mail" id="inputMail" class="form-control" autocomplete="username" required autofocus>
+			<label for="inputPassword">Mot de Passe</label>
+			<input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
-		<input
-			type="hidden"
-			name="_csrf_token"
-			value="{{ csrf_token('authenticate') }}">
+			<input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+			</div>
 
-		<div
-			class="checkbox mb-3">
-			<label>
-				<input
-					type="checkbox"
-					name="_remember_me">
-				Se souvenir de moi
-			</label>
+			<div class="checkbox mb-3">
+				<label>
+					<input type="checkbox" name="_remember_me">Se souvenir de moi
+				</label>
+			</div>
 		</div>
 
-
-		<button
-			class="btn btn-lg btn-primary"
-			type="submit">
-			Se Connecter
-		</button>
-		<a
-			href="{{ path('app_register') }}">Me créer un compte : ici</a>
+		<div>
+			<button class="btn btn-lg btn-primary" type="submit">Se Connecter</button>
+		</div>
 	</form>
 {% endblock %}
