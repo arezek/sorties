@@ -47,45 +47,6 @@ class MainController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/Profil/{id}", name="main_profil")
-     */
-    public function profil(ParticipantRepository $repository,int $id): Response
-    {
-        //todo: afficher le nom du profil en title, si id = le miens un bouton apparait pour modifier le profil.
-        //todo: modifier le chemin de navbar car redirige vers le '2'
-        //todo : problème d'affichage du logo juste sur cette page...
-        // $participant = $repository->findAll();
-        $participant = $repository->find($id);
-
-        return $this->render('main/profil/profil.html.twig',[
-            'participant'=> $participant
-        ]);
-    }
-
-    /**
-     * @Route("/MonProfil", name="main_profil_edit",methods={"GET", "POST"})
-     */
-    public function editProfil(Request $request,EntityManagerInterface $entityManager,Participant $participant): Response
-    {
-
-        $form = $this->createForm(ParticipantType::class, $participant);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-            return $this->redirectToRoute('main_index');
-        }
-
-        return $this->renderForm('main/profil/editProfil.html.twig', [
-            'participant' => $participant,
-            'form' => $form,
-        ]);
-
-
-
-
-    }
 
     /**
      * @Route("/Villes", name="main_villes")
@@ -103,16 +64,26 @@ class MainController extends AbstractController
             $entityManager->persist($ville);
             $entityManager->flush();
             $this->addFlash('success', 'Ville ajoutée');
-            return $this->redirectToRoute('main_villes', ['id' =>$ville->getId()]);
+            return $this->redirectToRoute('main_villes', ['id' => $ville->getId()]);
 
         }
         return $this->render('main/ville.html.twig', [
             'villeForm' => $villeForm->createView()
         ]);
-      //  $ville = $villeRepository->findBy(['nom', 'codePostal', 25]);
-
-
     }
+      //  $ville = $villeRepository->findBy(['nom', 'codePostal', 25]);
+    public function suppVille(Request $request, Ville $ville, EntityManagerInterface $entityManager): Response
+    {
+        {
+            $entityManager->remove($ville);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('main_villes', [], Response::HTTP_SEE_OTHER);
+    }
+
+
+
+
     /**
      * @Route("/Campus", name="main_campus")
      */
@@ -124,12 +95,12 @@ class MainController extends AbstractController
 
         if ($campusForm->isSubmitted() && $campusForm->isValid()) {
 
-           // $campus->setNom();
+            // $campus->setNom();
 
             $entityManager->persist($campus);
             $entityManager->flush();
             $this->addFlash('success', 'Campus ajoutée');
-            return $this->redirectToRoute('main_campus', ['id' =>$campus->getId()]);
+            return $this->redirectToRoute('main_campus', ['id' => $campus->getId()]);
 
         }
 
@@ -137,10 +108,18 @@ class MainController extends AbstractController
         return $this->render('main/campus.html.twig', [
             'campusForm' => $campusForm->createView()
         ]);
-       // $campus = $campusRepository->findBy(['nom', 25]);
-
-
+        // $campus = $campusRepository->findBy(['nom', 25]);
     }
+
+    public function suppCampus(Request $request, Campus $campus, EntityManagerInterface $entityManager): Response
+    {
+        {
+            $entityManager->remove($campus);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('main_campus');
+    }
+
 }
 
 
