@@ -30,12 +30,25 @@
             </tr>
         {% endfor %}
     </table>
-    {% if app.user %}
+    {# todo: Changer les cjumeline par les {Partipant.id ou .mail} #}
+    {% if app.user and app.user.mail == "cjumelinee@tutanota.com" %}
         <button type="submit" name="modifier" value="modifier">
             <a href="{{ path('sorties_edit',{'id' : sortie.id} )}}" >Modifier</a>
         </button>
+        <button type="submit" name="modifier" value="modifier">
+            <a href="{{ path('sorties_edit',{'id' : sortie.id} )}}" >Publier</a>
+        </button>
         <button type="submit" name="annuler" value="annuler">
-            <a href="{{ path('sorties_annuler') }}">Annuler</a>
+            <a href="{{ path('sorties_annuler',{'id' : sortie.id})}}">Annuler</a>
+        </button>
+    {% endif %}
+    {% if app.user and app.user.mail != "cjumelinee@tutanota.com" %}
+        <!--if si je ne participte pas-->
+        <button type="submit" name="modifier" value="modifier">
+            <a href="{{ path('sorties_edit',{'id' : sortie.id} )}}" >Participer</a>
+        </button>
+        <button type="submit" name="annuler" value="annuler">
+            <a href="{{ path('sorties_annuler') }}">Se désister</a>
         </button>
     {% endif %}
 

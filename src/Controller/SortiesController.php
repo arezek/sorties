@@ -48,8 +48,6 @@ class SortiesController extends AbstractController
             $sortie->setEtat('créée');
         } else if (isset($_POST['ouverte'])) {
             $sortie->setEtat('ouverte');
-        } else if (isset($_POST['annulée'])) {
-            $sortie->setEtat('annulée');
         }
 
         $sortieForm = $this->createForm(SortieFormType::class, $sortie);
@@ -70,13 +68,24 @@ class SortiesController extends AbstractController
     }
 
     /**
-     * @Route("/annuler", name="annuler")
+     * @Route("/annuler{id}", name="annuler")
      */
-    public function annuler(): Response
+    public function annuler(int $id, EntityManagerInterface $entityManager): Response
     {
+        $sortie = $entityManager->getRepository(Sortie::class)->find($id);
+
+        if (isset($_POST['enregistrer'])) {
+            //todo : relation etat/libelle à compléter
+            $sortie->setEtat('annulé');
+            //$sortie->setLibelle($_POST['justifier']);
+
+            $entityManager->flush();
+            return $this->redirectToRoute('main_index');
+        }
 
         return $this->render('sorties/annuler.html.twig', [
             'controller_name' => 'SortiesController',
+            'sortie' => $sortie,
         ]);
     }
 
@@ -96,7 +105,7 @@ class SortiesController extends AbstractController
     /**
      * @Route("/modifier/{id}", name="edit")
      */
-    public function edit(int $id, ManagerRegistry $doctrine, SortieRepository $sortieRepository, Request $request): Response
+    public function edit(int $id, ManagerRegistry $doctrine, SortieRepository $sortieRepository): Response
     {
         $sortieBDD = $sortieRepository->find($id);
         $entityManager = $doctrine->getManager();
@@ -104,12 +113,12 @@ class SortiesController extends AbstractController
         $sortieLieu = $entityManager->getRepository(Lieu::class)->find($id);
 
         if (isset($_POST['modifier'])) {
-            //2022-06-01T12:06
-            //dump($sortie);
-            //die();
-            //$dateArrondie = new DateTime(date('Y-m-d H:00',$_POST['dateHeureDebut']));
-            dump(new \DateTime($_POST['dateLimiteInscription']));
+            $sortie->setEtat('créée');
+        } else if (isset($_POST['ouverte'])) {
+            $sortie->setEtat('ouverte');
+        }
 
+        if (isset($_POST['modifier']) || isset($_POST['ouverte'])) {
             $sortie->setNom($_POST['nom']);
             $sortie->setDateHeureDebut(new \DateTime($_POST['dateHeureDebut']));
             $sortie->setDateLimiteInscription(new \DateTime($_POST['dateLimiteInscription']));
@@ -117,8 +126,6 @@ class SortiesController extends AbstractController
             $sortie->setDuree($_POST['duree']);
             $sortie->setInfosSortie($_POST['infosSortie']);
 
-            //strtotime($_POST['dateHeureDebut']);
-            //setDueDate(\DateTime::createFromFormat('Y-m-d', "2018-09-09"));
             $entityManager->flush();
             return $this->redirectToRoute('main_index');
         }

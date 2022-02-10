@@ -1,6 +1,22 @@
 {% extends 'base.html.twig' %}
 {% block body %}
-    <div>
-annuler la sortie
-    </div>
+
+    <h3>Annuler une sortie :</h3>
+    <form method="post">
+        <div>
+            <div>Nom de la sortie  : {{ sortie.nom }} </div>
+            <div>Date de la sortie : {{ sortie.dateHeureDebut | date("d/m/Y") }}</div>
+            <div>Campus : {relation campus}</div>
+            <div>Lieu : {relation lieu}</div>
+            <div>Motif :
+                <textarea type="text" name="justifier"  placeholder="Pourquoi annuler ?"></textarea>
+            </div>
+        </div>
+        {# todo: Changer les cjumeline par les {Partipant.id ou .mail} #}
+        {% if app.user and app.user.mail == "cjumelinee@tutanota.com" %}
+            <button type="submit" class="btn" name="enregistrer" value="enregistrer" >Enregistrer</button>
+            <button onclick="history.back()">Retour</button>
+        {% endif %}
+    </form>
+
 {% endblock %}

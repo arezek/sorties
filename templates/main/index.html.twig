@@ -68,7 +68,18 @@
                      / {{ sortie.nbInscriptionsMax }}
                 </td>
                 <td>
-                    {{ sortie.etat | upper }}
+                    {% if sortie.etat == 'annulé' %}
+                        Annulée
+                    {% endif %}
+                    {% if sortie.etat == 'créée' %}
+                        En création
+                    {% endif %}
+                    {% if sortie.etat == 'ouverte' %}
+                        Ouverte
+                    {% endif %}
+                    {% if sortie.etat == 'cloturé' or sortie.etat == 'passé' %}
+                        Fermé
+                    {% endif %}
                 </td>
                 <td>
                     {% if app.user %}
@@ -82,21 +93,30 @@
                 </td>
                 <td>
                     {% if app.user %}
+                        {# todo: Changer les cjumeline par les {Partipant.id ou .mail} #}
                         {% if app.user.mail == "cjumelinee@tutanota.com" %}
                             {% if sortie.etat == 'créée' %}
                                 <a href="{{ path('sorties_edit',{'id' : sortie.id} )}}">Modifier</a>
                                 <a href="{{ path('sorties_edit',{'id' : sortie.id} )}}">Publier</a>
                             {% endif %}
                             {% if sortie.etat == 'ouverte' %}
+                                <a href="{{ path('sorties_edit',{'id' : sortie.id})}}">Modifier</a>
+                                <a href="{{ path('sorties_annuler',{'id' : sortie.id})}}">Annuler</a>
+                            {% endif %}
+                            {% if sortie.etat == 'annulé' %}
                                 <a href="{{ path('sorties_edit',{'id' : sortie.id} )}}">Modifier</a>
-                                <a href="{{ path('sorties_annuler')}}">Annuler</a>
                             {% endif %}
                         {% endif %}
-                        {% if app.user.mail != "ajouter le mail de l'organisateur" %}
+                        {% if app.user.mail != "cjumelinee@tutanota.com" %}
                             {% if sortie.etat == 'ouverte' %}
                                 {% if app.user.actif == 0 %}
                                     <a href="{{ path('sorties_edit',{'id' : sortie.id} )}}">Participer</a>
                                 {% endif %}
+                                {% if app.user.actif == 1  %}
+                                    <a href="{{ path('sorties_edit',{'id' : sortie.id} )}}">Se désister</a>
+                                {% endif %}
+                            {% endif %}
+                            {% if sortie.etat == 'cloturé' %}
                                 {% if app.user.actif == 1  %}
                                     <a href="{{ path('sorties_edit',{'id' : sortie.id} )}}">Se désister</a>
                                 {% endif %}
