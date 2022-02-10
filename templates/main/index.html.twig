@@ -4,20 +4,24 @@
 
 {% block body %}
 <div>
-    <div>
-        <h4>Date du jour : {{ dateDuJour }}</h4>
-        {% if app.user %}
-            <h4>Participant : {{  app.user.prenom }} {{ app.user.nom }}</h4>
-        {% endif %}
+    <div class="enTeteAfficherSortie">
+        <h2>Sorties : </h2>
+        <h5>Date du jour : {{ dateDuJour }}{% if app.user %} - {{  app.user.prenom }} {{ app.user.nom }}{% endif %}</h5>
+        <div>
+            {% if app.user %}
+                <button type="submit"><a class="btnNav" href="{{ path('sorties_creer') }}">Creer une sortie</a>
+                </button>
+            {% elseif app.user == false %}
+                <button type="submit"><a class="btnNav" href="{{ path('app_login') }}">Me connecter pour créer une sortie</a>
+                </button>
+            {% endif %}
+        </div>
     </div>
-    <h4>Filtrer les sorties : </h4>
     <div>
         <div>
             <label>Campus : </label>
             <select>
-                {% for option in options %}
-                    <option value="{{ option }}">{{ option }}</option>
-                {% endfor %}
+                {% for option in options %}<option value="{{ option }}">{{ option }}</option>{% endfor %}
             </select>
         </div>
         <div>
@@ -34,22 +38,14 @@
         </div>
     </div>
     <div>
-        <div>
-            <input type="checkbox" value="1">
-            <label>Sorties dont je suis l'organisateur.trice</label>
-        </div>
-        <div>
-            <input type="checkbox" value="2">
-            <label>Sorties auxquelles je suis inscrite.e</label>
-        </div>
-        <div>
-            <input type="checkbox" value="3" checked>
-            <label >Sorties auxquelles je ne suis pas inscrit.e</label>
-        </div>
-        <div>
-            <input type="checkbox" value="4">
-            <label>Sorties passées</label>
-        </div>
+        <input type="checkbox" value="3" checked>
+        <label >Nouveautés</label>
+        <input type="checkbox" value="1">
+        <label>Organisateur-trice</label>
+        <input type="checkbox" value="2">
+        <label>Inscrit-e</label>
+        <input type="checkbox" value="4">
+        <label>Joyeux Souvenirs</label>
     </div>
     <div>
         <button type="submit">Rechercher</button>
@@ -84,17 +80,7 @@
             </tr>
         {% endfor %}
     </table>
-    <div>
-        {% if app.user %}
-            <button type="submit">
-                <a class="btnNav" href="{{ path('sorties_creer') }}">Creer une sortie</a>
-            </button>
-        {% elseif app.user == false %}
-            <button type="submit">
-                <a class="btnNav" href="{{ path('app_login') }}">Me connecter pour créer une sortie</a>
-            </button>
-        {% endif %}
-    </div>
+
 
 
 </div>

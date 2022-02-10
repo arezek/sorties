@@ -1,12 +1,12 @@
 //______________________________________ Imports //
-
-
+@import url('https://fonts.googleapis.com/css2?family=Shizuru&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Shizuru&display=swap');
 //______________________________________ Variables //
-
-$couleurSectionPrincipale: rgba(0, 195, 255, 0.631);
-
+$couleurSectionPrincipal: rgba(15,
+91,
+255,
+0.337);
 //______________________________________ Mixins //
-
 @mixin borderTest {
     border: 2px solid black;
 }
@@ -15,106 +15,130 @@ $couleurSectionPrincipale: rgba(0, 195, 255, 0.631);
     gap: 1em;
 }
 
+@mixin BorderShadowEXT {
+    box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.296), -8px -8px 12px 0 rgba(255, 255, 255, 0.529);
+}
 
+@mixin BorderShadowIN {
+    box-shadow: 12px 12px 16px 0 rgba(255, 255, 255, 0.3) inset, -8px -8px 12px 0 rgba(0, 0, 0, .25) inset;
+}
 
 //**********************************************************//
 //                           CSS                            //
 //__________________________________________________________//
-
 * {
     box-sizing: border-box;
     padding: 0.2em;
-    border-radius: 0.8em;
-
-    label{
-        display: block;
+    border-radius: 0.5em;
+    li,
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    div,
+    label {
+        color: white
     }
-       li,
-       p,
-       h1,
-       h2,
-       h3,
-       h4,
-       h5,
-       div,
-       label {
-           color: white
-       }
+    button {
+        padding: 0.4em;
+    }
 }
 
 body {
-    // @include borderTest;
+    // __________________________FlouBckGrd
     background-color: black;
-    background-image: url('../img/back-color.jpg');
+    background-image: url('../img/back-colors.png');
     background-size: cover;
-    background-attachment: scroll;
     background-repeat: no-repeat;
+    background-attachment: scroll;
+    // @include borderTest;
     display: grid;
-    grid-template-rows: 2fr 6fr 1fr;
+    grid-template-rows: 30em auto 3em;
     @include GapGeneral;
-
-    //___________________________________________________Header
+    height: 100%;
+    //_____________________________________________________________________________________Header
     header {
         // @include borderTest;
-        background-color: $couleurSectionPrincipale;
+        background-color: $couleurSectionPrincipal;
         display: grid;
         gap: 0.2em;
-        
-        .logoPrincipal {
+        padding: 1em;
+        box-shadow: 12px 12px 16px 0 rgba(255, 255, 255, 0.3) inset, -8px -8px 12px 0 rgba(0, 0, 0, .25) inset;
+        .logoEnTete {
             // @include borderTest;
-            display: grid;
-            grid-template-columns: 4fr 8fr;
+            display: flex;
             align-items: center;
-            gap: 1em;
-            height: 100%;
-
-            .logoPrincipalimg {
+            a {
+                 :hover {
+                    transition: all 2s ease;
+                    transform: scale(1.10);
+                }
                 // @include borderTest;
-                width: 10em;
+                display: block;
+                background: linear-gradient(135deg,
+                rgba(0,
+                0,
+                0,
+                0.22),
+                rgba(255,
+                255,
+                255,
+                0.25));
+                .imgEnTete {
+                    // @include borderTest;
+                    width: 10em;
+                    @include BorderShadowEXT();
+                }
             }
-            h1{
+            h1 {
                 // @include borderTest;
-                text-align: left;
+                text-align: center;
                 width: 100%;
+                font-family: 'Shizuru', cursive;
             }
         }
-
         nav {
             // @include borderTest;
             display: flex;
             flex-wrap: wrap;
-
+            justify-content: space-evenly;
+            font-size: large;
+            font-weight: bold;
+             :hover {
+                transition: all 0.2s ease;
+                transform: scale(1.05);
+            }
+             :active {
+                transform: scale(1.15);
+            }
             a {
                 // @include borderTest;
+                @include BorderShadowEXT();
                 color: white;
                 list-style-type: none;
-
+                max-height: 3em;
                 text-decoration: none;
                 text-align: center;
-
-                height: 3em;
+                margin: 1%;
+                padding: 1em;
             }
-
         }
     }
-
-    //___________________________________________________Section
+    //_____________________________________________________________________________________Section
     section {
         // @include borderTest;
-        background-color: $couleurSectionPrincipale;
-
+        @include BorderShadowIN();
+        background-color: $couleurSectionPrincipal;
     }
-
-    //___________________________________________________Section
+    //_____________________________________________________________________________________Section
     footer {
-        background-color: $couleurSectionPrincipale;
         // @include borderTest;
-        text-align: center;
+        @include BorderShadowIN();
+        background-color: $couleurSectionPrincipal;
+        display: flex;
+        justify-content: center;
         align-items: center;
     }
-
-
-
- 
-
 }
