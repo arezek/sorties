@@ -60,6 +60,7 @@ body header .logoEnTete h1 {
   text-align: center;
   width: 100%;
   font-family: "Shizuru", cursive;
+  font-size: 300%;
 }
 body header nav {
   display: flex;

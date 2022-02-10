@@ -8,7 +8,7 @@ $couleurSectionPrincipal: rgba(124,
 0.118);
 //______________________________________ Mixins //
 @mixin borderTest {
-    border: 2px solid black;
+    border: 2px solid rgb(255, 255, 255);
 }
 
 @mixin GapGeneral {
@@ -99,6 +99,7 @@ body {
                 text-align: center;
                 width: 100%;
                 font-family: 'Shizuru', cursive;
+                font-size: 300%;
             }
         }
         nav {
@@ -134,6 +135,9 @@ body {
     section {
         // @include borderTest;
         background-color: $couleurSectionPrincipal;
+        form.FormConnexion {
+            // @include borderTest;
+        }
     }
     //_____________________________________________________________________________________Section
     footer {
