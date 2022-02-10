@@ -6,6 +6,7 @@ use App\Entity\Sortie;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
@@ -24,7 +25,7 @@ class SortieType extends AbstractType
 
 
             ])
-            ->add('duree')
+            ->add('duree', TimeType::class)
             ->add('dateLimiteInscription', DateTimeType::class,[
                 'data' => new \DateTime(),
             ])

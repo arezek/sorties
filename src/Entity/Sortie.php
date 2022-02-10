@@ -86,7 +86,7 @@ class Sortie
         return $this->duree;
     }
 
-    public function setDuree(int $duree): self
+    public function setDuree(\DateTimeInterface$duree): self
     {
         $this->duree = $duree;
 
