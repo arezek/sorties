@@ -2,12 +2,14 @@
 
 namespace App\Controller;
 
+use App\Entity\Lieu;
 use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\RegistrationFormType;
 use App\Form\SortieFormType;
 use App\Repository\SortieRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -21,14 +23,19 @@ class SortiesController extends AbstractController
     /**
      * @Route("/detail/{id}", name="details")
      */
-    public function detail(string $id, SortieRepository $sortieRepository): Response
+    public function detail(int $id, SortieRepository $sortieRepository): Response
     {
         $sortie = $sortieRepository->find($id);
+        $pseudo1 = array('Clemodd', 'clement');
+        $pseudo2 = array('XEXE', 'Jacques');
+        $pseudos = array($pseudo1, $pseudo2);
 
         return $this->render('sorties/details.html.twig', [
             'sortie' => $sortie,
+            'pseudos' => $pseudos
         ]);
     }
+
     /**
      * @Route("/CreerSortie", name="creer")
      */
@@ -36,11 +43,15 @@ class SortiesController extends AbstractController
     {
         $sortie = new Sortie();
 
-        if (isset($_POST['enregistrer'])) {
-            $sortie->setEtat('enregistré');
-        } else if (isset($_POST['publier'])) {
-            $sortie->setEtat('publié');
+        if (isset($_POST['créée'])) {
+            $sortie->setEtat('créée');
+        } else if (isset($_POST['ouverte'])) {
+            $sortie->setEtat('ouverte');
+        } else if (isset($_POST['annulée'])) {
+            $sortie->setEtat('annulée');
         }
+
+
 
         $sortieForm = $this->createForm(SortieFormType::class, $sortie);
         $sortieForm->handleRequest($request);
@@ -61,21 +72,64 @@ class SortiesController extends AbstractController
     }
 
     /**
-     * @Route("/cancel", name="cancel")
+     * @Route("/annuler", name="annuler")
      */
-    public function cancel(): Response
+    public function annuler(): Response
     {
-        return $this->render('sorties/cancel.html.twig', [
+
+        return $this->render('sorties/annuler.html.twig', [
             'controller_name' => 'SortiesController',
         ]);
     }
+
     /**
-     * @Route("/modifier", name="edit")
+     * @Route("/supprimer/{id}", name="supprimer")
      */
-    public function edit(): Response
+    public function supprimer(Sortie $sortie, EntityManagerInterface $entityManager): Response
     {
+        $entityManager->remove($sortie);
+        $entityManager->flush();
+
+        return $this->render('main/index.html.twig', [
+            'controller_name' => 'SortiesController',
+        ]);
+    }
+
+    /**
+     * @Route("/modifier/{id}", name="edit")
+     */
+    public function edit(int $id, ManagerRegistry $doctrine, SortieRepository $sortieRepository, EntityManagerInterface $entityManagerI): Response
+    {
+        $sortieBDD = $sortieRepository->find($id);
+
+        $entityManager = $doctrine->getManager();
+
+        $sortie = $entityManager->getRepository(Sortie::class)->find($id);
+        $sortieLieu = $entityManager->getRepository(Lieu::class)->find($id);
+
+        if (!$sortie) {
+            throw $this->createNotFoundException(
+                'No product found for id '.$id
+            );
+        }
+
+        if($_SERVER["REQUEST_METHOD"]  === 'POST')
+
+        {
+
+            $adr = $_POST['adresse'];}
+
+        if (isset($_POST['modifier'])) {
+
+            $sortie->setNom();
+            $entityManager->flush();
+
+            return $this->redirectToRoute('main_index');
+        }
+
         return $this->render('sorties/edit.html.twig', [
             'controller_name' => 'SortiesController',
+            'sortie'=> $sortie
         ]);
     }
     /**

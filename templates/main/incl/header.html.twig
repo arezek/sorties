@@ -1,24 +1,40 @@
-    <header>
-            <div class="logoEnTete" >
-                <a href="{{ path('main_index') }}">
-                    <img class="imgEnTete" src="{{ asset('img/logo/logoSortir.png')}}" title="Accueil" alt="Logo du site">
-                </a>
-                <h1>Venez découvrir nos sortie avec ENI !!! </h1>
-            </div>
-        <nav>
-                <a href="{{ path('main_index') }}">Accueil</a>
-                {% if app.user%}
-                <a href="{{ path('main_profil', {'id' : app.user.id})}}">Mon Profil </a>
-                <a href="{{ path('main_profil_edit') }}">Modifier mon Profil</a>
-
-                <a href="{{ path('sorties_cancel') }}"> Annuler Sorties</a>
-                <a href="{{ path('sorties_edit') }}"> Modifier Sorties</a>
-                <a href="{{ path('app_logout') }}">Déconnexion</a>
-                {% endif%}
-                <a href="{{ path('app_login') }}"> Se Connecter</a>
-                <a href="{{ path('app_register') }}"> S'inscrire</a>
-                <a href="{{ path('sorties_history') }}"> Historiques Sorties</a>
-                <a href="{{ path('main_villes') }}">Villes</a>
-                <a href="{{ path('main_campus') }}">Campus</a>
-        </nav>
-    </header>
+<header>
+	<div
+		class="logoEnTete">
+		<a
+			href="{{ path('main_index') }}">
+			<img
+				class="imgEnTete"
+				src="{{ asset('img/logo/logoSortir.png')}}" title="Accueil"
+				alt="Logo du site">
+		</a>
+		<h1>Venez découvrir nos sortie avec ENI !!!
+		</h1>
+	</div>
+	<nav>
+		<a
+			href="{{ path('main_index') }}">Accueil</a>
+		{% if app.user%}
+			<a
+				href="{{ path('main_profil', {'id' : app.user.id})}}">Mon Profil
+			</a>
+			<a
+				href="{{ path('main_profil_edit') }}">Modifier mon Profil</a>
+			<a
+				href="{{ path('app_logout') }}">Déconnexion</a>
+			{% endif%}
+			<a
+				href="{{ path('app_login') }}">
+				Se Connecter</a>
+			<a
+				href="{{ path('app_register') }}">
+				S'inscrire</a>
+			<a
+				href="{{ path('sorties_history') }}">
+				Historiques Sorties</a>
+			<a
+				href="{{ path('main_villes') }}">Villes</a>
+			<a
+				href="{{ path('main_campus') }}">Campus</a>
+		</nav>
+	</header>
