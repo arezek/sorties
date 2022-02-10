@@ -84,21 +84,21 @@
                     {% if app.user %}
                         {% if app.user.mail == "cjumelinee@tutanota.com" %}
                             {% if sortie.etat == 'créée' %}
-                                <a href="{{ path('sorties_edit',{'id' : sortie.id} )}}">Publier</a>
                                 <a href="{{ path('sorties_edit',{'id' : sortie.id} )}}">Modifier</a>
+                                <a href="{{ path('sorties_edit',{'id' : sortie.id} )}}">Publier</a>
                             {% endif %}
                             {% if sortie.etat == 'ouverte' %}
-                                <a href="">Annuler</a>
-                                <a href="">Modifier</a>
+                                <a href="{{ path('sorties_edit',{'id' : sortie.id} )}}">Modifier</a>
+                                <a href="{{ path('sorties_annuler')}}">Annuler</a>
                             {% endif %}
                         {% endif %}
                         {% if app.user.mail != "ajouter le mail de l'organisateur" %}
                             {% if sortie.etat == 'ouverte' %}
                                 {% if app.user.actif == 0 %}
-                                    <a href="">Participer</a>
+                                    <a href="{{ path('sorties_edit',{'id' : sortie.id} )}}">Participer</a>
                                 {% endif %}
                                 {% if app.user.actif == 1 %}
-                                    <a href="">Se désister</a>
+                                    <a href="{{ path('sorties_edit',{'id' : sortie.id} )}}">Se désister</a>
                                 {% endif %}
                             {% endif %}
                         {% endif %}
