@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Campus;
-use App\Form\Campus1Type;
+use App\Form\CampusType;
 use App\Repository\CampusRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,7 +32,7 @@ class CampusController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $campus = new Campus();
-        $form = $this->createForm(Campus1Type::class, $campus);
+        $form = $this->createForm(CampusType::class, $campus);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,7 +63,7 @@ class CampusController extends AbstractController
      */
     public function edit(Request $request, Campus $campus, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(Campus1Type::class, $campus);
+        $form = $this->createForm(CampusType::class, $campus);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

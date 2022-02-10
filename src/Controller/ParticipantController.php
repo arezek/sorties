@@ -12,12 +12,12 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/participant")
+ * @Route("/profil")
  */
 class ParticipantController extends AbstractController
 {
     /**
-     * @Route("/", name="participant_index", methods={"GET"})
+     * @Route("/", name="profil_index", methods={"GET"})
      */
     public function index(ParticipantRepository $participantRepository): Response
     {
@@ -27,7 +27,7 @@ class ParticipantController extends AbstractController
     }
 
     /**
-     * @Route("/Profil/{id}", name="main_profil")
+     * @Route("/Profil/{id}", name="profil_id")
      */
     public function profil(ParticipantRepository $repository,int $id): Response
     {
@@ -37,56 +37,14 @@ class ParticipantController extends AbstractController
         // $participant = $repository->findAll();
         $participant = $repository->find($id);
 
-        return $this->render('main/profil/profil.html.twig',[
+        return $this->render('participant/show.html.twig',[
             'participant'=> $participant
         ]);
     }
 
-    /**
-     * @Route("/MonProfil", name="main_profil_edit",methods={"GET", "POST"})
-     */
-    public function editProfil(Request $request,EntityManagerInterface $entityManager,Participant $participant): Response
-    {
-
-        $form = $this->createForm(ParticipantType::class, $participant);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-            return $this->redirectToRoute('main_index');
-        }
-
-        return $this->renderForm('main/profil/editProfil.html.twig', [
-            'participant' => $participant,
-            'form' => $form,
-        ]);
-
-    }
 
     /**
-     * @Route("/new", name="participant_new", methods={"GET", "POST"})
-     */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
-    {
-        $participant = new Participant();
-        $form = $this->createForm(ParticipantType::class, $participant);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($participant);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('participant_index', [], Response::HTTP_SEE_OTHER);
-        }
-
-        return $this->renderForm('participant/new.html.twig', [
-            'participant' => $participant,
-            'form' => $form,
-        ]);
-    }
-
-    /**
-     * @Route("/{id}", name="participant_show", methods={"GET"})
+     * @Route("/{id}", name="profil_show", methods={"GET"})
      */
     public function show(Participant $participant): Response
     {
@@ -96,7 +54,7 @@ class ParticipantController extends AbstractController
     }
 
     /**
-     * @Route("/{id}/edit", name="participant_edit", methods={"GET", "POST"})
+     * @Route("/{id}/edit", name="profil_edit", methods={"GET", "POST"})
      */
     public function edit(Request $request, Participant $participant, EntityManagerInterface $entityManager): Response
     {
@@ -117,15 +75,17 @@ class ParticipantController extends AbstractController
     }
 
     /**
-     * @Route("/{id}", name="participant_delete", methods={"POST"})
+     * @Route("/{id}", name="profil_delete", methods={"POST"})
      */
     public function delete(Request $request, Participant $participant, EntityManagerInterface $entityManager): Response
     {
+
         if ($this->isCsrfTokenValid('delete'.$participant->getId(), $request->request->get('_token'))) {
             $entityManager->remove($participant);
             $entityManager->flush();
+            session_destroy();
         }
 
-        return $this->redirectToRoute('participant_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('app_register', [], Response::HTTP_SEE_OTHER);
     }
 }

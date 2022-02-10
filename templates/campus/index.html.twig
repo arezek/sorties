@@ -19,17 +19,17 @@
                 <td>{{ campus.id }}</td>
                 <td>{{ campus.nom }}</td>
                 <td>
-                    <a href="{{ path('campus_show', {'id': campus.id}) }}">show</a>
-                    <a href="{{ path('campus_edit', {'id': campus.id}) }}">edit</a>
+                    <a href="{{ path('campus_show', {'id': campus.id}) }}">Afficher</a>
+                    <a href="{{ path('campus_edit', {'id': campus.id}) }}">Modifier</a>
                 </td>
             </tr>
         {% else %}
             <tr>
-                <td colspan="3">no records found</td>
+                <td colspan="3">Pas de compus trouvé!</td>
             </tr>
         {% endfor %}
         </tbody>
     </table>
 
-    <a href="{{ path('campus_new') }}">Create new</a>
+    <a href="{{ path('campus_new') }}">Créer un Campus</a>
 {% endblock %}

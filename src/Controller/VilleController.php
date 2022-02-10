@@ -3,7 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Ville;
-use App\Form\Ville1Type;
+use App\Form\VilleType;
 use App\Repository\VilleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -32,7 +32,7 @@ class VilleController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $ville = new Ville();
-        $form = $this->createForm(Ville1Type::class, $ville);
+        $form = $this->createForm(VilleType::class, $ville);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -63,7 +63,7 @@ class VilleController extends AbstractController
      */
     public function edit(Request $request, Ville $ville, EntityManagerInterface $entityManager): Response
     {
-        $form = $this->createForm(Ville1Type::class, $ville);
+        $form = $this->createForm(VilleType::class, $ville);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {

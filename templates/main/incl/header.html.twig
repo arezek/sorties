@@ -15,9 +15,9 @@
 			<a  href="{{ path('main_index') }}">Accueil</a>
 		{% if app.user%}
 			<a
-				href="{{ path('main_profil', {'id' : app.user.id})}}">Mon Profil</a>
+				href="{{ path('profil_id', {'id' : app.user.id})}}">Mon Profil</a>
 			<a
-				href="{{ path('main_profil_edit') }}">Modifier mon Profil</a>
+				href="{{ path('profil_edit', {'id' : app.user.id}) }}">Modifier mon Profil</a>
 			<a
 				href="{{ path('app_logout') }}">Déconnexion</a>
 		{% else %}
@@ -27,8 +27,8 @@
 			<a
 				href="{{ path('sorties_history') }}">Historiques Sorties</a>
 			<a
-				href="{{ path('main_villes') }}">Villes</a>
+				href="{{ path('ville_index') }}">Villes</a>
 			<a
-				href="{{ path('main_campus') }}">Campus</a>
+				href="{{ path('campus_index') }}">Campus</a>
 		</nav>
 	</header>
