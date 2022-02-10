@@ -1,0 +1,122 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Accueil{% endblock %}
+
+{% block body %}
+
+    <div class="enTeteAfficherSortie">
+        <h2>Sorties : </h2>
+        <h5>Date du jour : {{ "now" | date('y-m-d') }}{% if app.user %} - {{  app.user.prenom }} {{ app.user.nom }}{% endif %}</h5>
+        <div>
+            {% if app.user %}
+                <button type="submit"><a class="btnNav" href="{{ path('sortie_new') }}">Creer une sortie</a>
+                </button>
+            {% elseif app.user == false %}
+                <button type="submit"><a class="btnNav" href="{{ path('app_login') }}">Me connecter pour créer une sortie</a>
+                </button>
+            {% endif %}
+        </div>
+    </div>
+    <div>
+        <div>
+            <tbody>
+            {% for campus in campuses %}
+                <tr>
+                    <td>{{ campus.id }}</td>
+                    <td>{{ campus.nom }}</td>
+                    <td>
+                        <a href="{{ path('campus_show', {'id': campus.id}) }}">Afficher</a>
+                        <a href="{{ path('campus_edit', {'id': campus.id}) }}">Modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Pas de compus trouvé!</td>
+                </tr>
+            {% endfor %}
+            </tbody>
+        </div>
+        <div>
+            <label>Le nom de la sortie contient : </label>
+            <input>
+        </div>
+        <div>
+            <label>Entre : </label>
+            <input type="date" >
+            <img alt="logo calendrier">
+            <label>et</label>
+            <input type="date">
+            <img alt="logo calendrier">
+        </div>
+    </div>
+    <div>
+        <input type="checkbox" value="3" checked>
+        <label >Nouveautés</label>
+        <input type="checkbox" value="1">
+        <label>Organisateur-trice</label>
+        <input type="checkbox" value="2">
+        <label>Inscrit-e</label>
+        <input type="checkbox" value="4">
+        <label>Joyeux Souvenirs</label>
+    </div>
+    <div>
+        <button type="submit">Rechercher</button>
+    </div>
+
+
+    {# FORMULAIRE SORTIE #}
+
+    <h1>Sortie index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>DateHeureDebut</th>
+                <th>Duree</th>
+                <th>DateLimiteInscription</th>
+                <th>NbInscriptionsMax</th>
+                <th>InfosSortie</th>
+                <th>Etat</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for sortie in sorties %}
+            <tr>
+                <td>{{ sortie.id }}</td>
+                <td>{{ sortie.nom }}</td>
+                <td>{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ sortie.duree ? sortie.duree|date('H:i') : ''}}</td>
+                <td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ sortie.nbInscriptionsMax }}</td>
+                <td>{{ sortie.infosSortie }}</td>
+                <td>{{ sortie.etat }}</td>
+                <td>
+                    <a href="{{ path('sortie_show', {'id': sortie.id}) }}">Afficher</a>
+                    <a href="{{ path('sortie_edit', {'id': sortie.id}) }}">Modifier</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="9">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+   {# <a href="{{ path('sortie_new') }}">Creer une nouvelle Sortie</a> #}
+{% endblock %}
+
+ {# {% if sortie == 'Afficher' %}
+                        <td>
+                            <a href="{{ path('sorties_details',{ id : sortie[0]}) }}">{{ sortie[i]}}</a>
+                        </td>
+                    {% elseif sortie[i] == 'Modifier' %}
+                        <td>
+                            <a href="{{ path('sorties_edit',{ id : sortie[0]}) }}">{{ sortie[i]}}</a>
+                        </td>
+                    {% else %}
+                            <td>{{ sortie[i]}}</td>
+                    {% endif %}#}

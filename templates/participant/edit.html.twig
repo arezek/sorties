@@ -1,11 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Edit Participant{% endblock %}
+{% block title %}Modifier Profil{% endblock %}
 
 {% block body %}
     <h1>Edit Participant</h1>
 
-    {{ include('participant/_form.html.twig', {'button_label': 'Update'}) }}
+    {{ include('participant/_form.html.twig', {'button_label': 'Modifier'}) }}
 
     <a href="{{ path('profil_index') }}">Revenir à la liste</a>
 

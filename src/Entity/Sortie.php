@@ -28,7 +28,7 @@ class Sortie
     private $dateHeureDebut;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="time")
      */
     private $duree;
 
@@ -81,7 +81,7 @@ class Sortie
         return $this;
     }
 
-    public function getDuree(): ?int
+    public function getDuree(): ?\DateTimeInterface
     {
         return $this->duree;
     }

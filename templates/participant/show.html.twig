@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Participant{% endblock %}
+{% block title %}Profil{% endblock %}
 
 {% block body %}
     <h1>Participant</h1>
@@ -50,9 +50,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('profil_index') }}">back to list</a>
+    <a href="{{ path('profil_index') }}">Retour à la liste</a>
 
-    <a href="{{ path('profil_edit', {'id': participant.id}) }}">edit</a>
+    <a href="{{ path('profil_edit', {'id': participant.id}) }}">Modifier</a>
 
     {{ include('participant/_delete_form.html.twig') }}
 {% endblock %}
