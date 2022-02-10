@@ -55,7 +55,7 @@ body {
     background-attachment: scroll;
     // @include borderTest;
     display: grid;
-    grid-template-rows: 30em auto 3em;
+    grid-template-rows: 20em auto 3em;
     @include GapGeneral;
     height: 100%;
     //_____________________________________________________________________________________Header
