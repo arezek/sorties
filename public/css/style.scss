@@ -1,6 +1,6 @@
 //______________________________________ Imports //
-@import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Shizuru&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Acme&display=swap');
 //______________________________________ Variables //
 $couleurSectionPrincipal: rgba(124,
 67,
@@ -98,7 +98,7 @@ body {
                 // @include borderTest;
                 text-align: center;
                 width: 100%;
-                font-family: 'Shizuru', cursive;
+                font-family: 'Acme', sans-serif; // mettre la police 
                 font-size: 300%;
             }
         }
