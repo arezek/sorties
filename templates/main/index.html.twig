@@ -97,7 +97,7 @@
                                 {% if app.user.actif == 0 %}
                                     <a href="{{ path('sorties_edit',{'id' : sortie.id} )}}">Participer</a>
                                 {% endif %}
-                                {% if app.user.actif == 1 %}
+                                {% if app.user.actif == 1  %}
                                     <a href="{{ path('sorties_edit',{'id' : sortie.id} )}}">Se désister</a>
                                 {% endif %}
                             {% endif %}
