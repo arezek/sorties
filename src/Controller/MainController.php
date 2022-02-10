@@ -47,45 +47,6 @@ class MainController extends AbstractController
         ]);
     }
 
-    /**
-     * @Route("/Profil/{id}", name="main_profil")
-     */
-    public function profil(ParticipantRepository $repository,int $id): Response
-    {
-        //todo: afficher le nom du profil en title, si id = le miens un bouton apparait pour modifier le profil.
-        //todo: modifier le chemin de navbar car redirige vers le '2'
-        //todo : problème d'affichage du logo juste sur cette page...
-        // $participant = $repository->findAll();
-        $participant = $repository->find($id);
-
-        return $this->render('main/profil/profil.html.twig',[
-            'participant'=> $participant
-        ]);
-    }
-
-    /**
-     * @Route("/MonProfil", name="main_profil_edit",methods={"GET", "POST"})
-     */
-    public function editProfil(Request $request,EntityManagerInterface $entityManager,Participant $participant): Response
-    {
-
-        $form = $this->createForm(ParticipantType::class, $participant);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
-            return $this->redirectToRoute('main_index');
-        }
-
-        return $this->renderForm('main/profil/editProfil.html.twig', [
-            'participant' => $participant,
-            'form' => $form,
-        ]);
-
-
-
-
-    }
 
     /**
      * @Route("/Villes", name="main_villes")
