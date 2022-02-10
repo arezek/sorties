@@ -103,16 +103,26 @@ class MainController extends AbstractController
             $entityManager->persist($ville);
             $entityManager->flush();
             $this->addFlash('success', 'Ville ajoutée');
-            return $this->redirectToRoute('main_villes', ['id' =>$ville->getId()]);
+            return $this->redirectToRoute('main_villes', ['id' => $ville->getId()]);
 
         }
         return $this->render('main/ville.html.twig', [
             'villeForm' => $villeForm->createView()
         ]);
-      //  $ville = $villeRepository->findBy(['nom', 'codePostal', 25]);
-
-
     }
+      //  $ville = $villeRepository->findBy(['nom', 'codePostal', 25]);
+    public function suppVille(Request $request, Ville $ville, EntityManagerInterface $entityManager): Response
+    {
+        {
+            $entityManager->remove($ville);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('main_villes', [], Response::HTTP_SEE_OTHER);
+    }
+
+
+
+
     /**
      * @Route("/Campus", name="main_campus")
      */
@@ -124,12 +134,12 @@ class MainController extends AbstractController
 
         if ($campusForm->isSubmitted() && $campusForm->isValid()) {
 
-           // $campus->setNom();
+            // $campus->setNom();
 
             $entityManager->persist($campus);
             $entityManager->flush();
             $this->addFlash('success', 'Campus ajoutée');
-            return $this->redirectToRoute('main_campus', ['id' =>$campus->getId()]);
+            return $this->redirectToRoute('main_campus', ['id' => $campus->getId()]);
 
         }
 
@@ -137,10 +147,18 @@ class MainController extends AbstractController
         return $this->render('main/campus.html.twig', [
             'campusForm' => $campusForm->createView()
         ]);
-       // $campus = $campusRepository->findBy(['nom', 25]);
-
-
+        // $campus = $campusRepository->findBy(['nom', 25]);
     }
+
+    public function suppCampus(Request $request, Campus $campus, EntityManagerInterface $entityManager): Response
+    {
+        {
+            $entityManager->remove($campus);
+            $entityManager->flush();
+        }
+        return $this->redirectToRoute('main_campus');
+    }
+
 }
 
 
