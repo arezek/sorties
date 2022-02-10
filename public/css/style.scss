@@ -1,11 +1,11 @@
 //______________________________________ Imports //
-@import url('https://fonts.googleapis.com/css2?family=Shizuru&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Indie+Flower&family=Shizuru&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500&display=swap');
 //______________________________________ Variables //
-$couleurSectionPrincipal: rgba(15,
-91,
-255,
-0.337);
+$couleurSectionPrincipal: rgba(124,
+67,
+36,
+0.118);
 //______________________________________ Mixins //
 @mixin borderTest {
     border: 2px solid black;
@@ -16,11 +16,11 @@ $couleurSectionPrincipal: rgba(15,
 }
 
 @mixin BorderShadowEXT {
-    box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.296), -8px -8px 12px 0 rgba(255, 255, 255, 0.529);
+    box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.316), -8px -8px 12px 0 rgba(255, 255, 255, 0.316);
 }
 
 @mixin BorderShadowIN {
-    box-shadow: 12px 12px 16px 0 rgba(255, 255, 255, 0.3) inset, -8px -8px 12px 0 rgba(0, 0, 0, .25) inset;
+    box-shadow: 12px 12px 16px 0 rgba(255, 255, 255, 0.172) inset, -8px -8px 12px 0 rgba(0, 0, 0, 0.378) inset;
 }
 
 //**********************************************************//
@@ -44,28 +44,30 @@ $couleurSectionPrincipal: rgba(15,
     button {
         padding: 0.4em;
     }
+    font-family: 'Poppins',
+    sans-serif;
 }
 
 body {
-    // __________________________FlouBckGrd
-    background-color: black;
-    background-image: url('../img/back-colors.png');
+    background-color: rgb(36, 34, 34);
+    background-image: url('../img/principal_wallpaper.jpg');
     background-size: cover;
     background-repeat: no-repeat;
     background-attachment: scroll;
     // @include borderTest;
-    display: grid;
-    grid-template-rows: 20em auto 3em;
     @include GapGeneral;
+    display: grid;
+    grid-template-rows: auto 70% 3em;
     height: 100%;
+    padding: 1em;
     //_____________________________________________________________________________________Header
     header {
         // @include borderTest;
+        @include BorderShadowIN();
         background-color: $couleurSectionPrincipal;
         display: grid;
         gap: 0.2em;
         padding: 1em;
-        box-shadow: 12px 12px 16px 0 rgba(255, 255, 255, 0.3) inset, -8px -8px 12px 0 rgba(0, 0, 0, .25) inset;
         .logoEnTete {
             // @include borderTest;
             display: flex;
@@ -109,11 +111,13 @@ body {
              :hover {
                 transition: all 0.2s ease;
                 transform: scale(1.05);
+                background-color: rgba(124, 67, 36, 0.563);
             }
              :active {
                 transform: scale(1.15);
             }
             a {
+                 :hover {}
                 // @include borderTest;
                 @include BorderShadowEXT();
                 color: white;
@@ -129,14 +133,13 @@ body {
     //_____________________________________________________________________________________Section
     section {
         // @include borderTest;
-        @include BorderShadowIN();
         background-color: $couleurSectionPrincipal;
     }
     //_____________________________________________________________________________________Section
     footer {
         // @include borderTest;
-        @include BorderShadowIN();
-        background-color: $couleurSectionPrincipal;
+        // @include BorderShadowIN();
+        // background-color: $couleurSectionPrincipal;
         display: flex;
         justify-content: center;
         align-items: center;
