@@ -8,25 +8,22 @@
     <table class="table">
         <tbody>
             <tr>
-                <th>Id</th>
-                <td>{{ sortie.id }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
+                <th>Nom de la sortie :</th>
                 <td>{{ sortie.nom }}</td>
             </tr>
             <tr>
-                <th>DateHeureDebut</th>
-                <td>{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('Y-m-d H:i:s') : '' }}</td>
+                <th>Date de début : </th>
+                <td>{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('d/m/Y à H:i') : '' }}</td>
             </tr>
             <tr>
-                <th>Duree</th>
+                <th>Date limite d'inscription : </th>
+                <td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('d/m/Y à H:i') : '' }}</td>
+            </tr>
+            <tr>
+                <th>Duree : </th>
                 <td>{{ sortie.duree ? sortie.dateHeureDebut|date('H:i') }}</td>
             </tr>
-            <tr>
-                <th>DateLimiteInscription</th>
-                <td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('Y-m-d H:i:s') : '' }}</td>
-            </tr>
+
             <tr>
                 <th>NbInscriptionsMax</th>
                 <td>{{ sortie.nbInscriptionsMax }}</td>
@@ -42,9 +39,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('main_index') }}">Retour à la liste</a>
+    {# todo: Changer les cjumeline par les {organisateur.id ou .mail} #}
+    {% if app.user.mail == "cjumelinee@tutanota.com" %}
+        <button class="btn"><a href="{{ path('sortie_edit', {'id': sortie.id}) }}">Modifier</a></button>
+    {% endif %}
 
-    <a href="{{ path('sortie_edit', {'id': sortie.id}) }}">Modifier</a>
-
-    {{ include('sortie/_delete_form.html.twig') }}
 {% endblock %}
