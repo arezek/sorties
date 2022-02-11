@@ -59,9 +59,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('profil_index') }}">Retour à la liste</a>
-
     <a href="{{ path('profil_edit', {'id': participant.id}) }}">Modifier</a>
+
+    <a href="{{ path('profil_index') }}">Liste Profil</a>
 
     {{ include('participant/_delete_form.html.twig') }}
 {% endblock %}

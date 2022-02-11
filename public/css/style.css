@@ -20,10 +20,10 @@
 
 body {
   background-color: #242222;
-  background-image: url("../img/principal_wallpaper.jpg");
+  background-image: url("../img/principal_wallpaper90D.jpg");
   background-size: cover;
   background-repeat: no-repeat;
-  background-attachment: scroll;
+  background-attachment: fixed;
   gap: 1em;
   display: grid;
   grid-template-rows: auto 70% auto;
@@ -90,37 +90,8 @@ body section {
   background-color: rgba(124, 67, 36, 0.118);
   padding: 1.5em;
 }
-body section form.FormConnexion {
-  text-align: center;
-}
-body section form.FormConnexion div {
-  padding: 1em;
-}
-body section form.FormConnexion .inscription {
-  display: flex;
-  text-align: start;
-}
-body section form.FormConnexion .inscription a {
-  font-size: small;
-  padding: 4em;
-  box-shadow: 12px 12px 16px 0 rgba(0, 0, 0, 0.316), -8px -8px 12px 0 rgba(255, 255, 255, 0.316);
-  color: white;
-  list-style-type: none;
-  max-height: 3em;
-  text-decoration: none;
-  text-align: center;
-  margin: 1%;
-  padding: 1em;
-}
-body section form.FormConnexion .mdpEmail label {
-  width: 80%;
-  padding: 1em;
-}
 body section .logoCalendrier {
   height: 2em;
-}
-body section div {
-  text-align: center;
 }
 body section button {
   margin: 0.5em;
@@ -136,6 +107,24 @@ body section button {
   margin: 1%;
   padding: 1em;
   text-decoration: none;
+}
+body section form div div {
+  align-items: center;
+  justify-content: center;
+  display: flex;
+}
+body section form div div label {
+  width: 15em;
+  margin: 1em;
+  text-align: center;
+}
+body section form div.btnSousFormulaire {
+  display: flex;
+  justify-content: center;
+}
+body section form + form {
+  display: flex;
+  justify-content: center;
 }
 body section input,
 body section select {
@@ -157,12 +146,10 @@ body section a {
   color: white;
 }
 body footer {
-  border: 2px solid white;
   height: auto;
   justify-content: center;
 }
 body footer .Hfooter {
-  border: 2px solid white;
   text-align: center;
 }
 

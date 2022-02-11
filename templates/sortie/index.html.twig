@@ -5,9 +5,9 @@
 
 {% block body %}
 
-	<div class="enTeteAfficherSortie">
+	<div>
 		<h3>
-			{% if app.user %}
+			{% if app.user %} Bonjour 
 				{{  app.user.prenom }}
 				{{ app.user.nom }}
 			{% endif %}
@@ -16,25 +16,25 @@
 		</h2>
 	</div>
 	<div>
-		<div>
+		<!-- <div> -->
 			<select name="campus">
 				{% for campus in campuses %}
 					<option value="Rennes">{{campus.nom}}</option>
 				{% endfor %}
 			</select>
-		</div>
-		<div>
+		<!-- </div> -->
+		<!-- <div> -->
 			<input type="text" placeholder="Quel Sortie ?">
-		</div>
-		<div>
+		<!-- </div> -->
+		<!-- <div> -->
 			<label>Entre :
 			</label>
 			<input type="date">
-			<img class="logoCalendrier" alt="logo calendrier">
+			<!-- <img src="{{asset('../../public/img/logo/agenda.png')}}" class="logoCalendrier" alt="logo calendrier"> -->
 			<label>et</label>
 			<input type="date">
-			<img class="logoCalendrier" alt="logo calendrier">
-		</div>
+			<!-- <img src="{{asset('../../public/img/logo/agenda.png')}}" class="logoCalendrier" alt="logo calendrier"> -->
+		<!-- </div> -->
 	</div>
 	<div>
 		<input type="checkbox" value="3" checked>
@@ -45,9 +45,9 @@
 		<label>Inscrit-e</label>
 		<input type="checkbox" value="4">
 		<label>Joyeux Souvenirs</label>
+		<button type="submit">Rechercher</button>
 	</div>
 	<div>
-		<button type="submit">Rechercher</button>
 	</div>
 
 

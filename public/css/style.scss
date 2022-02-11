@@ -65,10 +65,10 @@ $couleurSectionPrincipal: rgba(124,
 
 body {
     background-color: rgb(36, 34, 34);
-    background-image: url('../img/principal_wallpaper.jpg');
+    background-image: url('../img/principal_wallpaper90D.jpg');
     background-size: cover;
     background-repeat: no-repeat;
-    background-attachment: scroll;
+    background-attachment: fixed;
     // @include borderTest;
     @include GapGeneral;
     display: grid;
@@ -153,38 +153,34 @@ body {
         // @include borderTest;
         background-color: $couleurSectionPrincipal;
         padding: 1.5em;
-        form.FormConnexion {
-            // @include borderTest;
-            text-align: center;
-            div {
-                // @include borderTest;
-                padding: 1em;
-            }
-            .inscription {
-                display: flex;
-                text-align: start;
-                a {
-                    font-size: small;
-                    padding: 4em;
-                    // @include borderTest;
-                    @include typeBouton();
-                }
-            }
-            .mdpEmail {
-                label {
-                    // @include borderTest;
-                    width: 80%;
-                    padding: 1em;
-                }
-            }
-        }
+        // form.FormConnexion {
+        //     // @include borderTest;
+        //     text-align: center;
+        //     div {
+        //         // @include borderTest;
+        //         padding: 1em;
+        //     }
+        //     .inscription {
+        //         display: flex;
+        //         text-align: start;
+        //         a {
+        //             font-size: small;
+        //             padding: 4em;
+        //             // @include borderTest;
+        //             @include typeBouton();
+        //         }
+        //     }
+        //     .mdpEmail {
+        //         label {
+        //             // @include borderTest;
+        //             width: 80%;
+        //             padding: 1em;
+        //         }
+        //     }
+        // }
         .logoCalendrier {
             // @include borderTest;
             height: 2em;
-        }
-        div {
-            // @include borderTest;
-            text-align: center;
         }
         button {
             // @include borderTest;
@@ -194,6 +190,36 @@ body {
             border-color: inherit;
             @include typeBouton();
             text-decoration: none;
+        }
+        div {
+            // @include borderTest;
+        }
+        form {
+            div {
+                // @include borderTest;
+                div {
+                    // @include borderTest;
+                    align-items: center;
+                    justify-content: center;
+                    display: flex;
+                    label {
+                        // @include borderTest;
+                        width: 15em;
+                        margin: 1em;
+                        text-align: center;
+                    }
+                }
+            }
+            div.btnSousFormulaire {
+                // @include borderTest;
+                display: flex;
+                justify-content: center;
+            }
+            +form {
+                // @include borderTest;
+                display: flex;
+                justify-content: center;
+            }
         }
         input,
         select {
@@ -212,12 +238,9 @@ body {
     }
     //_____________________________________________________________________________________ Footer
     footer {
-        @include borderTest;
-        // display: flex;
         height: auto;
         justify-content: center;
         .Hfooter {
-            @include borderTest;
             text-align: center;
         }
     }

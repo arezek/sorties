@@ -8,6 +8,7 @@ use App\Repository\SortieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\Date;
 
 class MainController extends AbstractController
 {
@@ -20,7 +21,7 @@ class MainController extends AbstractController
         //todo: modifier pour afficher la date du jour, le nom d'un participant
         //todo : quand la date d'un evenemnt est à J+1 ou meme minute +1 : mettre l'état a 'passé'.
         //todo : quand la possibilité de s'inscrire est passée, on met l'état a 'cloturé'.
-       /* $sorties = $sortieRepository->findAll();
+        /* $sorties = $sortieRepository->findAll();
 
 
         $options = array('campus1', 'campus2', 'campus3');
@@ -37,8 +38,6 @@ class MainController extends AbstractController
             'options' => $options,
             'sorties' => $sorties
         ]);*/
-
-
 
         return $this->render('sortie/index.html.twig', [
             'sorties' => $sortieRepository->findAll(),
