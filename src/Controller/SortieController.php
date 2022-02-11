@@ -7,6 +7,7 @@ use App\Entity\Sortie;
 use App\Form\SortieType;
 use App\Repository\CampusRepository;
 use App\Repository\SortieRepository;
+use Doctrine\DBAL\Types\DateTimeType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,6 +27,11 @@ class SortieController extends AbstractController
     public function new(Request $request, EntityManagerInterface $entityManager): Response
     {
         $sortie = new Sortie();
+        $date = new \DateTime ('1:00');
+        $sortie->setDuree($date);
+        $sortie->setDateHeureDebut(new \DateTime('now'));
+        $sortie->setDateLimiteInscription(new \DateTime('now'));
+
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
 
@@ -65,6 +71,7 @@ class SortieController extends AbstractController
     public function edit(Request $request, Sortie $sortie, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(SortieType::class, $sortie);
+
         $form->handleRequest($request);
 
         if (isset($_POST['Créée'])) {
@@ -74,6 +81,12 @@ class SortieController extends AbstractController
         } else if (isset($_POST['Annulée'])) {
             $sortie->setEtat('Annulée');
         }
+
+        $sortie->setDateHeureDebut($sortie->getDateHeureDebut());
+        $sortie->setDateLimiteInscription($sortie->getDateLimiteInscription());
+
+
+
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();

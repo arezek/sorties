@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TimeType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Validator\Constraints\Positive;
 
 
 class SortieType extends AbstractType
@@ -28,16 +29,17 @@ class SortieType extends AbstractType
                 ]
             )
             ->add('dateHeureDebut', DateTimeType::class, [
-                'data' => new \DateTime(),
+
                 'format' => 'ddMMMMyyyy',
                 'html5' => false,
             ])
             ->add('duree', TimeType::class)
             ->add('dateLimiteInscription', DateTimeType::class, [
-                'data' => new \DateTime(),
+
                 'label' => 'Fin des inscriptions : ',
             ])
             ->add('duree', TimeType::class, [
+
                 'label' => 'Durée : ',
             ])
             ->add('nbInscriptionsMax', null, [
@@ -51,7 +53,8 @@ class SortieType extends AbstractType
                 NumberType::class,
                 [
                     'attr' => ['placeholder' => 'Nombre limite de participant'],
-                    'label' => false
+                    'label' => false,
+                    'constraints' => [new Positive()]
                 ]
             )
             ->add('infosSortie', TextType::class, [

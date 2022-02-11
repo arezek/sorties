@@ -39,6 +39,7 @@ class Sortie
 
     /**
      * @ORM\Column(type="integer")
+     *
      */
     private $nbInscriptionsMax;
 
