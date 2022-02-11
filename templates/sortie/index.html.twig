@@ -110,12 +110,14 @@
 							{% endif %}
 							{% if sortie.etat == 'Annulée' %}
 								<a href="{{ path('sortie_edit',{'id' : sortie.id} )}}">Modifier</a>
-								<a href="{{ path('sortie_edit',{'id' : sortie.id} )}}">Publier</a>
+								{# todo: modifier comme bouton dans _form et modifier le mainController pour publier directement #}
+								<a href="{{ path('sortie_edit',{'id' : sortie.id} )}}">Republier</a>
 								{# todo: rediriger vers la page annulation (de edit_etat)
 								<a href="{{ path('etat_edit',{'id' : sortie.id} )}}">Supprimer</a>#}
 							{% endif %}
 						{% endif %}
-						{% if app.user.mail != "ajouter le mail de l'organisateur" %}
+						{# todo: Changer les cjumeline par les {organisateur.id ou .mail} #}
+						{% if app.user.mail != "cjumelinee@tutanota.com" %}
 							{% if app.user.mail != "cjumelinee@tutanota.com" %}
 								{% if sortie.etat == 'Ouverte' %}
 									{% if app.user.actif == 0  %}
