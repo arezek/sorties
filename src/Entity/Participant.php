@@ -89,7 +89,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="boolean")
      */
-    private $administrateur;
+    private $administrateur = 1;
 
     /**
      * @ORM\Column(type="boolean")

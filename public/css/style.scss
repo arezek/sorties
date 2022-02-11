@@ -72,7 +72,7 @@ body {
     // @include borderTest;
     @include GapGeneral;
     display: grid;
-    grid-template-rows: auto 70% 3em;
+    grid-template-rows: auto 70% auto;
     height: 100%;
     padding: 1em;
     //_____________________________________________________________________________________Header
@@ -212,8 +212,13 @@ body {
     }
     //_____________________________________________________________________________________ Footer
     footer {
-        // @include borderTest;
-        display: flex;
+        @include borderTest;
+        // display: flex;
+        height: auto;
         justify-content: center;
+        .Hfooter {
+            @include borderTest;
+            text-align: center;
+        }
     }
 }

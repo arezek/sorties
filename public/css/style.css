@@ -26,7 +26,7 @@ body {
   background-attachment: scroll;
   gap: 1em;
   display: grid;
-  grid-template-rows: auto 70% 3em;
+  grid-template-rows: auto 70% auto;
   height: 100%;
   padding: 1em;
 }
@@ -157,8 +157,13 @@ body section a {
   color: white;
 }
 body footer {
-  display: flex;
+  border: 2px solid white;
+  height: auto;
   justify-content: center;
+}
+body footer .Hfooter {
+  border: 2px solid white;
+  text-align: center;
 }
 
 /*# sourceMappingURL=style.css.map */
