@@ -118,7 +118,7 @@
 						{% if app.user.mail != "ajouter le mail de l'organisateur" %}
 							{% if app.user.mail != "cjumelinee@tutanota.com" %}
 								{% if sortie.etat == 'Ouverte' %}
-									{% if app.user.actif == 0 %}
+									{% if app.user.actif == 0  %}
 										<a href="{{ path('sortie_edit',{'id' : sortie.id} )}}">Participer</a>
 										@@ -101,6 +116,11 @@
 										<a href="{{ path('sortie_edit',{'id' : sortie.id} )}}">Se désister</a>
