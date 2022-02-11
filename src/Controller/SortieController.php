@@ -85,9 +85,6 @@ class SortieController extends AbstractController
         $sortie->setDateHeureDebut($sortie->getDateHeureDebut());
         $sortie->setDateLimiteInscription($sortie->getDateLimiteInscription());
 
-
-
-
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
