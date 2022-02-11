@@ -33,7 +33,6 @@ class SortieType extends AbstractType
                 'format' => 'ddMMMMyyyy',
                 'html5' => false,
             ])
-            ->add('duree', TimeType::class)
             ->add('dateLimiteInscription', DateTimeType::class, [
 
                 'label' => 'Fin des inscriptions : ',
@@ -41,12 +40,6 @@ class SortieType extends AbstractType
             ->add('duree', TimeType::class, [
 
                 'label' => 'Durée : ',
-            ])
-            ->add('nbInscriptionsMax', null, [
-                'label' => 'Nombre de participants max : ',
-            ])
-            ->add('infosSortie', TextareaType::class, [
-                'label' => 'Informations : ',
             ])
             ->add(
                 'nbInscriptionsMax',
@@ -60,12 +53,7 @@ class SortieType extends AbstractType
             ->add('infosSortie', TextType::class, [
                 'attr' => ['placeholder' => 'Description de l\'évènement'],
                 'label' => false
-            ])
-            ->add('etat', TextType::class, [
-                'attr' => ['placeholder' => 'État de votre Sortie'],
-                'label' => false
-            ])
-            ->add('Enregistrer', SubmitType::class);
+            ]);
     }
 
     public function configureOptions(OptionsResolver $resolver): void

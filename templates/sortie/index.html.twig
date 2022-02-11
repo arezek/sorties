@@ -58,38 +58,87 @@
 	<table class="table">
 		<thead>
 			<tr>
-				<th>Id</th>
 				<th>Nom</th>
-				<th>DateHeureDebut</th>
-				<th>Duree</th>
-				<th>DateLimiteInscription</th>
-				<th>NbInscriptionsMax</th>
-				<th>InfosSortie</th>
+				<th>Date de la sortie</th>
+				<th>Clôture</th>
+				<th>Inscrits/places</th>
 				<th>Etat</th>
-				<th>actions</th>
+				<th>Inscrit</th>
+				<th>Organisateur</th>
+				<th>Actions</th>
 			</tr>
 		</thead>
 		<tbody>
-			{% for sortie in sorties %}
-				<tr>
-					<td>{{ sortie.id }}</td>
-					<td>{{ sortie.nom }}</td>
-					<td>{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('Y-m-d H:i:s') : '' }}</td>
-					<td>{{ sortie.duree ? sortie.duree|date('H:i') : ''}}</td>
-					<td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('Y-m-d H:i:s') : '' }}</td>
-					<td>{{ sortie.nbInscriptionsMax }}</td>
-					<td>{{ sortie.infosSortie }}</td>
-					<td>{{ sortie.etat }}</td>
-					<td>
-						<a href="{{ path('sortie_show', {'id': sortie.id}) }}">Afficher</a>
-						<a href="{{ path('sortie_edit', {'id': sortie.id}) }}">Modifier</a>
-					</td>
-				</tr>
-			{% else %}
-				<tr>
-					<td colspan="9">no records found</td>
-				</tr>
-			{% endfor %}
+		{% for sortie in sorties %}
+			<tr>
+				<td><a href="{{ path('sortie_show',{ id : sortie.id}) }}">{{ sortie.nom }}</a></td>
+				<td>{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('d/m/Y H:i') : '' }}</td>
+				<td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('d/m/Y H:i') : '' }}</td>
+				{# todo: Mettre le nombre d'inscrits avant le / (|lenght ?) #}
+				<td>{participants} / {{ sortie.nbInscriptionsMax }}</td>
+				<td>
+					{% if sortie.etat == 'Annulé' %}
+						Annulée
+					{% endif %}
+					{% if sortie.etat == 'Créée' %}
+						En création
+					{% endif %}
+					{% if sortie.etat == 'Ouverte' %}
+						Ouverte
+					{% endif %}
+					{% if sortie.etat == 'Cloturé' or sortie.etat == 'Passé' %}
+						Fermé
+					{% endif %}
+				</td>
+				{# todo : si on est actif pour cet evenement (manque les relations) mettre un if puis 'X' si true #}
+				<td>{participant.actif}</td>
+				{# todo: Orgnaisateur via relation #}
+				<td>{Jacques}</td>
+				<td>
+					{% if app.user %}
+						{# todo: Changer les cjumeline par les {organisateur.id ou .mail} #}
+						{% if app.user.mail == "cjumelinee@tutanota.com" %}
+							{% if sortie.etat == 'Créée' %}
+								<a href="{{ path('sortie_edit',{'id' : sortie.id} )}}">Modifier</a>
+								{# todo: modifier comme bouton dans _form et modifier le mainController pour publier directement #}
+								<a href="{{ path('sortie_edit',{'id' : sortie.id} )}}">Publier</a>
+							{% endif %}
+							{% if sortie.etat == 'Ouverte' %}
+								<a href="{{ path('sortie_edit',{'id' : sortie.id})}}">Modifier</a>
+								{# todo: rediriger vers la page annulation (de edit_etat)
+								<a href="{{ path('edit_etat',{'id' : sortie.id} )}}">Annuler</a>#}
+							{% endif %}
+							{% if sortie.etat == 'Annulée' %}
+								<a href="{{ path('sortie_edit',{'id' : sortie.id} )}}">Modifier</a>
+								{# todo: modifier comme bouton dans _form et modifier le mainController pour publier directement #}
+								<a href="{{ path('sortie_edit',{'id' : sortie.id} )}}">Republier</a>
+								{# todo: rediriger vers la page annulation (de edit_etat)
+								<a href="{{ path('etat_edit',{'id' : sortie.id} )}}">Supprimer</a>#}
+							{% endif %}
+						{% endif %}
+						{# todo: Changer les cjumeline par les {organisateur.id ou .mail} #}
+						{% if app.user.mail != "cjumelinee@tutanota.com" %}
+								{% if sortie.etat == 'Ouverte' %}
+									{% if app.user.actif == 0  %}
+										{# todo: ajouter le if :relation avec une sortie spécifique, si on participe pas, on peut s'inscrire #}
+										<a href="{{ path('sortie_edit',{'id' : sortie.id} )}}">Participer</a>
+										<a href="{{ path('sortie_edit',{'id' : sortie.id} )}}">Se désister</a>
+									{% endif %}
+								{% endif %}
+								{% if sortie.etat == 'Cloturée' %}
+									{% if app.user.actif == 1  %}
+										<a href="{{ path('sortie_edit',{'id' : sortie.id} )}}">Se désister</a>
+									{% endif %}
+								{% endif %}
+						{% endif %}
+					{% endif %}
+				</td>
+			</tr>
+		{% else %}
+			<tr>
+				<td colspan="9">no records found</td>
+			</tr>
+		{% endfor %}
 		</tbody>
 	</table>
 
