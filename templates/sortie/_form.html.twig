@@ -3,7 +3,7 @@
 
     {% if sortie.etat != 'Ouverte' and sortie.etat != 'Créée' and sortie.etat != 'Annulée' %}
         <button class="btn" name="Ouverte" value="Ouverte">Publier</button>
-        <button class="btn" name="Annulée" value="Annulée">Enregistrer</button>
+        <button class="btn" name="Créée" value="Créée">Enregistrer</button>
     {% endif %}
 
     {% if sortie.etat == 'Ouverte' %}
