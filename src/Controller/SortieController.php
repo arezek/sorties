@@ -12,6 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\DateTime;
 
 /**
  * @Route("/sortie")
@@ -27,6 +28,12 @@ class SortieController extends AbstractController
         $sortie = new Sortie();
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
+
+        if (isset($_POST['Créée'])) {
+            $sortie->setEtat('Créée');
+        } else if (isset($_POST['Ouverte'])) {
+            $sortie->setEtat('Ouverte');
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($sortie);
@@ -59,6 +66,14 @@ class SortieController extends AbstractController
     {
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);
+
+        if (isset($_POST['Créée'])) {
+            $sortie->setEtat('Créée');
+        } else if (isset($_POST['Ouverte'])) {
+            $sortie->setEtat('Ouverte');
+        } else if (isset($_POST['Annulée'])) {
+            $sortie->setEtat('Annulée');
+        }
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();

@@ -34,6 +34,16 @@ class SortieType extends AbstractType
             ->add('duree', TimeType::class)
             ->add('dateLimiteInscription', DateTimeType::class, [
                 'data' => new \DateTime(),
+                'label' => 'Fin des inscriptions : ',
+            ])
+            ->add('duree', TimeType::class, [
+                'label' => 'Durée : ',
+            ])
+            ->add('nbInscriptionsMax', null, [
+                'label' => 'Nombre de participants max : ',
+            ])
+            ->add('infosSortie', TextareaType::class, [
+                'label' => 'Informations : ',
             ])
             ->add(
                 'nbInscriptionsMax',
