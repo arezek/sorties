@@ -24,8 +24,11 @@ $couleurSectionPrincipal: rgba(124,
 }
 
 @mixin AncreBlanche {
-    color: white;
+    padding: 0.3em;
+    background-color: rgba(181, 113, 84, 0.687);
+    border: 3px solid white;
     text-decoration: none;
+    color: white;
 }
 
 @mixin typeBouton {
@@ -57,14 +60,6 @@ $couleurSectionPrincipal: rgba(124,
     div,
     label {
         color: white
-    }
-    button {
-        margin: 0.5em;
-        padding: 0.4em;
-        background-color: inherit;
-        border-color: inherit;
-        @include typeBouton();
-        text-decoration: none;
     }
 }
 
@@ -157,6 +152,7 @@ body {
     section {
         // @include borderTest;
         background-color: $couleurSectionPrincipal;
+        padding: 1.5em;
         form.FormConnexion {
             // @include borderTest;
             text-align: center;
@@ -182,8 +178,39 @@ body {
                 }
             }
         }
+        .logoCalendrier {
+            // @include borderTest;
+            height: 2em;
+        }
+        div {
+            // @include borderTest;
+            text-align: center;
+        }
+        button {
+            // @include borderTest;
+            margin: 0.5em;
+            padding: 0.4em;
+            background-color: inherit;
+            border-color: inherit;
+            @include typeBouton();
+            text-decoration: none;
+        }
+        input,
+        select {
+            border: 2px solid rgb(255, 255, 255);
+            padding: 0.5em;
+            margin: 1em;
+            background-color: rgba(181, 113, 84, 0.687);
+            color: white;
+            [type="date"] {
+                padding: 0.2em;
+            }
+        }
+        a {
+            @include AncreBlanche();
+        }
     }
-    //_____________________________________________________________________________________Section
+    //_____________________________________________________________________________________ Footer
     footer {
         // @include borderTest;
         display: flex;

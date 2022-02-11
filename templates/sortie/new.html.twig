@@ -1,11 +1,10 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Nouvelle Sortie{% endblock %}
+{% block title %}Nouvelle Sortie
+{% endblock %}
 
 {% block body %}
-    <h1>Creer une nouvelle Sortie</h1>
+	<h1>Creer une nouvelle Sortie</h1>
 
-    {{ include('sortie/_form.html.twig') }}
-
-    <a href="{{ path('main_index') }}">Retour à la liste</a>
+	{{ include('sortie/_form.html.twig') }}
 {% endblock %}

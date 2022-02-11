@@ -1,35 +1,28 @@
 <header>
-	<div
-		class="logoEnTete">
-		<a
-			href="{{ path('main_index') }}">
-			<img
-				class="imgEnTete"
-				src="{{ asset('img/logo/logoSortir.png')}}" title="Accueil"
-				alt="Logo du site">
+	<div class="logoEnTete">
+		<a href="{{ path('main_index') }}">
+			<img class="imgEnTete" src="{{ asset('img/logo/logoSortir.png')}}" title="Accueil" alt="Logo du site">
 		</a>
 		<h1>Venez découvrir nos sortie avec ENI !!!
 		</h1>
 	</div>
 	<nav>
-			<a  href="{{ path('main_index') }}">Accueil</a>
+		<a href="{{ path('main_index') }}">Accueil</a>
 		{% if app.user%}
-			<a
-				href="{{ path('profil_id', {'id' : app.user.id})}}">Mon Profil</a>
-			<a
-				href="{{ path('profil_edit', {'id' : app.user.id}) }}">Modifier mon Profil</a>
-			<a
-				href="{{ path('app_logout') }}">Déconnexion</a>
+
+			<a href="{{ path('profil_id', {'id' : app.user.id})}}">Mon Profil</a>
+			{# <a href="{{ path('profil_edit', {'id' : app.user.id}) }}">Modifier mon Profil</a> #}
+			<a href="{{ path('sortie_new') }}">Creer une sortie</a>
+			<a href="{{ path('app_logout') }}">Déconnexion</a>
 		{% else %}
-			<a
-				href="{{ path('app_login') }}">Se Connecter / S'incrire</a>
-		{% endif%}
-			{# <a
-				href="{{ path('sorties_history') }}">Historiques Sorties</a>
-			#}
-			<a
-				href="{{ path('ville_index') }}">Villes</a>
-			<a
-				href="{{ path('campus_index') }}">Campus</a>
+			<a href="{{ path('app_login') }}">Se Connecter / S'incrire</a>
+			{% endif%}
+		{# <a
+										href="{{ path('sorties_history') }}">Historiques Sorties</a>
+									<a
+									#}
+			{# href="{{ path('ville_index') }}">Villes</a>
+												<a
+													href="{{ path('campus_index') }}">Campus</a> #}
 		</nav>
 	</header>
