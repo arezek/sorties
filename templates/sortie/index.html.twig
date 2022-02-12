@@ -6,35 +6,21 @@
 {% block body %}
 
 	<div>
-		<h3>
-			{% if app.user %} Bonjour 
-				{{  app.user.prenom }}
-				{{ app.user.nom }}
-			{% endif %}
-		</h3>
-		<h2>Sorties :
-		</h2>
+		<h3>{% if app.user %} Bonjour {{  app.user.pseudo }} !{% endif %}</h3>
+		<h2>Sorties :</h2>
 	</div>
 	<div>
-		<!-- <div> -->
 			<select name="campus">
 				{% for campus in campuses %}
 					<option value="Rennes">{{campus.nom}}</option>
 				{% endfor %}
 			</select>
-		<!-- </div> -->
-		<!-- <div> -->
 			<input type="text" placeholder="Quel Sortie ?">
-		<!-- </div> -->
-		<!-- <div> -->
 			<label>Entre :
 			</label>
 			<input type="date">
-			<!-- <img src="{{asset('../../public/img/logo/agenda.png')}}" class="logoCalendrier" alt="logo calendrier"> -->
 			<label>et</label>
 			<input type="date">
-			<!-- <img src="{{asset('../../public/img/logo/agenda.png')}}" class="logoCalendrier" alt="logo calendrier"> -->
-		<!-- </div> -->
 	</div>
 	<div>
 		<input type="checkbox" value="3" checked>

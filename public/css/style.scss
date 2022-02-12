@@ -58,7 +58,10 @@ $couleurSectionPrincipal: rgba(124,
     h4,
     h5,
     div,
-    label {
+    label,
+    th,
+    td,
+    tr {
         color: white
     }
 }
@@ -123,7 +126,7 @@ body {
             // @include borderTest;
             display: flex;
             flex-wrap: wrap;
-            justify-content: space-evenly;
+            justify-content: start;
             font-size: large;
             font-weight: bold;
              :hover {
@@ -153,31 +156,31 @@ body {
         // @include borderTest;
         background-color: $couleurSectionPrincipal;
         padding: 1.5em;
-        // form.FormConnexion {
-        //     // @include borderTest;
-        //     text-align: center;
-        //     div {
-        //         // @include borderTest;
-        //         padding: 1em;
-        //     }
-        //     .inscription {
-        //         display: flex;
-        //         text-align: start;
-        //         a {
-        //             font-size: small;
-        //             padding: 4em;
-        //             // @include borderTest;
-        //             @include typeBouton();
-        //         }
-        //     }
-        //     .mdpEmail {
-        //         label {
-        //             // @include borderTest;
-        //             width: 80%;
-        //             padding: 1em;
-        //         }
-        //     }
-        // }
+        form.FormConnexion {
+            // @include borderTest;
+            text-align: center;
+            div {
+                // @include borderTest;
+                padding: 1em;
+            }
+            .inscription {
+                display: flex;
+                text-align: start;
+                a {
+                    font-size: small;
+                    padding: 4em;
+                    // @include borderTest;
+                    @include typeBouton();
+                }
+            }
+            .mdpEmail {
+                label {
+                    // @include borderTest;
+                    width: 80%;
+                    padding: 1em;
+                }
+            }
+        }
         .logoCalendrier {
             // @include borderTest;
             height: 2em;
@@ -204,7 +207,7 @@ body {
                     display: flex;
                     label {
                         // @include borderTest;
-                        width: 15em;
+                        width: 10em;
                         margin: 1em;
                         text-align: center;
                     }
@@ -243,5 +246,9 @@ body {
         .Hfooter {
             text-align: center;
         }
+    }
+    th {
+        // border: 1px solid white;
+        background-color: rgba(211, 169, 133, 0.626);
     }
 }

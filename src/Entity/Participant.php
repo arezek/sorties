@@ -113,6 +113,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\ManyToMany(targetEntity=Sortie::class, inversedBy="participants")
      */
+    //  * @ORM\JoinTable(name="participant") // todo: LCB à supp
     private $sorties;
 
     public function __construct()
@@ -306,7 +307,8 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-   /* public function __toString()
+    // todo: à supp
+   /* public function __toString()  
     {
         return $this->sorties;
     }  */

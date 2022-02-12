@@ -1,25 +1,28 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
 
-    {% if sortie.etat != 'Ouverte' and sortie.etat != 'Créée' and sortie.etat != 'Annulée' %}
-        <button class="btn" name="Ouverte" value="Ouverte">Publier</button>
-        <button class="btn" name="Créée" value="Créée">Enregistrer</button>
-    {% endif %}
+{{ form_widget(form) }}
+<div class="btnSousFormulaire">
 
-    {% if sortie.etat == 'Ouverte' %}
-        <button class="btn" name="Ouverte" value="Ouverte">Publier les modifications</button>
-        <button class="btn" name="Annulée" value="Annulée">Annuler</button>
-    {% endif %}
+	{% if sortie.etat != 'Ouverte' and sortie.etat != 'Créée' and sortie.etat != 'Annulée' %}
+		<button class="btn" name="Ouverte" value="Ouverte">Publier</button>
+		<button class="btn" name="Créée" value="Créée">Enregistrer</button>
+	{% endif %}
 
-    {% if sortie.etat == 'Créée' %}
-        <button class="btn" name="Ouverte" value="Ouverte">Publier</button>
-        <button class="btn" name="Créée" value="Créée">Enregistrer</button>
-        <button class="btn" name="Annulée" value="Annulée">Annuler</button>
-    {% endif %}
+	{% if sortie.etat == 'Ouverte' %}
+		<button class="btn" name="Ouverte" value="Ouverte">Publier les modifications</button>
+		<button class="btn" name="Annulée" value="Annulée">Annuler</button>
+	{% endif %}
 
-    {% if sortie.etat == 'Annulée' %}
-        <button class="btn" name="Ouverte" value="Ouverte">Publier à nouveau</button>
-        {{ include('sortie/_delete_form.html.twig') }}
-    {% endif %}
+	{% if sortie.etat == 'Créée' %}
+		<button class="btn" name="Ouverte" value="Ouverte">Publier</button>
+		<button class="btn" name="Créée" value="Créée">Enregistrer</button>
+		<button class="btn" name="Annulée" value="Annulée">Annuler</button>
+	{% endif %}
+
+	{% if sortie.etat == 'Annulée' %}
+	<button class="btn" name="Ouverte" value="Ouverte">Publier à nouveau</button>
+	{{ include('sortie/_delete_form.html.twig') }}
+	{% endif %}
+</div>
 
 {{ form_end(form) }}
