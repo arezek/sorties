@@ -78,12 +78,13 @@ body {
     grid-template-rows: auto 70% auto;
     height: 100%;
     padding: 1em;
-    //_____________________________________________________________________________________Header
+    //__________________________________________________________________________________Header
     header {
         // @include borderTest;
         @include BorderShadowIN();
         background-color: $couleurSectionPrincipal;
         display: grid;
+        grid-template-columns: auto 80%;
         gap: 0.2em;
         padding: 1em;
         .logoEnTete {
@@ -125,8 +126,8 @@ body {
         nav {
             // @include borderTest;
             display: flex;
-            flex-wrap: wrap;
-            justify-content: start;
+            justify-content: end;
+            align-items: center;
             font-size: large;
             font-weight: bold;
              :hover {
@@ -151,11 +152,30 @@ body {
             }
         }
     }
-    //_____________________________________________________________________________________Section
+    //________________________________________________________________________________Section
     section {
         // @include borderTest;
         background-color: $couleurSectionPrincipal;
         padding: 1.5em;
+        font-size: 95%;
+        a {
+            @include AncreBlanche();
+        }
+        input,
+        select {
+            border: 2px solid rgb(255, 255, 255);
+            padding: 0.5em;
+            margin: 1em;
+            background-color: rgba(181, 113, 84, 0.687);
+            color: white;
+            [type="date"] {
+                padding: 0.2em;
+            }
+        }
+        div.premierDivAccueil {
+            display: grid;
+            grid-template-columns: 10% auto;
+        }
         form.FormConnexion {
             // @include borderTest;
             text-align: center;
@@ -167,9 +187,9 @@ body {
                 display: flex;
                 text-align: start;
                 a {
+                    // @include borderTest;
                     font-size: small;
                     padding: 4em;
-                    // @include borderTest;
                     @include typeBouton();
                 }
             }
@@ -181,10 +201,6 @@ body {
                 }
             }
         }
-        .logoCalendrier {
-            // @include borderTest;
-            height: 2em;
-        }
         button {
             // @include borderTest;
             margin: 0.5em;
@@ -194,9 +210,7 @@ body {
             @include typeBouton();
             text-decoration: none;
         }
-        div {
-            // @include borderTest;
-        }
+        //___________________________________________________________________________Formulaire
         form {
             div {
                 // @include borderTest;
@@ -208,9 +222,20 @@ body {
                     label {
                         // @include borderTest;
                         width: 10em;
-                        margin: 1em;
+                        margin: 0.5em;
                         text-align: center;
                     }
+                }
+            }
+            div div {
+                // @include borderTest;
+                display: inherit;
+                text-align: center;
+                #sortie_dateHeureDebut,
+                #sortie_dateLimiteInscription,
+                #sortie_duree {
+                    // @include borderTest;
+                    display: flex
                 }
             }
             div.btnSousFormulaire {
@@ -224,31 +249,58 @@ body {
                 justify-content: center;
             }
         }
-        input,
-        select {
-            border: 2px solid rgb(255, 255, 255);
-            padding: 0.5em;
-            margin: 1em;
-            background-color: rgba(181, 113, 84, 0.687);
-            color: white;
-            [type="date"] {
-                padding: 0.2em;
+        //____________________________________________________________________ View
+        div {
+            // border: 1px solid white;
+            text-align: center;
+            padding: 0px;
+            table {
+                // border: 1px solid white;
+                width: auto;
+                margin-left: auto;
+                margin-right: auto;
             }
-        }
-        a {
-            @include AncreBlanche();
         }
     }
     //_____________________________________________________________________________________ Footer
     footer {
         height: auto;
         justify-content: center;
-        .Hfooter {
+        h3,
+        h5 {
             text-align: center;
         }
     }
-    th {
-        // border: 1px solid white;
-        background-color: rgba(211, 169, 133, 0.626);
+    //____________________________________________________________________________________ Tableau
+    table {
+        margin-bottom: 2em;
+        font-size: 90%;
+        th {
+            // border: 1px solid white;
+            background-color: rgba(124, 67, 36, 0.563);
+            padding: 0.7em;
+            font-size: large;
+        }
+        td {
+            background-color: rgba(230, 179, 134, 0.475);
+            padding: 0.5em;
+            a {
+                display: flex;
+                padding: 0.8em;
+            }
+            .AncreBtnTableau {
+                border: inherit;
+                background-color: unset;
+                color: rgb(124, 67, 36);
+            }
+        }
+        .CelluleBtnTableau {
+            // border: 1px solid white;
+            background-color: inherit;
+            background-color: rgba(255, 255, 255, 0.489);
+            // display: grid;
+            display: flex;
+            margin: 0.2em;
+        }
     }
 }

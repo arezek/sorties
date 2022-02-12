@@ -30,12 +30,13 @@ class SortieType extends AbstractType
             )
             ->add('dateHeureDebut', DateTimeType::class, [
 
+                'label' => 'Date : ',
                 'format' => 'ddMMMMyyyy',
                 'html5' => false,
             ])
             ->add('dateLimiteInscription', DateTimeType::class, [
 
-                'label' => 'Fin des inscriptions : ',
+                'label' => 'Clôturée le : ',
             ])
             ->add('duree', TimeType::class, [
 

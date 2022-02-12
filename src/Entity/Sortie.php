@@ -60,6 +60,11 @@ class Sortie
      */
     private $participants;
 
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $organisateur;
+
     public function __construct()
     {
         $this->participants = new ArrayCollection();
@@ -177,6 +182,18 @@ class Sortie
         if ($this->participants->removeElement($participant)) {
             $participant->removeSorty($this);
         }
+
+        return $this;
+    }
+
+    public function getOrganisateur(): ?string
+    {
+        return $this->organisateur;
+    }
+
+    public function setOrganisateur(string $organisateur): self
+    {
+        $this->organisateur = $organisateur;
 
         return $this;
     }

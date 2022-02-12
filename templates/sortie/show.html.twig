@@ -3,45 +3,45 @@
 {% block title %}Sortie{% endblock %}
 
 {% block body %}
-    <h1>Sortie</h1>
+    <h6>Sortie</h6>
 
     <table class="table">
         <tbody>
             <tr>
-                <th>Nom de la sortie :</th>
+                <th>Nom de la sortie</th>
                 <td>{{ sortie.nom }}</td>
             </tr>
             <tr>
-                <th>Date de début : </th>
+                <th>Date de début</th>
                 <td>{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('d/m/Y à H:i') : '' }}</td>
             </tr>
             <tr>
-                <th>Date limite d'inscription : </th>
+                <th>Date limite d'inscription</th>
                 <td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('d/m/Y à H:i') : '' }}</td>
             </tr>
             <tr>
-                <th>Duree : </th>
+                <th>Duree</th>
                 <td>{{ sortie.duree ? sortie.dateHeureDebut|date('H:i') }}</td>
             </tr>
 
             <tr>
-                <th>NbInscriptionsMax :</th>
+                <th>NbInscriptionsMax</th>
                 <td>{{ sortie.nbInscriptionsMax }}</td>
             </tr>
             <tr>
-                <th>InfosSortie :</th>
+                <th>InfosSortie</th>
                 <td>{{ sortie.infosSortie }}</td>
             </tr>
             <tr>
-                <th>Etat :</th>
+                <th>Etat</th>
                 <td>{{ sortie.etat }}</td>
             </tr>
         </tbody>
     </table>
 
     {# todo: Changer les cjumeline par les {organisateur.id ou .mail} #}
-    {% if app.user.mail == "cjumelinee@tutanota.com" %}
+    {# {% if app.user.mail == "cjumelinee@tutanota.com" %}
         <button class="btn"><a href="{{ path('sortie_edit', {'id': sortie.id}) }}">Modifier</a></button>
-    {% endif %}
+    {% endif %} #}
 
 {% endblock %}
