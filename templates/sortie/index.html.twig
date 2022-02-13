@@ -52,7 +52,7 @@
 					<th>Nom</th>
 					<th>Date de la sortie</th>
 					<th>Clôture</th>
-					<th>Inscrits/places</th>
+					<th>Places</th>
 					<th>Etat</th>
 					<th>Inscrit</th>
 					<th>Organisateur</th>
@@ -67,7 +67,7 @@
 						<td>{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('d/m/Y H:i') : '' }}</td>
 						<td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('d/m/Y H:i') : '' }}</td>
 						{# todo: Mettre le nombre d'inscrits avant le / (|lenght ?) #}
-						<td>{participants} /
+						<td> {{sortie.participants | length}} /
 							{{ sortie.nbInscriptionsMax }}</td>
 						<td>
 							{% if sortie.etat == 'Annulé' %}
