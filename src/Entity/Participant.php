@@ -91,7 +91,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\Column(type="boolean")
      */
-    private $administrateur = 1;
+    private $administrateur;
 
     /**
      * @ORM\Column(type="boolean")
@@ -312,4 +312,10 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     {
         return $this->sorties;
     }  */
+
+    public function getNomPrenom()  
+    {
+        
+        return $this->nom." ".$this->prenom;
+    }
 }

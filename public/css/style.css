@@ -169,13 +169,13 @@ body section form div div label {
   margin: 0.5em;
   text-align: center;
 }
-body section form div div {
+body section form div#sortie div {
   display: inherit;
   text-align: center;
 }
-body section form div div #sortie_dateHeureDebut,
-body section form div div #sortie_dateLimiteInscription,
-body section form div div #sortie_duree {
+body section form div#sortie div #sortie_dateHeureDebut,
+body section form div#sortie div #sortie_dateLimiteInscription,
+body section form div#sortie div #sortie_duree {
   display: flex;
 }
 body section form div.btnSousFormulaire {
