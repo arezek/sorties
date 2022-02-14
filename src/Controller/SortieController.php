@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Campus;
+use App\Entity\Lieu;
 use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\SortieType;
@@ -10,6 +11,7 @@ use App\Repository\CampusRepository;
 use App\Repository\LieuRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
+use App\Repository\VilleRepository;
 use Doctrine\DBAL\Types\DateTimeType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,7 +29,7 @@ class SortieController extends AbstractController
     /**
      * @Route("/new/{id}", name="sortie_new", methods={"GET", "POST"})
      */
-    public function new(int $id,Request $request, EntityManagerInterface $entityManager,LieuRepository $lieuRepository, CampusRepository $campusRepository, ParticipantRepository $participantRepository): Response
+    public function new(int $id,Request $request, EntityManagerInterface $entityManager,VilleRepository $villeRepository,LieuRepository $lieuRepository, CampusRepository $campusRepository, ParticipantRepository $participantRepository): Response
     {
         $sortie = new Sortie();
         $date = new \DateTime ('1:00');
@@ -37,9 +39,8 @@ class SortieController extends AbstractController
         $participant = $participantRepository->find($id);
         $sortie->setOrganisateur($participant);
 
-        $formSortie = $this->createForm(SortieType::class, $sortie);
-        $formLieu = $this->createForm(LieuT::class, $sortie);
-        $formSortie->handleRequest($request);
+        $form = $this->createForm(SortieType::class, $sortie);
+        $form->handleRequest($request);
 
         if (isset($_POST['Créée'])) {
             $sortie->setEtat('Créée');
@@ -47,7 +48,7 @@ class SortieController extends AbstractController
             $sortie->setEtat('Ouverte');
         }
 
-        if ($formSortie->isSubmitted() && $formSortie->isValid()) {
+        if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($sortie);
             $entityManager->flush();
 
@@ -56,7 +57,8 @@ class SortieController extends AbstractController
 
         return $this->renderForm('sortie/new.html.twig', [
             'sortie' => $sortie,
-            'formSortie' => $formSortie,
+            'form' => $form,
+            'villes' => $villeRepository->findAll(),
             'campuses' => $campusRepository->findAll(),
             'lieux' => $lieuRepository->findAll(),
         ]);
