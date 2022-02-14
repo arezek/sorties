@@ -215,6 +215,7 @@ body table th {
 body table td {
   background-color: rgba(230, 179, 134, 0.475);
   padding: 0.5em;
+  text-overflow: ellipsis;
 }
 body table td a {
   display: flex;

@@ -121,6 +121,12 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $sortiesOrganisteur;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="campusParticipants")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $campus;
+
     public function __construct()
     {
         $this->sorties = new ArrayCollection();
@@ -132,6 +138,9 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     public function getId(): ?int
     {
         return $this->id;
+    }
+    public function setId( int $id){
+        $this->$id = $id;
     }
 
     public function getMail(): ?string
@@ -342,6 +351,18 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
                 $sortie->setOrganisateur(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(?Campus $campus): self
+    {
+        $this->campus = $campus;
 
         return $this;
     }

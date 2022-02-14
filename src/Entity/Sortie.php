@@ -51,11 +51,6 @@ class Sortie
     private $infosSortie;
 
     /**
-     * @ORM\Column(type="string", length=50)
-     */
-    private $etat;
-
-    /**
      * @ORM\ManyToMany(targetEntity=Participant::class, mappedBy="sorties")
      */
     private $participants;
@@ -65,6 +60,24 @@ class Sortie
      * @ORM\JoinColumn(nullable=false)
      */
     private $organisateur;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Etat::class, inversedBy="etatSorties")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $etat;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Lieu::class, inversedBy="lieuSorties")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $lieu;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Campus::class, inversedBy="campusSorties", cascade={"persist"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $campus;
 
     public function __construct()
     {
@@ -148,17 +161,6 @@ class Sortie
         return $this;
     }
 
-    public function getEtat(): ?string
-    {
-        return $this->etat;
-    }
-
-    public function setEtat(string $etat): self
-    {
-        $this->etat = $etat;
-
-        return $this;
-    }
 
     /**
      * @return Collection|Participant[]
@@ -195,6 +197,42 @@ class Sortie
     public function setOrganisateur(?participant $organisateur): self
     {
         $this->organisateur = $organisateur;
+
+        return $this;
+    }
+
+    public function getEtat(): ?Etat
+    {
+        return $this->etat;
+    }
+
+    public function setEtat(?Etat $etat): self
+    {
+        $this->etat = $etat;
+
+        return $this;
+    }
+
+    public function getLieu(): ?Lieu
+    {
+        return $this->lieu;
+    }
+
+    public function setLieu(?Lieu $lieu): self
+    {
+        $this->lieu = $lieu;
+
+        return $this;
+    }
+
+    public function getCampus(): ?Campus
+    {
+        return $this->campus;
+    }
+
+    public function setCampus(?Campus $campus): self
+    {
+        $this->campus = $campus;
 
         return $this;
     }
