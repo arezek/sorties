@@ -55,7 +55,7 @@ class AppFixtures extends Fixture
         //                                  ÉTAT 
         //_________________________________________________________________________
         // Création de 4 états
-        $libelles = ['Créée', 'Ouverte', 'Clôturée', 'Activité en cours', 'Annuler'];
+        $libelles = ['Créée', 'Ouverte', 'Cloturée', 'En Cours', 'Fermer','Passé'];
 
         $etat = [];
 

@@ -211,13 +211,13 @@ body table {
 body table th {
   background-color: rgba(124, 67, 36, 0.563);
   padding: 0.7em;
-  font-size: large;
+  font-size: medium;
 }
 body table td {
   background-color: rgba(230, 179, 134, 0.475);
   padding: 0.5em;
   text-overflow: ellipsis;
-  font-size: x-large;
+  font-size: medium;
 }
 body table td a {
   display: flex;
