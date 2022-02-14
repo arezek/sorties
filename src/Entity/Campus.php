@@ -27,13 +27,13 @@ class Campus
     private $nom;
 
     /**
-     * @ORM\OneToMany(targetEntity=sortie::class, mappedBy="campus", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="campus", orphanRemoval=true)
      * @ORM\JoinColumn(nullable=false)
      */
     private $campusSorties;
 
     /**
-     * @ORM\OneToMany(targetEntity=participant::class, mappedBy="campus",orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=Participant::class, mappedBy="campus",orphanRemoval=true)
      */
     private $campusParticipants;
 
