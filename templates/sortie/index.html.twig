@@ -89,11 +89,15 @@
 						</td>
 						{# todo : si on est actif pour cet evenement (manque les relations) mettre un if puis 'X' si true #}
 						{# todo: verifier quand on fais l'inscription a une activité #}
-						<td>{% for participant in sortie.participants %}
-								{% if participant.id == app.user.id %}
-									X
-								{% endif %}
-							{% endfor %}</td>
+						<td>
+							{% if app.user %}
+								{% for participant in sortie.participants %}
+									{% if participant.id == app.user.id %}
+										X
+									{% endif %}
+								{% endfor %}
+							{% endif %}
+						</td>
 						<td>{{sortie.organisateur.pseudo}}</td>
 						{% if app.user %}
 							<td
