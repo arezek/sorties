@@ -34,7 +34,6 @@ class LieuController extends AbstractController
     public function new(Request $request,VilleRepository $villeRepository, EntityManagerInterface $entityManager): Response
     {
         $lieu = new Lieu();
-        $ville = new Ville();
         $form = $this->createForm(LieuType::class, $lieu);
 
 

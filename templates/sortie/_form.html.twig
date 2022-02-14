@@ -21,14 +21,11 @@
 	</select>
 </div>
 
-
-
-
 <div class="btnSousFormulaire">
 
 	{% if sortie.etat != 'Ouverte' and sortie.etat != 'Créée' and sortie.etat != 'Annulée' %}
-		<button class="btn" name="Ouverte" value="Ouverte">Publier</button>
 		<button class="btn" name="Créée" value="Créée">Enregistrer</button>
+		<button class="btn" name="Ouverte" value="Ouverte">Publier</button>
 	{% endif %}
 
 	{% if sortie.etat == 'Ouverte' %}
@@ -60,10 +57,18 @@
 
 	<a href="">Ajouter Lieu</a>
 
+
 	<div>
 		<input type="text" maxlength="150" placeholder="Rue">
-
+	</div>
+	<div>
 		<input type="number" maxlength="4" placeholder="Code postal">
+	</div>
+	<div>
+		<input type="number" maxlength="50" placeholder="Latitude">
+	</div>
+	<div>
+		<input type="number" maxlength="50" placeholder="Longitude">
 	</div>
 </div>
 </form>

@@ -48,11 +48,20 @@ class SortieController extends AbstractController
             $sortie->setEtat('Ouverte');
         }
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($sortie);
-            $entityManager->flush();
 
-            return $this->redirectToRoute('main_index', [], Response::HTTP_SEE_OTHER);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $villeTemp = $villeRepository->find($_POST['optionSelectVille']);
+            if (!is_null($villeTemp)){
+                $sortie->setVille($villeTemp);
+                $entityManager->persist($sortie);
+                $entityManager->flush();
+
+
+                return $this->redirectToRoute('main_index', [], Response::HTTP_SEE_OTHER);
+            } else {
+                //todo: rajouter une erreur : merci de sélectionner une valeur pour la ville
+            }
         }
 
         return $this->renderForm('sortie/new.html.twig', [
