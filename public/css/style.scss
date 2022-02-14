@@ -228,7 +228,7 @@ body {
                 }
             }
             div#sortie div {
-                // @include borderTest;
+                @include borderTest;
                 display: inherit;
                 text-align: center;
                 #sortie_dateHeureDebut,
@@ -285,6 +285,7 @@ body {
             background-color: rgba(230, 179, 134, 0.475);
             padding: 0.5em;
             text-overflow: ellipsis;
+            font-size: x-large;
             a {
                 display: flex;
                 padding: 0.8em;

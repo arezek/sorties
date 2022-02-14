@@ -84,20 +84,6 @@ class AppFixtures extends Fixture
         // Création de 50 participants
         $participant = [];
 
-        //________________________________ Admin
-        $participant[0] = new Participant();
-        $participant[0]->setPrenom("Hadmin");
-        $participant[0]->setNom("Istrateur");
-        $participant[0]->setTelephone("0612345678");
-        $participant[0]->setMail("admin@gmail.com");
-        $participant[0]->setPassword("1Ll@ssssssss");
-        $participant[0]->setActif(false);
-        $participant[0]->setPseudo("HaIs");
-        $participant[0]->setAdministrateur(1);
-        $participant[0]->setCampus($campus[$faker->numberBetween($min = 1, $max = count($campus) - 1)]);
-        $manager->persist($participant[0]);
-        $manager->flush();
-
         //________________________________ Participant hasard
 
 
