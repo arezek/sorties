@@ -113,20 +113,20 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\ManyToMany(targetEntity=Sortie::class, inversedBy="participants")
      */
-    //  * @ORM\JoinTable(name="participant") // todo: LCB à supp
+    //  * @ORM\JoinTable(name="participant")                                                         // todo: LCB à supp
     private $sorties;
 
     /**
-     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="organisateur")
+     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="organisateur", orphanRemoval=true)
      */
-    private $sortieOrganisateur;
+    private $sortiesOrganisteur;
 
-    
     public function __construct()
     {
         $this->sorties = new ArrayCollection();
         $this->sortiesOrganisateur = new ArrayCollection();
         $this->sortieOrganisateur = new ArrayCollection();
+        $this->sortiesOrganisteur = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -319,27 +319,27 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @return Collection|Sortie[]
      */
-    public function getSortieOrganisateur(): Collection
+    public function getSortiesOrganisteur(): Collection
     {
-        return $this->sortieOrganisateur;
+        return $this->sortiesOrganisteur;
     }
 
-    public function addSortieOrganisateur(Sortie $sortieOrganisateur): self
+    public function addSortiesOrganisteur(Sortie $sortie): self
     {
-        if (!$this->sortieOrganisateur->contains($sortieOrganisateur)) {
-            $this->sortieOrganisateur[] = $sortieOrganisateur;
-            $sortieOrganisateur->setOrganisateur($this);
+        if (!$this->sortiesOrganisteur->contains($sortie)) {
+            $this->sortiesOrganisteur[] = $sortie;
+            $sortie->setOrganisateur($this);
         }
 
         return $this;
     }
 
-    public function removeSortieOrganisateur(Sortie $sortieOrganisateur): self
+    public function removeSortiesOrganisteur(Sortie $sortie): self
     {
-        if ($this->sortieOrganisateur->removeElement($sortieOrganisateur)) {
+        if ($this->sortiesOrganisteur->removeElement($sortie)) {
             // set the owning side to null (unless already changed)
-            if ($sortieOrganisateur->getOrganisateur() === $this) {
-                $sortieOrganisateur->setOrganisateur(null);
+            if ($sortie->getOrganisateur() === $this) {
+                $sortie->setOrganisateur(null);
             }
         }
 

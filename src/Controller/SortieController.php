@@ -3,9 +3,11 @@
 namespace App\Controller;
 
 use App\Entity\Campus;
+use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\SortieType;
 use App\Repository\CampusRepository;
+use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use Doctrine\DBAL\Types\DateTimeType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,15 +24,17 @@ class SortieController extends AbstractController
 {
 
     /**
-     * @Route("/new", name="sortie_new", methods={"GET", "POST"})
+     * @Route("/new/{id}", name="sortie_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(int $id,Request $request, EntityManagerInterface $entityManager,ParticipantRepository $participantRepository): Response
     {
         $sortie = new Sortie();
         $date = new \DateTime ('1:00');
         $sortie->setDuree($date);
         $sortie->setDateHeureDebut(new \DateTime('now'));
         $sortie->setDateLimiteInscription(new \DateTime('now'));
+        $participant = $participantRepository->find($id);
+        $sortie->setOrganisateur($participant);
 
         $form = $this->createForm(SortieType::class, $sortie);
         $form->handleRequest($request);

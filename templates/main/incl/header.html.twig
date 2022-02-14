@@ -4,17 +4,18 @@
 			<img class="imgEnTete" src="{{ asset('img/logo/logoSortir.png')}}" title="Accueil" alt="Logo du site">
 		</a>
 		{# <h1>Venez découvrir nos sortie avec ENI !!!
-		</h1> #}
+				</h1> #}
 	</div>
 	<nav>
 		<a href="{{ path('main_index') }}">Accueil</a>
 		{% if app.user%}
 
 			<a href="{{ path('profil_id', {'id' : app.user.id})}}">Mon Profil</a>
-			<a href="{{ path('sortie_new') }}">Creer une sortie</a>
+			<a href="{{ path('sortie_new',{'id' : app.user.id})}}">Creer une sortie</a>
+
 			<a href="{{ path('app_logout') }}">Déconnexion</a>
 		{% else %}
 			<a href="{{ path('app_login') }}">Connexion</a>
-		{% endif%}
+			{% endif%}
 		</nav>
 	</header>

@@ -91,7 +91,7 @@
 							<td
 								class="CelluleBtnTableau">
 								{# todo: Changer les cjumeline par les {organisateur.id ou .mail} #}
-								{% if app.user.pseudo == sortie.organisateur %}
+								{% if app.user.pseudo == sortie.organisateur.pseudo %}
 									{% if sortie.etat == 'Créée' %}
 										<a href="{{ path('sortie_edit',{'id' : sortie.id} )}}" class="AncreBtnTableau">Modifier</a>
 										{# todo: modifier comme bouton dans _form et modifier le mainController pour publier directement #}
@@ -112,7 +112,7 @@
 									{% endif %}
 								{% endif %}
 								{# todo: Changer les cjumeline par les {organisateur.id ou .mail} #}
-								{% if app.user.mail != "cjumelinee@tutanota.com" %}
+								{% if app.user.mail != sortie.organisateur.mail %}
 									{% if sortie.etat == 'Ouverte' %}
 										{% if app.user.actif == 0  %}
 											{# todo: ajouter le if :relation avec une sortie spécifique, si on participe pas, on peut s'inscrire #}
