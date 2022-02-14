@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Participant;
 use App\Form\ParticipantType;
+use App\Repository\CampusRepository;
 use App\Repository\ParticipantRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -56,7 +57,7 @@ class ParticipantController extends AbstractController
     /**
      * @Route("/{id}/edit", name="profil_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Participant $participant, EntityManagerInterface $entityManager): Response
+    public function edit(CampusRepository $campusRepository, Request $request, Participant $participant, EntityManagerInterface $entityManager): Response
     {
         $form = $this->createForm(ParticipantType::class, $participant);
         $form->handleRequest($request);
@@ -71,6 +72,7 @@ class ParticipantController extends AbstractController
         return $this->renderForm('participant/edit.html.twig', [
             'participant' => $participant,
             'form' => $form,
+            'campuses' => $campusRepository->findAll(),
         ]);
     }
 

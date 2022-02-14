@@ -31,13 +31,14 @@
             </tr>
             #}
 
-            <tr>
-                <th>Nom</th>
-                <td>{{ participant.nom }}</td>
-            </tr>
+
             <tr>
                 <th>Prenom</th>
                 <td>{{ participant.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ participant.nom }}</td>
             </tr>
             <tr>
                 <th>Telephone</th>
@@ -51,6 +52,10 @@
                 <th>Actif</th>
                 <td>{{ participant.actif ? 'Yes' : 'No' }}</td>
             </tr> -->
+            <tr>
+                <th>Campus</th>
+                <td>{{ participant.campus.nom }}</td>
+            </tr>
             {% if (participant.administrateur == 1) %}
                 <tr>
                     <th>Administrateur</th>

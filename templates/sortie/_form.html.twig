@@ -1,6 +1,29 @@
-{{ form_start(form) }}
+{{ form_start(formSortie) }}
 
-{{ form_widget(form) }}
+{{ form_widget(formSortie) }}
+
+<div>
+	<label>Campus </label>
+	<select name="optionSelectCampus">
+		{% for campus in campuses %}
+			<option  name="optionSelect" value="{{campus.id}}">{{campus.nom}}</option>
+		{% endfor %}
+	</select>
+</div>
+
+
+<div>
+	<label>Lieu</label>
+	<select name="optionSelectLieu">
+		{% for lieu in lieux %}
+			<option  name="optionSelect" value="{{lieu.id}}">{{lieu.nom}}</option>
+		{% endfor %}
+	</select>
+</div>
+
+
+
+
 <div class="btnSousFormulaire">
 
 	{% if sortie.etat != 'Ouverte' and sortie.etat != 'Créée' and sortie.etat != 'Annulée' %}
@@ -25,4 +48,4 @@
 	{% endif %}
 </div>
 
-{{ form_end(form) }}
+{{ form_end(formSortie) }}

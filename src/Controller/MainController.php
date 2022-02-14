@@ -21,23 +21,12 @@ class MainController extends AbstractController
         //todo: modifier pour afficher la date du jour, le nom d'un participant
         //todo : quand la date d'un evenemnt est à J+1 ou meme minute +1 : mettre l'état a 'passé'.
         //todo : quand la possibilité de s'inscrire est passée, on met l'état a 'cloturé'.
-        /* $sorties = $sortieRepository->findAll();
+        // $sorties = $sortieRepository->findAll();
 
 
-        $options = array('campus1', 'campus2', 'campus3');
-        $valeur = array(1, 'Parc', '10/11/2023', '31/12/2024', '3/5', 'En cours', 'X', 'Jacques', 'Afficher');
-        $valeur2 = array(2, 'Parc2', '10/11/2023', '31/12/2024', '3/5', 'En cours', 'X', 'Jacques', 'Modifier');
-        $valeur3 = array(3, 'Parc3', '10/11/2023', '31/12/2024', '3/5', 'En cours', 'X', 'Jacques', 'Afficher');
-        //$sorties = array($valeur, $valeur2, $valeur3);
+        if (isset($_POST['Créée'])) {
 
-        return $this->render('main/index.html.twig', [
-            'controller_name' => 'MainController',
-            'dateDuJour' => '09/02/2022',
-            'participantPrenom' => 'Clement',
-            'participantNom' => 'J.',
-            'options' => $options,
-            'sorties' => $sorties
-        ]);*/
+        }
 
         return $this->render('sortie/index.html.twig', [
             'sorties' => $sortieRepository->findAll(),

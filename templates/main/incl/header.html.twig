@@ -8,11 +8,15 @@
 	</div>
 	<nav>
 		<a href="{{ path('main_index') }}">Accueil</a>
+
 		{% if app.user%}
 
 			<a href="{{ path('profil_id', {'id' : app.user.id})}}">Mon Profil</a>
 			<a href="{{ path('sortie_new',{'id' : app.user.id})}}">Creer une sortie</a>
-
+			{% if app.user.administrateur == '1' %}
+				<a href="{{ path('ville_index')}}">Ville</a>
+				<a href="{{ path('campus_index')}}">Campus</a>
+			{% endif %}
 			<a href="{{ path('app_logout') }}">Déconnexion</a>
 		{% else %}
 			<a href="{{ path('app_login') }}">Connexion</a>
