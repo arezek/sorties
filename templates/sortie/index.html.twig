@@ -101,14 +101,14 @@
 									{% if sortie.etat == 'Ouverte' %}
 										<a href="{{ path('sortie_edit',{'id' : sortie.id})}}" class="AncreBtnTableau">Modifier</a>
 										{# todo: rediriger vers la page annulation (de edit_etat)
-																																						<a href="{{ path('edit_etat',{'id' : sortie.id} )}}">Annuler</a>#}
+<a href="{{ path('edit_etat',{'id' : sortie.id} )}}">Annuler</a>#}
 									{% endif %}
 									{% if sortie.etat == 'Annulée' %}
 										<a href="{{ path('sortie_edit',{'id' : sortie.id} )}}" class="AncreBtnTableau">Modifier</a>
 										{# todo: modifier comme bouton dans _form et modifier le mainController pour publier directement #}
 										<a href="{{ path('sortie_edit',{'id' : sortie.id} )}}" class="AncreBtnTableau">Republier</a>
 										{# todo: rediriger vers la page annulation (de edit_etat)
-																																						<a href="{{ path('etat_edit',{'id' : sortie.id} )}}">Supprimer</a>#}
+<a href="{{ path('etat_edit',{'id' : sortie.id} )}}">Supprimer</a>#}
 									{% endif %}
 								{% endif %}
 								{# todo: Changer les cjumeline par les {organisateur.id ou .mail} #}
