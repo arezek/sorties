@@ -46,7 +46,7 @@ class Sortie
     private $nbInscriptionsMax;
 
     /**
-     * @ORM\Column(type="string", length=50, nullable=true) //todo: mettre en 200 caractères et text area
+     * @ORM\Column(type="text", nullable=true)
      */
     private $infosSortie;
 

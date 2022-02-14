@@ -113,7 +113,6 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @ORM\ManyToMany(targetEntity=Sortie::class, inversedBy="participants")
      */
-    //  * @ORM\JoinTable(name="participant")                                                         // todo: LCB à supp
     private $sorties;
 
     /**
