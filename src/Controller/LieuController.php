@@ -3,8 +3,10 @@
 namespace App\Controller;
 
 use App\Entity\Lieu;
+use App\Entity\Ville;
 use App\Form\LieuType;
 use App\Repository\LieuRepository;
+use App\Repository\VilleRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,22 +31,32 @@ class LieuController extends AbstractController
     /**
      * @Route("/new", name="lieu_new", methods={"GET", "POST"})
      */
-    public function new(Request $request, EntityManagerInterface $entityManager): Response
+    public function new(Request $request,VilleRepository $villeRepository, EntityManagerInterface $entityManager): Response
     {
         $lieu = new Lieu();
+        $ville = new Ville();
         $form = $this->createForm(LieuType::class, $lieu);
+
+
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($lieu);
-            $entityManager->flush();
-
+            $villeTemp = $villeRepository->find($_POST['optionSelectVille']);
+            if (!is_null($villeTemp)){
+                $lieu->setVille($villeTemp);
+                $entityManager->persist($lieu);
+                $entityManager->flush();
+            } else {
+                //todo: rajouter une erreur : merci de sélectionner une valeur pour la ville
+            }
             return $this->redirectToRoute('lieu_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('lieu/new.html.twig', [
             'lieu' => $lieu,
             'form' => $form,
+            'villes' => $villeRepository->findAll(),
         ]);
     }
 
@@ -55,6 +67,7 @@ class LieuController extends AbstractController
     {
         return $this->render('lieu/show.html.twig', [
             'lieu' => $lieu,
+
         ]);
     }
 
