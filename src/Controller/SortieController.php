@@ -7,6 +7,7 @@ use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\SortieType;
 use App\Repository\CampusRepository;
+use App\Repository\LieuRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
 use Doctrine\DBAL\Types\DateTimeType;
@@ -26,7 +27,7 @@ class SortieController extends AbstractController
     /**
      * @Route("/new/{id}", name="sortie_new", methods={"GET", "POST"})
      */
-    public function new(int $id,Request $request, EntityManagerInterface $entityManager,ParticipantRepository $participantRepository): Response
+    public function new(int $id,Request $request, EntityManagerInterface $entityManager,LieuRepository $lieuRepository, CampusRepository $campusRepository, ParticipantRepository $participantRepository): Response
     {
         $sortie = new Sortie();
         $date = new \DateTime ('1:00');
@@ -36,8 +37,9 @@ class SortieController extends AbstractController
         $participant = $participantRepository->find($id);
         $sortie->setOrganisateur($participant);
 
-        $form = $this->createForm(SortieType::class, $sortie);
-        $form->handleRequest($request);
+        $formSortie = $this->createForm(SortieType::class, $sortie);
+        $formLieu = $this->createForm(LieuT::class, $sortie);
+        $formSortie->handleRequest($request);
 
         if (isset($_POST['Créée'])) {
             $sortie->setEtat('Créée');
@@ -45,7 +47,7 @@ class SortieController extends AbstractController
             $sortie->setEtat('Ouverte');
         }
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($formSortie->isSubmitted() && $formSortie->isValid()) {
             $entityManager->persist($sortie);
             $entityManager->flush();
 
@@ -54,7 +56,9 @@ class SortieController extends AbstractController
 
         return $this->renderForm('sortie/new.html.twig', [
             'sortie' => $sortie,
-            'form' => $form,
+            'formSortie' => $formSortie,
+            'campuses' => $campusRepository->findAll(),
+            'lieux' => $lieuRepository->findAll(),
         ]);
     }
 
@@ -72,7 +76,7 @@ class SortieController extends AbstractController
     /**
      * @Route("/{id}/edit", name="sortie_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Sortie $sortie, EntityManagerInterface $entityManager): Response
+    public function edit(Request $request, Sortie $sortie, EntityManagerInterface $entityManager, CampusRepository $campusRepository): Response
     {
         $form = $this->createForm(SortieType::class, $sortie);
 
@@ -98,6 +102,7 @@ class SortieController extends AbstractController
         return $this->renderForm('sortie/edit.html.twig', [
             'sortie' => $sortie,
             'form' => $form,
+            'campuses' => $campusRepository->findAll(),
         ]);
     }
 

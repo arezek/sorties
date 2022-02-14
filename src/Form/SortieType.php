@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\Sortie;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -49,7 +50,7 @@ class SortieType extends AbstractType
                     'constraints' => [new Positive()]
                 ]
             )
-            ->add('infosSortie', TextType::class, [
+            ->add('infosSortie', TextareaType::class, [
                 'attr' => ['placeholder' => 'Description de l\'évènement'],
                 'label' => false
             ]);

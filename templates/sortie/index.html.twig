@@ -67,11 +67,10 @@
 						</td>
 						<td>{{ sortie.dateHeureDebut ? sortie.dateHeureDebut|date('d/m/Y H:i') : '' }}</td>
 						<td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('d/m/Y H:i') : '' }}</td>
-						{# todo: Mettre le nombre d'inscrits avant le / (|lenght ?) #}
 						<td> {{sortie.participants | length}} /
 							{{ sortie.nbInscriptionsMax }}</td>
 						<td>
-							{% if sortie.etat == 'Annulé' %}
+							{% if sortie.etat == 'Annulée' %}
 								Annulée
 							{% endif %}
 							{% if sortie.etat == 'Créée' %}
@@ -80,22 +79,30 @@
 							{% if sortie.etat == 'Ouverte' %}
 								Ouverte
 							{% endif %}
-							{% if sortie.etat == 'Cloturé' or sortie.etat == 'Passé' %}
-								Fermé
+							{# todo: dans main controller, gérer les dates pour afficher si activité en cours ou terminée #}
+							{% if sortie.etat == 'xxxxxxxx' %}
+								En cours
+							{% endif %}
+							{% if sortie.etat == 'Cloturée' or sortie.etat == 'Passée' %}
+								Fermée
 							{% endif %}
 						</td>
 						{# todo : si on est actif pour cet evenement (manque les relations) mettre un if puis 'X' si true #}
-						<td>{participant.actif}</td>
+						{# todo: verifier quand on fais l'inscription a une activité #}
+						<td>{% for participant in sortie.participants %}
+								{% if participant.id == app.user.id %}
+									X
+								{% endif %}
+							{% endfor %}</td>
 						<td>{{sortie.organisateur.pseudo}}</td>
 						{% if app.user %}
 							<td
 								class="CelluleBtnTableau">
-								{# todo: Changer les cjumeline par les {organisateur.id ou .mail} #}
 								{% if app.user.pseudo == sortie.organisateur.pseudo %}
 									{% if sortie.etat == 'Créée' %}
 										<a href="{{ path('sortie_edit',{'id' : sortie.id} )}}" class="AncreBtnTableau">Modifier</a>
 										{# todo: modifier comme bouton dans _form et modifier le mainController pour publier directement #}
-										<a href="{{ path('sortie_edit',{'id' : sortie.id} )}}" class="AncreBtnTableau">Publier</a>
+										<a href="{{ path('sortie_edit',{'id' : sortie.id} )}}" class="AncreBtnTableau" name="Ouverte" value="Ouverte">Publier</a>
 
 									{% endif %}
 									{% if sortie.etat == 'Ouverte' %}
