@@ -61,7 +61,7 @@ class Sortie
     private $participants;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\ManyToOne(targetEntity=participant::class, inversedBy="sortieOrganisateur")
      */
     private $organisateur;
 
@@ -186,15 +186,16 @@ class Sortie
         return $this;
     }
 
-    public function getOrganisateur(): ?string
+    public function getOrganisateur(): ?participant
     {
         return $this->organisateur;
     }
 
-    public function setOrganisateur(string $organisateur): self
+    public function setOrganisateur(?participant $organisateur): self
     {
         $this->organisateur = $organisateur;
 
         return $this;
     }
+
 }

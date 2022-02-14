@@ -45,6 +45,7 @@
 	<div>
 
 		<h1>Sortie Disponible</h1>
+		
 
 		<table class="table">
 			<thead>
@@ -85,8 +86,7 @@
 						</td>
 						{# todo : si on est actif pour cet evenement (manque les relations) mettre un if puis 'X' si true #}
 						<td>{participant.actif}</td>
-						{# todo: Orgnaisateur via relation #}
-						<td>{{sortie.organisateur}}</td>
+						<td>{{sortie.organisateur.pseudo}}</td>
 						{% if app.user %}
 							<td
 								class="CelluleBtnTableau">

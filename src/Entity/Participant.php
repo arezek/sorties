@@ -116,9 +116,17 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     //  * @ORM\JoinTable(name="participant") // todo: LCB à supp
     private $sorties;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Sortie::class, mappedBy="organisateur")
+     */
+    private $sortieOrganisateur;
+
+    
     public function __construct()
     {
         $this->sorties = new ArrayCollection();
+        $this->sortiesOrganisateur = new ArrayCollection();
+        $this->sortieOrganisateur = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -307,15 +315,35 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
-    // todo: à supp
-   /* public function __toString()  
-    {
-        return $this->sorties;
-    }  */
 
-    public function getNomPrenom()  
+    /**
+     * @return Collection|Sortie[]
+     */
+    public function getSortieOrganisateur(): Collection
     {
-        
-        return $this->nom." ".$this->prenom;
+        return $this->sortieOrganisateur;
     }
+
+    public function addSortieOrganisateur(Sortie $sortieOrganisateur): self
+    {
+        if (!$this->sortieOrganisateur->contains($sortieOrganisateur)) {
+            $this->sortieOrganisateur[] = $sortieOrganisateur;
+            $sortieOrganisateur->setOrganisateur($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSortieOrganisateur(Sortie $sortieOrganisateur): self
+    {
+        if ($this->sortieOrganisateur->removeElement($sortieOrganisateur)) {
+            // set the owning side to null (unless already changed)
+            if ($sortieOrganisateur->getOrganisateur() === $this) {
+                $sortieOrganisateur->setOrganisateur(null);
+            }
+        }
+
+        return $this;
+    }
+
 }
