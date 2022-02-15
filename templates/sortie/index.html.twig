@@ -79,13 +79,14 @@
 							{% if sortie.etat.libelle == 'Ouverte' %}
 								Ouverte
 							{% endif %}
-							{# todo: dans main controller, gérer les dates pour afficher si activité en cours ou terminée #}
-							{% if sortie.etat.libelle == 'xxxxxxxx' %}
-								En cours
-							{% endif %}
-							{% if sortie.etat.libelle == 'Cloturée' or sortie.etat == 'Passée' %}
+							{% if sortie.etat.libelle == 'Cloturée' or sortie.etat.libelle == 'Passée' or sortie.etat.libelle == 'Fermée' %}
 								Fermée
 							{% endif %}
+							{# todo: dans main controller, gérer les dates pour afficher si activité en cours ou terminée #}
+							{% if sortie.etat.libelle == 'En Cours' %}
+								En cours
+							{% endif %}
+
 						</td>
 						{# todo : si on est actif pour cet evenement (manque les relations) mettre un if puis 'X' si true #}
 						{# todo: verifier quand on fais l'inscription a une activité #}
