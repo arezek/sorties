@@ -56,7 +56,8 @@ class SortieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $villeTemp = $villeRepository->find($_POST['optionSelectVille']);
             $campusTemp = $campusRepository->find($_POST['optionSelectCampus']);
-            $lieuTemp = $lieuRepository->find($_POST['optionSelectLieu']);
+            $tok = strtok($_POST['optionSelectLieu'], " /");
+            $lieuTemp = $lieuRepository->find($tok);
 
             if (!is_null($villeTemp && !is_null($lieuTemp) && !is_null($campusTemp))){
                 $sortie->setCampus($campusTemp);
@@ -72,6 +73,7 @@ class SortieController extends AbstractController
         }
 
         return $this->renderForm('sortie/new.html.twig', [
+            'id' => $id,
             'sortie' => $sortie,
             'form' => $form,
             'villes' => $villeRepository->findAll(),
@@ -85,9 +87,13 @@ class SortieController extends AbstractController
      */
     public function show(Sortie $sortie): Response
     {
+        $pseudos = array();
+
+//todo : accéder aux données de la table : participant_sortie sur phpmyadmin et comparer. Envoyer les pseudos vers le tableau
 
         return $this->render('sortie/show.html.twig', [
             'sortie' => $sortie,
+            'pseudos' => $pseudos,
          ]);
     }
 

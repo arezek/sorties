@@ -18,7 +18,6 @@ class MainController extends AbstractController
     public function index(SortieRepository $sortieRepository,CampusRepository $campusRepository): Response
     {
         //todo: envoyer une variable (true/false) pour savoir si on est connecter pour afficher son etat de connect navbar
-        //todo: modifier pour afficher la date du jour, le nom d'un participant
         //todo : quand la date d'un evenemnt est à J+1 ou meme minute +1 : mettre l'état a 'passé'.
         //todo : quand la possibilité de s'inscrire est passée, on met l'état a 'cloturé'.
         // $sorties = $sortieRepository->findAll();
