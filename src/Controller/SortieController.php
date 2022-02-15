@@ -56,7 +56,8 @@ class SortieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $villeTemp = $villeRepository->find($_POST['optionSelectVille']);
             $campusTemp = $campusRepository->find($_POST['optionSelectCampus']);
-            $lieuTemp = $lieuRepository->find($_POST['optionSelectLieu']);
+            $tok = strtok($_POST['optionSelectLieu'], " /");
+            $lieuTemp = $lieuRepository->find($tok);
 
             if (!is_null($villeTemp && !is_null($lieuTemp) && !is_null($campusTemp))){
                 $sortie->setCampus($campusTemp);
@@ -72,6 +73,7 @@ class SortieController extends AbstractController
         }
 
         return $this->renderForm('sortie/new.html.twig', [
+            'id' => $id,
             'sortie' => $sortie,
             'form' => $form,
             'villes' => $villeRepository->findAll(),

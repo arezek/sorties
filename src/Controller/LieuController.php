@@ -29,9 +29,9 @@ class LieuController extends AbstractController
     }
 
     /**
-     * @Route("/new", name="lieu_new", methods={"GET", "POST"})
+     * @Route("/new/{id}", name="lieu_new", methods={"GET", "POST"})
      */
-    public function new(Request $request,VilleRepository $villeRepository, EntityManagerInterface $entityManager): Response
+    public function new(int $id, Request $request,VilleRepository $villeRepository, EntityManagerInterface $entityManager): Response
     {
         $lieu = new Lieu();
         $form = $this->createForm(LieuType::class, $lieu);
@@ -46,13 +46,15 @@ class LieuController extends AbstractController
                 $lieu->setVille($villeTemp);
                 $entityManager->persist($lieu);
                 $entityManager->flush();
+
+                return $this->redirectToRoute('sortie_new', ['id'=>$id], Response::HTTP_SEE_OTHER);
             } else {
                 //todo: rajouter une erreur : merci de sélectionner une valeur pour la ville
             }
-            return $this->redirectToRoute('lieu_index', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('lieu/new.html.twig', [
+            'id' => $id,
             'lieu' => $lieu,
             'form' => $form,
             'villes' => $villeRepository->findAll(),

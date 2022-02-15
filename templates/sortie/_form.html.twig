@@ -27,10 +27,11 @@
 	<select id="optionSelectLieu" name="optionSelectLieu" onchange="choix()">
 		<option value="default">Choisir un lieu</option>
 		{% for lieu in lieux %}
-			<option  id="optionSelect" name="optionSelect" value="{{lieu.nom}}">{{lieu.nom}}</option>
+			<option  id="optionSelect" name="optionSelect" value="{{ lieu.id }}/{{lieu.nom}}/{{lieu.ville.codePostal}}/{{lieu.latitude}}/{{lieu.longitude}}">{{lieu.nom}}</option>
 		{% endfor %}
 	</select>
-	<a href="">Ajouter Lieu</a>
+	<a href="{{ path('lieu_new',{ id : id}) }}">Ajouter Lieu</a>
+
 	<div>
 		<label id="rue" >Rue</label>
 	</div>
