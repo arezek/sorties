@@ -51,6 +51,7 @@ $couleurSectionPrincipal: rgba(124,
     padding: 0.2em;
     border-radius: 0.5em;
     font-family: 'Poppins', sans-serif;
+    letter-spacing: 1.5px;
     li,
     p,
     h1,
@@ -58,6 +59,7 @@ $couleurSectionPrincipal: rgba(124,
     h3,
     h4,
     h5,
+    h6,
     div,
     label,
     th,
@@ -285,7 +287,7 @@ body {
                     white-space: nowrap;
                 }
                 .AncreBtnTableau:hover {
-                    background-color: rgba(255, 182, 118, 0.605);
+                    background-color: rgba(148, 98, 54, 0.605);
                 }
             }
         }
@@ -308,7 +310,8 @@ body {
     }
     // ___________________________________________________________ Scroll
     section div.scrollBox {
-        @include borderTest();
+        // @include borderTest();
+        scroll-snap-type: none;
         overflow: auto;
         height: 30em;
     }
@@ -361,8 +364,8 @@ body {
             }
         }
         textarea {
-            height: 10em;
-            width: 30%;
+            height: 8em;
+            // width: 80%;
         }
         div#sortie div {
             display: inherit;
@@ -390,6 +393,30 @@ body {
                 border-color: inherit;
                 border: unset;
                 background-color: inherit;
+            }
+        }
+        div.formNewSortie {
+            // @include borderTest();
+            max-width: 100%;
+            display: grid;
+            grid-template-columns: 50% auto;
+            .formVilleCampus {
+                // @include borderTest();
+                display: grid;
+                div.affichageLieu {
+                    display: block;
+                }
+            }
+            .formSortie {
+                // @include borderTest();
+                display: flex;
+                flex-direction: column;
+                div#sortie {
+                    // @include borderTest();
+                    width: 100%;
+                    display: flex;
+                    flex-direction: column;
+                }
             }
         }
     }

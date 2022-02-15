@@ -4,22 +4,32 @@
 {% endblock %}
 
 {% block body %}
-	<h1>Modifier mon profil</h1>
 	<div>
+		<h1>Modifier mon profil</h1>
 
 		{{ include('participant/_form.html.twig', {'button_label': 'Modifier'}) }}
+		<div
+			class="btnSousFormulaire">
+			<button
+				class="btn">{{ button_label|default('Save') }}</button>
+		</div>
 
 		<div>
-			<label>Campus </label>
-			<select name="optionSelectCampus">
+			<label>Campus
+			</label>
+			<select
+				name="optionSelectCampus">
 				{% for campus in campuses %}
-					<option  name="optionSelect" value="{{campus.id}}">{{campus.nom}}</option>
+					<option
+						name="optionSelect"
+						value="{{campus.id}}">{{campus.nom}}</option>
 				{% endfor %}
 			</select>
 		</div>
 
 		<div>
-			<label>Ma photo </label>
+			<label>Ma photo
+			</label>
 			{# Todo : ATTENTION : Javascript pour la photo et pas submit le formulaire #}
 			<button>Uploader</button>
 		</div>

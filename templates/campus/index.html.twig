@@ -9,34 +9,38 @@
 	<div>
 
 		<h1>Liste des Campus</h1>
+		<div
+			class="scrollBox">
+			<table
+				class="table">
+				{# <thead>
+												<tr>
+													<th>Id</th>
+													<th>Nom</th>
+												</tr>
+											</thead> #}
+				<tbody>
+					{% for campus in campuses %}
+						<tr>
+							{# <td>{{ campus.id }}</td> #}
+							<td>{{ campus.nom }}</td>
+							<td
+								class="CelluleBtnTableau">
 
-		<table
-			class="table">
-			<thead>
-				<tr>
-					<th>Id</th>
-					<th>Nom</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for campus in campuses %}
-					<tr>
-						<td>{{ campus.id }}</td>
-						<td>{{ campus.nom }}</td>
-						<td class="CelluleBtnTableau">
-
-						<a
-							href="{{ path('campus_show', {'id': campus.id}) }}">Afficher</a>
-						<a
-							href="{{ path('campus_edit', {'id': campus.id}) }}">Modifier</a>
-					</tr>
-				</td>
-			</tbody>
-		</tr>
-	{% else %}
-		<tr>
-			<td
-				colspan="3">Pas de compus trouvé!</td>
-		</tr>
-	{% endfor %}
-</tbody></table></div>{% endblock %}
+								<a
+									href="{{ path('campus_show', {'id': campus.id}) }}">Afficher</a>
+								<a
+									href="{{ path('campus_edit', {'id': campus.id}) }}">Modifier</a>
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td
+								colspan="3">Pas de compus trouvé!</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+	</div>
+{% endblock %}

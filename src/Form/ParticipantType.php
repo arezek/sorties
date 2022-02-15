@@ -15,18 +15,14 @@ class ParticipantType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-           /* ->add('mail')
-            ->add('roles')
-            ->add('password')
-            ->add('nom')
-            ->add('prenom')
-            ->add('telephone')
-            ->add('administrateur')
-            ->add('actif')
-            ->add('pseudo') */
+           /* 
+           ->add('roles')
+           ->add('administrateur')
+           ->add('actif')
+           */
            ->add('pseudo')
-            ->add('prenom')
-            ->add('nom')
+           ->add('prenom')
+           ->add('nom')
             ->add('telephone', TelType::class)
             ->add('mail')
             ->add('password', RepeatedType::class, [
