@@ -1,4 +1,4 @@
-$(document).ready(
+let ready = $(document).ready(
     function (){
         $("#optionSelect").click(function (event){
 
@@ -6,6 +6,13 @@ $(document).ready(
             console.log(contenu);
             $("#rue").textContent = "hey";
         })
-
     }
-)
+);
+
+function choix(){
+    var idSelectionne = document.getElementById("optionSelectLieu").value;
+
+    document.getElementById("rue").textContent = document.getElementById("optionSelectLieu").value;
+    document.getElementById("rue").textContent = document.getElementById("optionSelectLieu").value;
+
+}

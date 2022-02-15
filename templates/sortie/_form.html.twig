@@ -24,10 +24,10 @@
 {# todo: créer un filtre selon le choix de ville pour afficher les lieux spécifiques à cette ville. #}
 
 <div>
-	<select name="optionSelectLieu">
+	<select id="optionSelectLieu" name="optionSelectLieu" onchange="choix()">
 		<option value="default">Choisir un lieu</option>
 		{% for lieu in lieux %}
-			<option  id="optionSelect" name="optionSelect" value="{{lieu.id}}">{{lieu.nom}}</option>
+			<option  id="optionSelect" name="optionSelect" value="{{lieu.nom}}">{{lieu.nom}}</option>
 		{% endfor %}
 	</select>
 	<a href="">Ajouter Lieu</a>
@@ -35,13 +35,13 @@
 		<label id="rue" >Rue</label>
 	</div>
 	<div>
-		<label >Code postal</label>
+		<label id="codePostal">Code postal</label>
 	</div>
 	<div>
-		<label >Latitude</label>
+		<label id="latitude">Latitude</label>
 	</div>
 	<div>
-		<label >Longitude</label>
+		<label id="longitude">Longitude</label>
 	</div>
 </div>
 
