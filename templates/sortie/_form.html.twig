@@ -1,10 +1,10 @@
-{{ form_start(formSortie) }}
+{{ form_start(form) }}
 
-{{ form_widget(formSortie) }}
+{{ form_widget(form) }}
 
 <div>
-	<label>Campus </label>
 	<select name="optionSelectCampus">
+		<option value="default">Choisir un campus</option>
 		{% for campus in campuses %}
 			<option  name="optionSelect" value="{{campus.id}}">{{campus.nom}}</option>
 		{% endfor %}
@@ -13,22 +13,19 @@
 
 
 <div>
-	<label>Lieu</label>
-	<select name="optionSelectLieu">
-		{% for lieu in lieux %}
-			<option  name="optionSelect" value="{{lieu.id}}">{{lieu.nom}}</option>
+	<select name="optionSelectVille">
+		<option value="default">Choisir une ville</option>
+		{% for ville in villes %}
+			<option  name="optionSelect" value="{{ville.id}}">{{ville.nom}}</option>
 		{% endfor %}
 	</select>
 </div>
 
-
-
-
 <div class="btnSousFormulaire">
 
 	{% if sortie.etat != 'Ouverte' and sortie.etat != 'Créée' and sortie.etat != 'Annulée' %}
-		<button class="btn" name="Ouverte" value="Ouverte">Publier</button>
 		<button class="btn" name="Créée" value="Créée">Enregistrer</button>
+		<button class="btn" name="Ouverte" value="Ouverte">Publier</button>
 	{% endif %}
 
 	{% if sortie.etat == 'Ouverte' %}
@@ -48,4 +45,31 @@
 	{% endif %}
 </div>
 
-{{ form_end(formSortie) }}
+{{ form_end(form) }}
+<form method="post" action="">
+<div>
+	<select name="optionSelectLieu">
+		<option value="default">Choisir un lieu</option>
+		{% for lieu in lieux %}
+			<option  name="optionSelect" value="{{lieu.id}}">{{lieu.nom}}</option>
+		{% endfor %}
+	</select>
+
+	<a href="">Ajouter Lieu</a>
+
+
+	<div>
+		<input type="text" maxlength="150" placeholder="Rue">
+	</div>
+	<div>
+		<input type="number" maxlength="4" placeholder="Code postal">
+	</div>
+	<div>
+		<input type="number" maxlength="50" placeholder="Latitude">
+	</div>
+	<div>
+		<input type="number" maxlength="50" placeholder="Longitude">
+	</div>
+</div>
+</form>
+

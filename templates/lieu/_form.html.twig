@@ -1,4 +1,12 @@
 {{ form_start(form) }}
     {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<div>
+    <select name="optionSelectVille">
+        <option value="default">Choisir une ville</option>
+        {% for ville in villes %}
+            <option  name="optionSelect" value="{{ville.id}}">{{ville.nom}}</option>
+        {% endfor %}
+    </select>
+</div>
+    <button class="btn">{{ button_label|default('Enregistrer') }}</button>
 {{ form_end(form) }}

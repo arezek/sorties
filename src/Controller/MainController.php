@@ -24,9 +24,6 @@ class MainController extends AbstractController
         // $sorties = $sortieRepository->findAll();
 
 
-        if (isset($_POST['Créée'])) {
-
-        }
 
         return $this->render('sortie/index.html.twig', [
             'sorties' => $sortieRepository->findAll(),

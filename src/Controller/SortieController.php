@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Campus;
+use App\Entity\Lieu;
 use App\Entity\Participant;
 use App\Entity\Sortie;
 use App\Form\SortieType;
@@ -10,6 +11,7 @@ use App\Repository\CampusRepository;
 use App\Repository\LieuRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
+use App\Repository\VilleRepository;
 use Doctrine\DBAL\Types\DateTimeType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -27,7 +29,7 @@ class SortieController extends AbstractController
     /**
      * @Route("/new/{id}", name="sortie_new", methods={"GET", "POST"})
      */
-    public function new(int $id,Request $request, EntityManagerInterface $entityManager,LieuRepository $lieuRepository, CampusRepository $campusRepository, ParticipantRepository $participantRepository): Response
+    public function new(int $id,Request $request, EntityManagerInterface $entityManager,VilleRepository $villeRepository,LieuRepository $lieuRepository, CampusRepository $campusRepository, ParticipantRepository $participantRepository): Response
     {
         $sortie = new Sortie();
         $date = new \DateTime ('1:00');
@@ -46,16 +48,26 @@ class SortieController extends AbstractController
             $sortie->setEtat('Ouverte');
         }
 
-        if ($formSortie->isSubmitted() && $formSortie->isValid()) {
-            $entityManager->persist($sortie);
-            $entityManager->flush();
 
-            return $this->redirectToRoute('main_index', [], Response::HTTP_SEE_OTHER);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $villeTemp = $villeRepository->find($_POST['optionSelectVille']);
+            if (!is_null($villeTemp)){
+                $sortie->setVille($villeTemp);
+                $entityManager->persist($sortie);
+                $entityManager->flush();
+
+
+                return $this->redirectToRoute('main_index', [], Response::HTTP_SEE_OTHER);
+            } else {
+                //todo: rajouter une erreur : merci de sélectionner une valeur pour la ville
+            }
         }
 
         return $this->renderForm('sortie/new.html.twig', [
             'sortie' => $sortie,
-            'formSortie' => $formSortie,
+            'form' => $form,
+            'villes' => $villeRepository->findAll(),
             'campuses' => $campusRepository->findAll(),
             'lieux' => $lieuRepository->findAll(),
         ]);
