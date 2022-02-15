@@ -67,10 +67,8 @@ class AppFixtures extends Fixture
         }
 
         // Création de campus dont le premier est par défaut
-        $campuses = ['0', 'Rennes', 'Nantes', 'Quimper', 'Niort'];
+        $campuses = ['Rennes', 'Nantes', 'Quimper', 'Niort'];
         $campus = [];
-        $campus[0] = new Campus();
-        $campus[0]->setNom('Campus ?');
 
         for ($i = 1; $i < count($campuses); $i++) {
             $campus[$i] = new Campus();

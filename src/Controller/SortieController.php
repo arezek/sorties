@@ -3,11 +3,14 @@
 namespace App\Controller;
 
 use App\Entity\Campus;
+use App\Entity\Etat;
 use App\Entity\Lieu;
 use App\Entity\Participant;
 use App\Entity\Sortie;
+use App\Entity\Ville;
 use App\Form\SortieType;
 use App\Repository\CampusRepository;
+use App\Repository\EtatRepository;
 use App\Repository\LieuRepository;
 use App\Repository\ParticipantRepository;
 use App\Repository\SortieRepository;
@@ -29,7 +32,7 @@ class SortieController extends AbstractController
     /**
      * @Route("/new/{id}", name="sortie_new", methods={"GET", "POST"})
      */
-    public function new(int $id,Request $request, EntityManagerInterface $entityManager,VilleRepository $villeRepository,LieuRepository $lieuRepository, CampusRepository $campusRepository, ParticipantRepository $participantRepository): Response
+    public function new(int $id,Request $request,EtatRepository $etatRepository, EntityManagerInterface $entityManager,VilleRepository $villeRepository,LieuRepository $lieuRepository, CampusRepository $campusRepository, ParticipantRepository $participantRepository): Response
     {
         $sortie = new Sortie();
         $date = new \DateTime ('1:00');
@@ -43,24 +46,28 @@ class SortieController extends AbstractController
         $formSortie->handleRequest($request);
 
         if (isset($_POST['Créée'])) {
-            $sortie->setEtat('Créée');
+            $etatTemp = $etatRepository->findByLibelle("Créée");
+            $sortie->setEtat($etatTemp);
         } else if (isset($_POST['Ouverte'])) {
-            $sortie->setEtat('Ouverte');
+            $etatTemp = $etatRepository->findByLibelle("Ouverte");
+            $sortie->setEtat($etatTemp);
         }
-
-
 
         if ($form->isSubmitted() && $form->isValid()) {
             $villeTemp = $villeRepository->find($_POST['optionSelectVille']);
-            if (!is_null($villeTemp)){
-                $sortie->setVille($villeTemp);
+            $campusTemp = $campusRepository->find($_POST['optionSelectCampus']);
+            $lieuTemp = $lieuRepository->find($_POST['optionSelectLieu']);
+
+            if (!is_null($villeTemp && !is_null($lieuTemp) && !is_null($campusTemp))){
+                $sortie->setCampus($campusTemp);
+                $sortie->setLieu($lieuTemp);
+
                 $entityManager->persist($sortie);
                 $entityManager->flush();
 
-
                 return $this->redirectToRoute('main_index', [], Response::HTTP_SEE_OTHER);
             } else {
-                //todo: rajouter une erreur : merci de sélectionner une valeur pour la ville
+                //todo : flash : selectionnez une valeur
             }
         }
 
@@ -92,6 +99,11 @@ class SortieController extends AbstractController
         $form = $this->createForm(SortieType::class, $sortie);
 
         $form->handleRequest($request);
+
+        if (isset($_POST['optionSelect'])) {
+            dd("hey");
+        }
+
 
         if (isset($_POST['Créée'])) {
             $sortie->setEtat('Créée');

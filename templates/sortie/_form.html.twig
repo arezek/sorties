@@ -21,6 +21,30 @@
 	</select>
 </div>
 
+{# todo: créer un filtre selon le choix de ville pour afficher les lieux spécifiques à cette ville. #}
+
+<div>
+	<select name="optionSelectLieu">
+		<option value="default">Choisir un lieu</option>
+		{% for lieu in lieux %}
+			<option  id="optionSelect" name="optionSelect" value="{{lieu.id}}">{{lieu.nom}}</option>
+		{% endfor %}
+	</select>
+	<a href="">Ajouter Lieu</a>
+	<div>
+		<label id="rue" >Rue</label>
+	</div>
+	<div>
+		<label >Code postal</label>
+	</div>
+	<div>
+		<label >Latitude</label>
+	</div>
+	<div>
+		<label >Longitude</label>
+	</div>
+</div>
+
 <div class="btnSousFormulaire">
 
 	{% if sortie.etat != 'Ouverte' and sortie.etat != 'Créée' and sortie.etat != 'Annulée' %}
@@ -46,30 +70,4 @@
 </div>
 
 {{ form_end(form) }}
-<form method="post" action="">
-<div>
-	<select name="optionSelectLieu">
-		<option value="default">Choisir un lieu</option>
-		{% for lieu in lieux %}
-			<option  name="optionSelect" value="{{lieu.id}}">{{lieu.nom}}</option>
-		{% endfor %}
-	</select>
-
-	<a href="">Ajouter Lieu</a>
-
-
-	<div>
-		<input type="text" maxlength="150" placeholder="Rue">
-	</div>
-	<div>
-		<input type="number" maxlength="4" placeholder="Code postal">
-	</div>
-	<div>
-		<input type="number" maxlength="50" placeholder="Latitude">
-	</div>
-	<div>
-		<input type="number" maxlength="50" placeholder="Longitude">
-	</div>
-</div>
-</form>
 
