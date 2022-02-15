@@ -6,7 +6,7 @@ $couleurSectionPrincipal: rgba(124,
 67,
 36,
 0.118);
-//______________________________________ Mixins //
+// ______________________________________ Mixins //
 @mixin borderTest {
     border: 2px solid rgb(255, 255, 255);
 }
@@ -42,9 +42,9 @@ $couleurSectionPrincipal: rgba(124,
     padding: 1em;
 }
 
-//**********************************************************//
-//                           CSS                            //
-//__________________________________________________________//
+// **********************************************************//
+// CSS                            //
+// __________________________________________________________//
 * {
     box-sizing: border-box;
     padding: 0.2em;
@@ -62,7 +62,7 @@ $couleurSectionPrincipal: rgba(124,
     th,
     td,
     tr {
-        color: white
+        color: white;
     }
 }
 
@@ -78,7 +78,7 @@ body {
     grid-template-rows: auto 70% auto;
     height: 100%;
     padding: 1em;
-    //__________________________________________________________________________________Header
+    // __________________________________________________________________________________Header
     header {
         @include BorderShadowIN();
         background-color: $couleurSectionPrincipal;
@@ -133,7 +133,8 @@ body {
             h1 {
                 text-align: center;
                 width: 100%;
-                font-family: 'Acme', sans-serif; // mettre la police 
+                font-family: 'Acme', sans-serif;
+                // mettre la police
                 font-size: 300%;
             }
         }
@@ -149,6 +150,7 @@ body {
             align-items: center;
             font-size: large;
             font-weight: bold;
+            flex-wrap: wrap;
              :hover {
                 -webkit-transition: all 0.2s ease;
                 transition: all 0.2s ease;
@@ -161,7 +163,7 @@ body {
                 transform: scale(1.15);
             }
             a {
-                 :hover {}
+                white-space: nowrap;
                 @include BorderShadowEXT();
                 color: white;
                 list-style-type: none;
@@ -172,7 +174,8 @@ body {
                 padding: 1em;
             }
         }
-    } //________________________________________________________________________________Section
+    }
+    // ________________________________________________________________________________Section
     section {
         background-color: $couleurSectionPrincipal;
         padding: 1.5em;
@@ -191,102 +194,15 @@ body {
                 padding: 0.2em;
             }
         }
-        div.premierDivAccueil {
-            display: -ms-grid;
-            display: grid;
-            -ms-grid-columns: 10% auto;
-            grid-template-columns: 10% auto;
-        }
-        form.FormConnexion {
-            text-align: center;
-            div {
-                padding: 1em;
-            }
-            .inscription {
-                display: -webkit-box;
-                display: -webkit-flex;
-                display: -ms-flexbox;
-                display: flex;
-                text-align: start;
-                a {
-                    font-size: small;
-                    padding: 4em;
-                    @include typeBouton();
-                }
-            }
-            .mdpEmail {
-                label {
-                    width: 80%;
-                    padding: 1em;
-                }
-            }
-        }
         button {
+            @include typeBouton();
             margin: 0.5em;
             padding: 0.4em;
             background-color: inherit;
             border-color: inherit;
-            @include typeBouton();
             text-decoration: none;
         }
-        //___________________________________________________________________________Formulaire
-        form {
-            div {
-                div {
-                    -webkit-box-align: center;
-                    -webkit-align-items: center;
-                    -ms-flex-align: center;
-                    align-items: center;
-                    -webkit-box-pack: center;
-                    -webkit-justify-content: center;
-                    -ms-flex-pack: center;
-                    justify-content: center;
-                    display: -webkit-box;
-                    display: -webkit-flex;
-                    display: -ms-flexbox;
-                    display: flex;
-                    label {
-                        width: 10em;
-                        margin: 0.5em;
-                        text-align: center;
-                    }
-                }
-            }
-            div#sortie div {
-                display: inherit;
-                text-align: center;
-                #sortie_dateHeureDebut,
-                #sortie_dateLimiteInscription,
-                #sortie_duree {
-                    display: -webkit-box;
-                    display: -webkit-flex;
-                    display: -ms-flexbox;
-                    display: flex
-                }
-            }
-            div.btnSousFormulaire {
-                display: -webkit-box;
-                display: -webkit-flex;
-                display: -ms-flexbox;
-                display: flex;
-                -webkit-box-pack: center;
-                -webkit-justify-content: center;
-                -ms-flex-pack: center;
-                justify-content: center;
-                a {}
-            }
-            +form {
-                display: -webkit-box;
-                display: -webkit-flex;
-                display: -ms-flexbox;
-                display: flex;
-                -webkit-box-pack: center;
-                -webkit-justify-content: center;
-                -ms-flex-pack: center;
-                justify-content: center;
-            }
-        }
-        //____________________________________________________________________ View
+        // ____________________________________________________________________ View
         div {
             text-align: center;
             padding: 0px;
@@ -297,7 +213,7 @@ body {
             }
         }
     }
-    //_____________________________________________________________________________________ Footer
+    // _____________________________________________________________________________________ Footer
     footer {
         height: auto;
         -webkit-box-pack: center;
@@ -309,7 +225,7 @@ body {
             text-align: center;
         }
     }
-    //____________________________________________________________________________________ Tableau
+    // ____________________________________________________________________________________ Tableau
     table {
         margin-bottom: 2em;
         font-size: 90%;
@@ -317,7 +233,7 @@ body {
             // border: 1px solid white;
             background-color: rgba(124, 67, 36, 0.563);
             padding: 0.7em;
-            font-size: medium;
+            font-size: large;
         }
         td {
             background-color: rgba(230, 179, 134, 0.475);
@@ -339,13 +255,104 @@ body {
         .CelluleBtnTableau {
             // border: 1px solid white;
             background-color: inherit;
-            background-color: rgba(255, 255, 255, 0.489);
+            // background-color: rgba(255, 255, 255, 0.489);
             // display: grid;
             display: -webkit-box;
             display: -webkit-flex;
             display: -ms-flexbox;
             display: flex;
-            margin: 0.2em;
+            justify-content: space-between;
+            a {
+                margin-right: 0.5em;
+            }
         }
+    }
+    // ___________________________________________________________ Accueil
+    section div.premierDivAccueil {
+        display: -ms-grid;
+        display: grid;
+        -ms-grid-columns: 10% auto;
+        grid-template-columns: 10% auto;
+    }
+    // ___________________________________________________________ Connexion
+    section form.FormConnexion {
+        text-align: center;
+        div {
+            padding: 1em;
+        }
+        .inscription {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            text-align: start;
+            a {
+                font-size: small;
+                padding: 4em;
+                @include typeBouton();
+            }
+        }
+        .mdpEmail {
+            label {
+                width: 80%;
+                padding: 1em;
+            }
+        }
+    }
+    // ___________________________________________________________________________Formulaire
+    section form {
+        div {
+            div {
+                -webkit-box-align: center;
+                -webkit-align-items: center;
+                -ms-flex-align: center;
+                align-items: center;
+                -webkit-box-pack: center;
+                -webkit-justify-content: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;
+                label {
+                    width: 10em;
+                    margin: 0.5em;
+                    text-align: center;
+                }
+            }
+        }
+        div#sortie div {
+            display: inherit;
+            text-align: center;
+            #sortie_dateHeureDebut,
+            #sortie_dateLimiteInscription,
+            #sortie_duree {
+                display: -webkit-box;
+                display: -webkit-flex;
+                display: -ms-flexbox;
+                display: flex;
+            }
+        }
+        div.btnSousFormulaire {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+        }
+        // +form {
+        //     display: -webkit-box;
+        //     display: -webkit-flex;
+        //     display: -ms-flexbox;
+        //     display: flex;
+        //     -webkit-box-pack: center;
+        //     -webkit-justify-content: center;
+        //     -ms-flex-pack: center;
+        //     justify-content: center;
+        // }
     }
 }

@@ -1,35 +1,42 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Campus{% endblock %}
+{% block title %}Campus
+{% endblock %}
 
 {% block body %}
-    <h1>Liste des Campus</h1>
+	<a
+		href="{{ path('campus_new') }}">Créer un Campus</a>
+	<div>
 
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Id</th>
-                <th>Nom</th>
-                <th>actions</th>
-            </tr>
-        </thead>
-        <tbody>
-        {% for campus in campuses %}
-            <tr>
-                <td>{{ campus.id }}</td>
-                <td>{{ campus.nom }}</td>
-                <td>
-                    <a href="{{ path('campus_show', {'id': campus.id}) }}">Afficher</a>
-                    <a href="{{ path('campus_edit', {'id': campus.id}) }}">Modifier</a>
-                </td>
-            </tr>
-        {% else %}
-            <tr>
-                <td colspan="3">Pas de compus trouvé!</td>
-            </tr>
-        {% endfor %}
-        </tbody>
-    </table>
+		<h1>Liste des Campus</h1>
 
-    <a href="{{ path('campus_new') }}">Créer un Campus</a>
-{% endblock %}
+		<table
+			class="table">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>Nom</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for campus in campuses %}
+					<tr>
+						<td>{{ campus.id }}</td>
+						<td>{{ campus.nom }}</td>
+						<td class="CelluleBtnTableau">
+
+						<a
+							href="{{ path('campus_show', {'id': campus.id}) }}">Afficher</a>
+						<a
+							href="{{ path('campus_edit', {'id': campus.id}) }}">Modifier</a>
+					</tr>
+				</td>
+			</tbody>
+		</tr>
+	{% else %}
+		<tr>
+			<td
+				colspan="3">Pas de compus trouvé!</td>
+		</tr>
+	{% endfor %}
+</tbody></table></div>{% endblock %}
