@@ -70,20 +70,20 @@
 						<td> {{sortie.participants | length}} /
 							{{ sortie.nbInscriptionsMax }}</td>
 						<td>
-							{% if sortie.etat == 'Annulée' %}
+							{% if sortie.etat.libelle == 'Annulée' %}
 								Annulée
 							{% endif %}
-							{% if sortie.etat == 'Créée' %}
+							{% if sortie.etat.libelle == 'Créée' %}
 								En création
 							{% endif %}
-							{% if sortie.etat == 'Ouverte' %}
+							{% if sortie.etat.libelle == 'Ouverte' %}
 								Ouverte
 							{% endif %}
 							{# todo: dans main controller, gérer les dates pour afficher si activité en cours ou terminée #}
-							{% if sortie.etat == 'xxxxxxxx' %}
+							{% if sortie.etat.libelle == 'xxxxxxxx' %}
 								En cours
 							{% endif %}
-							{% if sortie.etat == 'Cloturée' or sortie.etat == 'Passée' %}
+							{% if sortie.etat.libelle == 'Cloturée' or sortie.etat == 'Passée' %}
 								Fermée
 							{% endif %}
 						</td>
@@ -100,21 +100,20 @@
 						</td>
 						<td>{{sortie.organisateur.pseudo}}</td>
 						{% if app.user %}
-							<td
-								class="CelluleBtnTableau">
+							<td class="CelluleBtnTableau">
 								{% if app.user.pseudo == sortie.organisateur.pseudo %}
-									{% if sortie.etat == 'Créée' %}
+									{% if sortie.etat.libelle == 'Créée' %}
 										<a href="{{ path('sortie_edit',{'id' : sortie.id} )}}" class="AncreBtnTableau">Modifier</a>
 										{# todo: modifier comme bouton dans _form et modifier le mainController pour publier directement #}
 										<a href="{{ path('sortie_edit',{'id' : sortie.id} )}}" class="AncreBtnTableau" name="Ouverte" value="Ouverte">Publier</a>
 
 									{% endif %}
-									{% if sortie.etat == 'Ouverte' %}
+									{% if sortie.etat.libelle == 'Ouverte' %}
 										<a href="{{ path('sortie_edit',{'id' : sortie.id})}}" class="AncreBtnTableau">Modifier</a>
 										{# todo: rediriger vers la page annulation (de edit_etat)
 <a href="{{ path('edit_etat',{'id' : sortie.id} )}}">Annuler</a>#}
 									{% endif %}
-									{% if sortie.etat == 'Annulée' %}
+									{% if sortie.etat.libelle == 'Annulée' %}
 										<a href="{{ path('sortie_edit',{'id' : sortie.id} )}}" class="AncreBtnTableau">Modifier</a>
 										{# todo: modifier comme bouton dans _form et modifier le mainController pour publier directement #}
 										<a href="{{ path('sortie_edit',{'id' : sortie.id} )}}" class="AncreBtnTableau">Republier</a>
@@ -124,14 +123,14 @@
 								{% endif %}
 								{# todo: Changer les cjumeline par les {organisateur.id ou .mail} #}
 								{% if app.user.mail != sortie.organisateur.mail %}
-									{% if sortie.etat == 'Ouverte' %}
+									{% if sortie.etat.libelle == 'Ouverte' %}
 										{% if app.user.actif == 0  %}
 											{# todo: ajouter le if :relation avec une sortie spécifique, si on participe pas, on peut s'inscrire #}
 											<a href="{{ path('sortie_edit',{'id' : sortie.id} )}}" class="AncreBtnTableau">Participer</a>
 											<a href="{{ path('sortie_edit',{'id' : sortie.id} )}}" class="AncreBtnTableau">Se désister</a>
 										{% endif %}
 									{% endif %}
-									{% if sortie.etat == 'Cloturée' %}
+									{% if sortie.etat.libelle == 'Cloturée' %}
 										{% if app.user.actif == 1  %}
 											<a href="{{ path('sortie_edit',{'id' : sortie.id} )}}" class="AncreBtnTableau">Se désister</a>
 										{% endif %}
