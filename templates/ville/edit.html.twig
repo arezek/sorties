@@ -1,13 +1,22 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Modifier Ville{% endblock %}
+{% block title %}Modifier Ville
+{% endblock %}
 
 {% block body %}
-    <h1>Edit Ville</h1>
+	<h1>Edit Ville</h1>
+	<div>
+		{{ include('ville/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+		<div
+			class="btnSousFormulaire">
 
-    {{ include('ville/_form.html.twig', {'button_label': 'Enregistrer'}) }}
+		{{ include('ville/_delete_form.html.twig') }}
+			<a
+				class="btn"
 
-    <a href="{{ path('ville_index') }}">Retour à la liste</a>
+				href="{{ path('ville_index') }}">Retour à la liste</a>
+		</div>
 
-    {{ include('ville/_delete_form.html.twig') }}
+
+	</div>
 {% endblock %}

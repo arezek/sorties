@@ -46,7 +46,7 @@ $couleurSectionPrincipal: rgba(124,
 // CSS                            //
 // __________________________________________________________//
 * {
-    scale: 0.99;
+    // scale: 0.99;
     box-sizing: border-box;
     padding: 0.2em;
     border-radius: 0.5em;
@@ -182,7 +182,7 @@ body {
     section {
         background-color: $couleurSectionPrincipal;
         padding: 1.5em;
-        font-size: 95%;
+        font-size: 105%;
         a {
             @include AncreBlanche();
             // margin: 1em;
@@ -207,6 +207,10 @@ body {
             background-color: inherit;
             border-color: inherit;
             text-decoration: none;
+        }
+        div.checkbox {
+            // @include borderTest();
+            white-space: nowrap;
         }
         // ____________________________________________________________________ View
         div {
@@ -246,8 +250,6 @@ body {
         tbody {
             td.nomSortie {
                 white-space: nowrap;
-                overflow-x: scroll;
-                height: 1em;
             }
             td.nomSortie:hover {
                 transform: scale(0.98);
@@ -342,6 +344,7 @@ body {
     }
     // ___________________________________________________________________________Formulaire
     section form {
+        margin-bottom: 1em;
         div {
             div {
                 -webkit-box-align: center;
@@ -379,7 +382,11 @@ body {
                 display: flex;
             }
         }
+        a.btn {
+            margin: 2em;
+        }
         div.btnSousFormulaire {
+            // @include borderTest();
             display: -webkit-box;
             display: -webkit-flex;
             display: -ms-flexbox;
@@ -388,6 +395,7 @@ body {
             -webkit-justify-content: center;
             -ms-flex-pack: center;
             justify-content: center;
+            padding: 2em;
             button a {
                 // box-shadow: inherit;
                 border-color: inherit;
