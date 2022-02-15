@@ -38,7 +38,6 @@ class SortieController extends AbstractController
         $sortie->setOrganisateur($participant);
 
         $formSortie = $this->createForm(SortieType::class, $sortie);
-        $formLieu = $this->createForm(LieuT::class, $sortie);
         $formSortie->handleRequest($request);
 
         if (isset($_POST['Créée'])) {
