@@ -13,6 +13,6 @@ function choix(){
     var idSelectionne = document.getElementById("optionSelectLieu").value;
 
     document.getElementById("rue").textContent = document.getElementById("optionSelectLieu").value;
-    document.getElementById("rue").textContent = document.getElementById("optionSelectLieu").value;
+    document.getElementById("codePostal").textContent = document.getElementById("optionSelectLieu").value;
 
 }
