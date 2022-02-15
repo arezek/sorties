@@ -20,27 +20,65 @@
                 <td>{{ sortie.dateLimiteInscription ? sortie.dateLimiteInscription|date('d/m/Y à H:i') : '' }}</td>
             </tr>
             <tr>
-                <th>Duree</th>
-                <td>{{ sortie.duree ? sortie.dateHeureDebut|date('H:i') }}</td>
-            </tr>
-
-            <tr>
-                <th>NbInscriptionsMax</th>
+                <th>Nombre de places</th>
                 <td>{{ sortie.nbInscriptionsMax }}</td>
             </tr>
             <tr>
-                <th>InfosSortie</th>
+                <th>Duree</th>
+                <td>{{ sortie.duree ? sortie.dateHeureDebut|date('H:i') }}</td>
+            </tr>
+            <tr>
+                <th>Description</th>
                 <td>{{ sortie.infosSortie }}</td>
             </tr>
             <tr>
-                <th>Etat</th>
-                <td>{{ sortie.etat.libelle }}</td>
+                <th>Campus</th>
+                <td>{{ sortie.campus.nom }}</td>
+            </tr>
+            <tr>
+                <th>Lieu</th>
+                <td>{{ sortie.lieu.nom }} à {{ sortie.lieu.ville.nom }}</td>
+            </tr>
+            <tr>
+                <th>Rue</th>
+                <td>{{ sortie.lieu.rue }}</td>
+            </tr>
+            <tr>
+                <th>Code postal</th>
+                <td>{{ sortie.lieu.ville.codePostal }}</td>
+            </tr>
+            <tr>
+                <th>Latitude</th>
+                <td>{{ sortie.lieu.latitude }}</td>
+            </tr>
+            <tr>
+                <th>Longitude</th>
+                <td>{{ sortie.lieu.longitude }}</td>
             </tr>
         </tbody>
     </table>
 
-    {# todo: Changer les cjumeline par les {organisateur.id ou .mail} #}
-    {# {% if app.user.mail == "cjumelinee@tutanota.com" %}
+    <div>Liste des participants inscrits : </div>
+
+    <table class="table">
+        <tbody>
+        <tr>
+            <th>Pseudo</th>
+            {# {% for pseudo in pseudos %}
+                <td></td>
+            {% endfor %} #}
+        </tr>
+        <tr>
+            <th>Nom</th>
+            <td>{}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    {# todo : ajouter les boutons selon les cas 'inscrit' 'non inscrit' et si on est le créateur de l'évenement (deja fait sur une version de github)
+        todo : mettre le deuxieme tableau dans l'autre sens CSS
+
+    {% if app.user.mail == "cjumelinee@tutanota.com" %}
         <button class="btn"><a href="{{ path('sortie_edit', {'id': sortie.id}) }}">Modifier</a></button>
     {% endif %} #}
 
