@@ -42,8 +42,8 @@ class SortieController extends AbstractController
         $participant = $participantRepository->find($id);
         $sortie->setOrganisateur($participant);
 
-        $formSortie = $this->createForm(SortieType::class, $sortie);
-        $formSortie->handleRequest($request);
+        $form = $this->createForm(SortieType::class, $sortie);
+        $form->handleRequest($request);
 
         if (isset($_POST['Créée'])) {
             $etatTemp = $etatRepository->findByLibelle("Créée");
