@@ -12,56 +12,66 @@
 				{{  app.user.pseudo }}
 			{% endif %}
 		</h3>
-		<div>
+		<form method="post" action="">
 			<label>Campus :
 			</label>
 			<select
-				name="campus">
+				name="campusSelect">
+				<option
+						value="default">Choisir un campus</option>
 				{% for campus in campuses %}
 					<option
-						value="selectCampus">{{campus.nom}}</option>
+						value="{{ campus.id }}">{{campus.nom}}</option>
 				{% endfor %}
 			</select>
 			<input
 				type="text"
+				name="motRecherche"
 				placeholder="Quel Sortie ?">
 			<label>Entre :
 			</label>
 			<input
-				type="date">
+					name="dateDebut"
+					type="date">
 			<label>et</label>
 			<input
-				type="date">
-		</div>
+					name="dateFin"
+					type="date">
+			<div>
+				<input
+						name="nouveaute"
+						type="checkbox"
+						value="3"
+						checked>
+				<label>Nouveautés</label>
+				<input
+						name="organisateur"
+						type="checkbox"
+						value="1">
+				<label>Organisateur-trice</label>
+				<input
+						name="inscrit"
+						type="checkbox"
+						value="2">
+				<label>Inscrit-e</label>
+				<input
+						name="passee"
+						type="checkbox"
+						value="4">
+				<label>Joyeux Souvenirs</label>
+				<button
+						type="submit">Rechercher</button>
+			</div>
+		</form>
 	</div>
-	<div>
-		<input
-			type="checkbox"
-			value="3"
-			checked>
-		<label>Nouveautés</label>
-		<input
-			type="checkbox"
-			value="1">
-		<label>Organisateur-trice</label>
-		<input
-			type="checkbox"
-			value="2">
-		<label>Inscrit-e</label>
-		<input
-			type="checkbox"
-			value="4">
-		<label>Joyeux Souvenirs</label>
-		<button
-			type="submit">Rechercher</button>
-	</div>
+
 	<div></div>
 
 
 	{# FORMULAIRE SORTIE #}
 	<div>
 
-		<h1>Sortie Disponible</h1>
+		<h1>Sorties disponibles</h1>
 		<div
 			class="scrollBox">
 
@@ -122,7 +132,8 @@
 									{% endfor %}
 								{% endif %}
 							</td>
-							<td>{{sortie.organisateur.pseudo}}</td>
+							<td>
+								<a href="{{ path('profil_id',{ id : sortie.organisateur.id}) }}">{{sortie.organisateur.pseudo}}</a></td>
 							{% if app.user %}
 								<td
 									class="CelluleBtnTableau">
@@ -177,7 +188,7 @@
 					{% else %}
 						<tr>
 							<td
-								colspan="9">no records found</td>
+								colspan="9">Aucune sorties</td>
 						</tr>
 					{% endfor %}
 				</tbody>
