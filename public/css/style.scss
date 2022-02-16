@@ -32,12 +32,14 @@ $couleurSectionPrincipal: rgba(124,
 }
 
 @mixin typeBouton {
+    // @include borderTest();
     @include BorderShadowEXT();
     color: white;
     list-style-type: none;
     max-height: 3em;
     text-decoration: none;
     text-align: center;
+    vertical-align: middle;
     margin: 1%;
     padding: 1em;
 }
@@ -222,6 +224,28 @@ body {
                 margin-right: auto;
             }
         }
+        div.deuxBlock {
+            // @include borderTest();
+            max-width: 100%;
+            display: grid;
+            grid-template-columns: 50% auto;
+            .block1 {
+                // @include borderTest();
+                display: grid;
+                div.affichageLieu {
+                    display: block;
+                }
+            }
+            .block2 {
+                // @include borderTest();
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                div {
+                    text-align: center;
+                }
+            }
+        }
     }
     // _____________________________________________________________________________________ Footer
     footer {
@@ -320,25 +344,25 @@ body {
     // ___________________________________________________________ Connexion
     section form.FormConnexion {
         text-align: center;
-        div {
-            padding: 1em;
-        }
         .inscription {
+            // @include borderTest();
             display: -webkit-box;
             display: -webkit-flex;
             display: -ms-flexbox;
             display: flex;
-            text-align: start;
             a {
-                font-size: small;
-                padding: 4em;
+                // @include borderTest(); 
                 @include typeBouton();
             }
         }
         .mdpEmail {
+            // @include borderTest();
+            display: flex;
+            flex-direction: column;
             label {
-                width: 80%;
-                padding: 1em;
+                // @include borderTest();
+                display: block;
+                float: left;
             }
         }
     }
@@ -403,19 +427,19 @@ body {
                 background-color: inherit;
             }
         }
-        div.formNewSortie {
+        div.deuxformBlock {
             // @include borderTest();
             max-width: 100%;
             display: grid;
             grid-template-columns: 50% auto;
-            .formVilleCampus {
+            .block1 {
                 // @include borderTest();
                 display: grid;
                 div.affichageLieu {
                     display: block;
                 }
             }
-            .formSortie {
+            .block2 {
                 // @include borderTest();
                 display: flex;
                 flex-direction: column;

@@ -70,7 +70,7 @@ class AppFixtures extends Fixture
         $campuses = ['Rennes', 'Nantes', 'Quimper', 'Niort'];
         $campus = [];
 
-        for ($i = 1; $i < count($campuses); $i++) {
+        for ($i = 0; $i < count($campuses); $i++) {
             $campus[$i] = new Campus();
             $campus[$i]->setNom($campuses[$i]);
             $manager->persist($campus[$i]);
@@ -113,13 +113,13 @@ class AppFixtures extends Fixture
             $sortie[$i]->setdateHeureDebut($faker->dateTimeInInterval($startDate = '+ 10 days', $interval = '+20 day', $timezone = null));
             $sortie[$i]->setDuree($faker->dateTimeInInterval($startDate = 'now', $interval = '+1 day', $timezone = null));
             $sortie[$i]->setDateLimiteInscription($faker->dateTimeInInterval($startDate = 'now', $interval = '+10 day', $timezone = null));
-            $sortie[$i]->setNbInscriptionsMax($faker->numberBetween($min = 5, $max = 20));
+            $sortie[$i]->setNbInscriptionsMax($faker->numberBetween($min = 15, $max = 20));
             $sortie[$i]->setInfosSortie($faker->sentence);
             $sortie[$i]->setEtat($etat[$faker->numberBetween($min = 0, $max = count($etat) - 1)]);
             $sortie[$i]->setLieu($lieu[$faker->numberBetween($min = 0, $max = count($lieu) - 1)]);
             $sortie[$i]->setCampus($campus[$faker->numberBetween($min = 0, $max = count($campus) - 1)]);
             $sortie[$i]->setOrganisateur($participant[$faker->numberBetween($min = 0, $max = count($participant) - 1)]);
-            for ($j = 0; $j < $faker->numberBetween($min = 0, $max = $sortie[$i]->getNbInscriptionsMax()); $j++) {
+            for ($j = 0; $j < $faker->numberBetween($min = 15, $max = $sortie[$i]->getNbInscriptionsMax()); $j++) {
                 $sortie[$i]->addParticipant($participant[$faker->numberBetween($min = 0, $max = count($participant) - 1)]);
             }
 

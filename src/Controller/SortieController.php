@@ -85,15 +85,13 @@ class SortieController extends AbstractController
     /**
      * @Route("/{id}", name="sortie_show", methods={"GET"})
      */
-    public function show(Sortie $sortie): Response
+    public function show(int $id,Sortie $sortie, SortieRepository $sortieRepository): Response
     {
-        $pseudos = array();
-
-//todo : accéder aux données de la table : participant_sortie sur phpmyadmin et comparer. Envoyer les pseudos vers le tableau
+        //todo : accéder aux données de la table : participant_sortie sur phpmyadmin et comparer. Envoyer les pseudos vers le tableau
+        $sorties = $sortieRepository->find($id);
 
         return $this->render('sortie/show.html.twig', [
             'sortie' => $sortie,
-            'pseudos' => $pseudos,
          ]);
     }
 
