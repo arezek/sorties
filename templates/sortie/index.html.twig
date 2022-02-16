@@ -132,7 +132,8 @@
 									{% endfor %}
 								{% endif %}
 							</td>
-							<td>{{sortie.organisateur.pseudo}}</td>
+							<td>
+								<a href="{{ path('profil_id',{ id : sortie.organisateur.id}) }}">{{sortie.organisateur.pseudo}}</a></td>
 							{% if app.user %}
 								<td
 									class="CelluleBtnTableau">
