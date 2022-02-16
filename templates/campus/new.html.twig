@@ -4,8 +4,9 @@
 
 {% block body %}
     <h1>Ajouter un Campus</h1>
-
+    <div>
     {{ include('campus/_form.html.twig') }}
 
     <a href="{{ path('campus_index') }}">Retour à la liste de campus</a>
+    </div>
 {% endblock %}

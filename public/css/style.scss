@@ -41,7 +41,7 @@ $couleurSectionPrincipal: rgba(124,
     text-align: center;
     vertical-align: middle;
     margin: 1%;
-    padding: 1em;
+    padding: 0.5em;
 }
 
 // **********************************************************//
@@ -210,6 +210,12 @@ body {
             border-color: inherit;
             text-decoration: none;
         }
+        button.btn {
+            // @include borderTest();
+            padding: 1em;
+            font-size: large;
+            align-items: stretch;
+        }
         div.checkbox {
             // @include borderTest();
             white-space: nowrap;
@@ -283,7 +289,7 @@ body {
             td {
                 background-color: rgba(230, 179, 134, 0.475);
                 padding: 0.5em;
-                font-size: medium;
+                font-size: large;
                 a {
                     display: -webkit-box;
                     display: -webkit-flex;
@@ -305,7 +311,7 @@ body {
                 display: flex;
                 justify-content: space-between;
                 .AncreBtnTableau {
-                    @include borderTest();
+                    // @include borderTest();
                     border: inherit;
                     background-color: unset;
                     color: rgb(255, 255, 255);
@@ -320,6 +326,13 @@ body {
     }
     table+div {
         padding: 1em;
+    }
+    div.scrollBox table.table.sortieShow {
+        // @include borderTest();
+        tr,
+        td {
+            font-size: small;
+        }
     }
     // ___________________________________________________________ Accueil
     section div.premierDivAccueil {
@@ -337,8 +350,7 @@ body {
     // ___________________________________________________________ Scroll
     section div.scrollBox {
         // @include borderTest();
-        scroll-snap-type: none;
-        overflow: auto;
+        overflow-y: auto; // scrollbar-color: rgb(215, // 123, // 26); // scrollbar-width: 5em;
         height: 30em;
     }
     // ___________________________________________________________ Connexion
@@ -346,12 +358,10 @@ body {
         text-align: center;
         .inscription {
             // @include borderTest();
-            display: -webkit-box;
-            display: -webkit-flex;
-            display: -ms-flexbox;
-            display: flex;
+            text-align: left;
+            padding: 0.5em;
             a {
-                // @include borderTest(); 
+                // @include borderTest();
                 @include typeBouton();
             }
         }

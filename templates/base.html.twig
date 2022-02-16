@@ -1,37 +1,51 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <link rel="icon" type="image/png" sizes="20x20" href="{{asset('../public/img/logo/logoSortir.png')}}">
-        <link rel="stylesheet" href="{{ asset('../public/css/style.css') }}">
-        <link rel="stylesheet" href="{{ asset('../public/css/normalize.css') }}"><script
-                src="https://code.jquery.com/jquery-3.6.0.min.js"
-                integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
-                crossorigin="anonymous"></script>
-        <script rel="javascript" type="text/javascript"  src="{{ asset('../public/js/Preremplissage.js') }}"></script>
+	<head>
+		<meta
+			charset="UTF-8">
+		<link
+			rel="icon"
+			type="image/png"
+			sizes="20x20"
+			href="{{asset('../public/img/logo/logoSortir.png')}}">
+		<link
+			rel="stylesheet"
+			href="{{ asset('../public/css/style.css') }}">
+		<link
+			rel="stylesheet"
+			href="{{ asset('../public/css/normalize.css') }}"><script
+			src="https://code.jquery.com/jquery-3.6.0.min.js"
+			integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4="
+			crossorigin="anonymous"></script>
+		<script
+			rel="javascript"
+			type="text/javascript"
+			src="{{ asset('../public/js/Preremplissage.js') }}"></script>
+		<title>
+			{% block title %}Sortie
+			{% endblock %}
+		</title>
+	</head>
+	<body>
+		{# //_______________________________________Header #}
+		{% include "main/incl/header.html.twig" %}
 
-        <title>{% block title %}Sortie{% endblock %}</title>
-    </head>
-    <body>
-        {# //_______________________________________Header #}
-    {% include "main/incl/header.html.twig" %}
+		{# //_______________________________________Section #}
+		<section>
+			{# read and display all flash messages #}
+			{% for label, messages in app.flashes %}
+				{% for message in messages %}
+					<div
+						class="flash-{{ label }}">
+						{{ message }}
+					</div>
+				{% endfor %}
+			{% endfor %}
+			{% block body %}{% endblock %}
+		</section>
+		{# //_______________________________________Footer #}
+		{% include "main/incl/footer.html.twig" %}
+	</body>
 
-    {# //_______________________________________Section #}
-    <section>
-        {# read and display all flash messages #}
-        {% for label, messages in app.flashes %}
-            {% for message in messages %}
-                <div
-                    class="flash-{{ label }}">
-                    {{ message }}
-                </div>
-            {% endfor %}
-        {% endfor %}
-        {% block body %}{% endblock %}
-    </section>
-    {# //_______________________________________Footer #}
-    {% include "main/incl/footer.html.twig" %}
-    </body>
-    
 
 </html>
