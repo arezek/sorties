@@ -70,9 +70,6 @@
 
 	{# FORMULAIRE SORTIE #}
 	<div>
-		{% for connect in app.flashes('connect') %}
-		{{ connect }}
-		{% endfor %}
 		{% for register in app.flashes('register') %}
 			{{ register }}
 		{% endfor %}
