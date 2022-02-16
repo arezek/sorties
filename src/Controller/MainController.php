@@ -41,7 +41,12 @@ class MainController extends AbstractController
 
             for ($i = 0; $i < count($options) ; $i++) {
                 if (!is_null($options[$i]) && $options[$i] == true && $options[$i] != ""){
-                    dump($options[$i]);
+                    $campusChoisi = $campusRepository->filtreCampus($options[$i]->getId());
+
+                    $sorties = $sortieRepository->rechercherSortieFlitree($campusChoisi);
+                    $sorties = $sortieRepository->findAll();
+
+                    dump($sorties);
                 }
             }
 
