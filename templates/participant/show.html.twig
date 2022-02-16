@@ -9,28 +9,6 @@
 
     <table class="tableParticipant">
         <tbody>
-            {# <tr>
-                <th>Id</th>
-                <td>{{ participant.id }}</td>
-            </tr> #}
-            {# <tr>
-                <th>Pseudo</th>
-                <td>{{ participant.pseudo }}</td>
-            </tr> #}
-
-            {#
-            <tr>
-            <th>Roles</th>
-            <td>{{ participant.roles ? participant.roles|json_encode : '' }}</td>
-            </tr>
-            #}
-            {#
-            <tr>
-            <th>Password</th>
-            <td>{{ participant.password }}</td>
-            </tr>
-            #}
-
 
             <tr>
                 <th>Prenom</th>
@@ -40,18 +18,17 @@
                 <th>Nom</th>
                 <td>{{ participant.nom }}</td>
             </tr>
-            <tr>
-                <th>Telephone</th>
-                <td>{{ participant.telephone }}</td>
-            </tr>
-            <tr>
-                <th>Mail</th>
-                <td>{{ participant.mail }}</td>
-            </tr>
-            <!-- <tr>
-                <th>Actif</th>
-                <td>{{ participant.actif ? 'Yes' : 'No' }}</td>
-            </tr> -->
+            {% if app.user.id == participant.id %}
+
+                <tr>
+                    <th>Telephone</th>
+                    <td>{{ participant.telephone }}</td>
+                </tr>
+                <tr>
+                    <th>Mail</th>
+                    <td>{{ participant.mail }}</td>
+                </tr>
+            {% endif %}
             <tr>
                 <th>Campus</th>
                 <td>{{ participant.campus.nom }}</td>
@@ -66,9 +43,12 @@
         </tbody>
     </table>
     <div>
-    <a href="{{ path('profil_edit', {'id': participant.id}) }}">Modifier</a>
+        {% if app.user.id == participant.id %}
+            <a href="{{ path('profil_edit', {'id': participant.id}) }}">Modifier</a>
+        {% endif %}
     </div>
-
-    {{ include('participant/_delete_form.html.twig') }}
+    {% if app.user.id == participant.id %}
+        {{ include('participant/_delete_form.html.twig') }}
+    {% endif %}
 </div>
 {% endblock %}
