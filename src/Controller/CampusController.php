@@ -38,6 +38,7 @@ class CampusController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($campus);
             $entityManager->flush();
+            $this->addFlash('notice', 'Campus ajouté !');
 
             return $this->redirectToRoute('campus_index', [], Response::HTTP_SEE_OTHER);
         }

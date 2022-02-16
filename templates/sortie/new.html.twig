@@ -5,5 +5,8 @@
 
 {% block body %}
 	<h1>Créer une nouvelle Sortie</h1>
+	{% for message in app.flashes('message') %}
+		{{ message }}
+	{% endfor %}
 	{{ include('sortie/_form.html.twig') }}
 {% endblock %}

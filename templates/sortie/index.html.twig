@@ -70,7 +70,15 @@
 
 	{# FORMULAIRE SORTIE #}
 	<div>
-
+		{% for connect in app.flashes('connect') %}
+		{{ connect }}
+		{% endfor %}
+		{% for register in app.flashes('register') %}
+			{{ register }}
+		{% endfor %}
+		{% for notice in app.flashes('notice') %}
+			{{ notice }}
+		{% endfor %}
 		<h1>Sorties disponibles</h1>
 		<div
 			class="scrollBox">

@@ -35,8 +35,10 @@
 						</tr>
 					{% else %}
 						<tr>
-							<td
-								colspan="3">Pas de compus trouvé!</td>
+							<td{% for notice in app.flashes('notice') %}
+								{{ notice }}
+							{% endfor %}
+								colspan="3">Pas de campus trouvé!</td>
 						</tr>
 					{% endfor %}
 				</tbody>

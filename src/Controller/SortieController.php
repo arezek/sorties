@@ -65,10 +65,11 @@ class SortieController extends AbstractController
 
                 $entityManager->persist($sortie);
                 $entityManager->flush();
+                $this->addFlash('notice', ' Vous avez ajouter une sortie !');
 
                 return $this->redirectToRoute('main_index', [], Response::HTTP_SEE_OTHER);
             } else {
-                //todo : flash : selectionnez une valeur
+                $this->addFlash('message', ' selectionnez une valeur');  //todo : flash : selectionnez une valeur
             }
         }
 
