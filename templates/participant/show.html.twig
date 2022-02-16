@@ -14,11 +14,12 @@
                 <th>Prenom</th>
                 <td>{{ participant.prenom }}</td>
             </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ participant.nom }}</td>
+            </tr>
             {% if app.user.id == participant.id %}
-                <tr>
-                    <th>Nom</th>
-                    <td>{{ participant.nom }}</td>
-                </tr>
+
                 <tr>
                     <th>Telephone</th>
                     <td>{{ participant.telephone }}</td>
