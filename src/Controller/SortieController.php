@@ -99,23 +99,21 @@ class SortieController extends AbstractController
     /**
      * @Route("/{id}/edit", name="sortie_edit", methods={"GET", "POST"})
      */
-    public function edit(int $id, Request $request,LieuRepository $lieuRepository, VilleRepository $villeRepository, Sortie $sortie, EntityManagerInterface $entityManager, CampusRepository $campusRepository): Response
+    public function edit(int $id, Request $request,EtatRepository $etatRepository, LieuRepository $lieuRepository, VilleRepository $villeRepository, Sortie $sortie, EntityManagerInterface $entityManager, CampusRepository $campusRepository): Response
     {
         $form = $this->createForm(SortieType::class, $sortie);
 
         $form->handleRequest($request);
 
-        if (isset($_POST['optionSelect'])) {
-            dd("hey");
-        }
-
-
         if (isset($_POST['Créée'])) {
-            $sortie->setEtat('Créée');
+            $etatTemp = $etatRepository->findByLibelle("Créée");
+            $sortie->setEtat($etatTemp);
         } else if (isset($_POST['Ouverte'])) {
-            $sortie->setEtat('Ouverte');
+            $etatTemp = $etatRepository->findByLibelle("Ouverte");
+            $sortie->setEtat($etatTemp);
         } else if (isset($_POST['Annulée'])) {
-            $sortie->setEtat('Annulée');
+            $etatTemp = $etatRepository->findByLibelle("Annulée");
+            $sortie->setEtat($etatTemp);
         }
 
         $sortie->setDateHeureDebut($sortie->getDateHeureDebut());
