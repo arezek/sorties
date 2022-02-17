@@ -87,10 +87,6 @@ class MainController extends AbstractController
                 }
             }
 
-            dump(count($sortie[$i]->getParticipants()) . 'et' .
-                $sortie[$i]->getNbInscriptionsMax());
-            dump($sortie[$i]->getNbInscriptionsMax());
-
 
             $sortie[$i]->setEtat($etatTemp);
             $entityManager->persist($sortie[$i]);
