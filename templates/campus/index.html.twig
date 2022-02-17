@@ -13,12 +13,6 @@
 			class="scrollBox">
 			<table
 				class="table">
-				{# <thead>
-												<tr>
-													<th>Id</th>
-													<th>Nom</th>
-												</tr>
-											</thead> #}
 				<tbody>
 					{% for campus in campuses %}
 						<tr>
@@ -26,16 +20,16 @@
 							<td>{{ campus.nom }}</td>
 							<td
 								class="CelluleBtnTableau">
-								{# TODO: à supp si inutile #}
-								{# <a
-									href="{{ path('campus_show', {'id': campus.id}) }}">Afficher</a> #}
 								<a
+									class="AncreBtnTableau"
+
 									href="{{ path('campus_edit', {'id': campus.id}) }}">Modifier</a>
 							</td>
 						</tr>
 					{% else %}
 						<tr>
-							<td colspan="3">Pas de campus trouvé!</td>
+							<td
+								colspan="3">Pas de campus trouvé!</td>
 							{% for notice in app.flashes('notice') %}
 								{{ notice }}
 							{% endfor %}

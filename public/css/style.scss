@@ -25,8 +25,9 @@ $couleurSectionPrincipal: rgba(124,
 
 @mixin AncreBlanche {
     padding: 0.3em;
-    background-color: rgba(181, 113, 84, 0.687);
-    border: 3px solid white;
+    // background-color: rgba(181, 113, 84, 0.687);
+    background-color: rgba(181, 113, 84, 0.578);
+    border: 1px solid white;
     text-decoration: none;
     color: white;
 }
@@ -101,7 +102,7 @@ body {
             -ms-flex-align: center;
             align-items: center;
             a {
-                :hover {
+                 :hover {
                     -webkit-transition: all 2s ease;
                     transition: all 2s ease;
                     -webkit-transform: scale(1.10);
@@ -156,14 +157,14 @@ body {
             font-size: large;
             font-weight: bold;
             flex-wrap: wrap;
-            :hover {
+             :hover {
                 -webkit-transition: all 0.2s ease;
                 transition: all 0.2s ease;
                 -webkit-transform: scale(1.05);
                 transform: scale(1.05);
                 background-color: rgba(124, 67, 36, 0.563);
             }
-            :active {
+             :active {
                 -webkit-transform: scale(1.15);
                 transform: scale(1.15);
             }
@@ -283,11 +284,12 @@ body {
             }
             td.nomSortie:hover {
                 transform: scale(1.01);
-                background-color: rgba(244, 169, 128, 0.509);
+                background-color: rgba(186, 103, 59, 0.859);
                 margin: 0px;
             }
             td {
-                background-color: rgba(230, 179, 134, 0.475);
+                // background-color: rgba(230, 179, 134, 0.475);
+                background-color: rgba(181, 113, 84, 0.585);
                 padding: 0.5em;
                 font-size: large;
                 width: auto;
@@ -351,7 +353,7 @@ body {
     // ___________________________________________________________ Scroll
     section div.scrollBox {
         // @include borderTest();
-        overflow-y: auto; // scrollbar-color: rgb(215, // 123, // 26); // scrollbar-width: 5em;
+        overflow-y: auto;
         height: 30em;
     }
     // ___________________________________________________________ Connexion
@@ -467,17 +469,10 @@ body {
 
 @media only screen and (max-width: 800px) {
     header {
-        @include borderTest();
-        // display: unset;
-        display: block;
-        grid: unset;
-        // grid-template-columns: auto auto;
-        .logoEnTete {
-            // display: bl;
-            // flex-direction: column;
-        }
+        // @include borderTest();
+        .logoEnTete {}
         nav {
-            @include borderTest(); // display: unset; // display: inline;
+            @include borderTest();
         }
     }
 }
