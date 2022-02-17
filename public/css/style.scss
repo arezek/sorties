@@ -274,19 +274,25 @@ body {
         font-size: 90%;
         th {
             // @include borderTest();
-            background-color: rgba(124, 67, 36, 0.563);
+            background-color: rgba(124, 67, 36, 0.427);
             padding: 0.7em;
             font-size: large;
         }
         tbody {
             td.nomSortie {
+                // @include borderTest();
                 white-space: nowrap;
+                a {
+                    // @include borderTest();
+                    box-shadow: 4px 4px 4px 0 rgba(0, 0, 0, 0.16), -4px -4px 4px 0 rgba(0, 0, 0, 0.112);
+                }
+                a:hover {
+                    transform: scale(1.05);
+                    background-color: rgba(169, 90, 47, 0.742);
+                    margin: 0px;
+                }
             }
-            td.nomSortie:hover {
-                transform: scale(1.01);
-                background-color: rgba(186, 103, 59, 0.859);
-                margin: 0px;
-            }
+            td.nomSortie:hover {}
             td {
                 // background-color: rgba(230, 179, 134, 0.475);
                 background-color: rgba(181, 113, 84, 0.585);
