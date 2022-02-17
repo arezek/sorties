@@ -99,15 +99,15 @@ class SortieController extends AbstractController
     /**
      * @Route("/{id}/edit", name="sortie_edit", methods={"GET", "POST"})
      */
-    public function edit(Request $request, Sortie $sortie, EntityManagerInterface $entityManager, CampusRepository $campusRepository, VilleRepository $villeRepository, LieuRepository $lieuRepository): Response
+    public function edit(int $id, Request $request,LieuRepository $lieuRepository, VilleRepository $villeRepository, Sortie $sortie, EntityManagerInterface $entityManager, CampusRepository $campusRepository): Response
     {
         $form = $this->createForm(SortieType::class, $sortie);
 
         $form->handleRequest($request);
 
-        // if (isset($_POST['optionSelect'])) {
-        //     dd("hey");
-        // }
+        if (isset($_POST['optionSelect'])) {
+            dd("hey");
+        }
 
 
         if (isset($_POST['Créée'])) {
@@ -129,10 +129,11 @@ class SortieController extends AbstractController
 
         return $this->renderForm('sortie/edit.html.twig', [
             'sortie' => $sortie,
-            'villes' => $villeRepository->findAll(),
             'form' => $form,
             'campuses' => $campusRepository->findAll(),
+            'villes' => $villeRepository->findAll(),
             'lieux' => $lieuRepository->findAll(),
+            'id' => $id,
         ]);
     }
 
