@@ -31,7 +31,7 @@
 					</tr>
 					<tr>
 						<th>Duree</th>
-						<td>{{ sortie.duree ? sortie.dateHeureDebut|date('H:i') }}</td>
+						<td>{{ sortie.duree ? sortie.duree|date('H:i'): 'indéterminé' }}</td>
 					</tr>
 					<tr>
 						<th>Campus</th>
