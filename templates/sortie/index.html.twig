@@ -31,11 +31,11 @@
 			<label>Entre :
 			</label>
 			<input
-					name="dateDebut"
+					name="dateDebut" value = "{{ date.format('Y-m-d') }}"
 					type="date">
 			<label>et</label>
 			<input
-					name="dateFin"
+					name="dateFin"  value = "{{ date.format('Y-m-d') }}"
 					type="date">
 			<div>
 				<input
@@ -203,8 +203,12 @@
 
 	</div>
 
+	{{ "now" |format_datetime('long', 'short', locale='fr') }}
+
+
 	{# <a href="{{ path('sortie_new') }}">Creer une nouvelle Sortie</a> #}
 {% endblock %}
+
 
 {# {% if sortie == 'Afficher' %}
                         <td>

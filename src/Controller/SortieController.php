@@ -35,6 +35,8 @@ class SortieController extends AbstractController
     public function new(int $id,Request $request,EtatRepository $etatRepository, EntityManagerInterface $entityManager,VilleRepository $villeRepository,LieuRepository $lieuRepository, CampusRepository $campusRepository, ParticipantRepository $participantRepository): Response
     {
         $sortie = new Sortie();
+        $particpant = new Participant();
+        $particpant->addSorty($sortie);
         $date = new \DateTime ('1:00');
         $sortie->setDuree($date);
         $sortie->setDateHeureDebut(new \DateTime('now'));
@@ -90,7 +92,7 @@ class SortieController extends AbstractController
     {
         //todo : accéder aux données de la table : participant_sortie sur phpmyadmin et comparer. Envoyer les pseudos vers le tableau
         $sorties = $sortieRepository->find($id);
-
+        dump($sortie);
         return $this->render('sortie/show.html.twig', [
             'sortie' => $sortie,
          ]);

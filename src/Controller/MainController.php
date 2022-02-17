@@ -3,13 +3,14 @@
 namespace App\Controller;
 
 
+
 use App\Repository\CampusRepository;
 use App\Repository\SortieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Validator\Constraints\Date;
+
 
 class MainController extends AbstractController
 {
@@ -26,7 +27,9 @@ class MainController extends AbstractController
 
         //Searchbar :
         //Nom : campusSelect / motRecherche / dateDebut / dateFin / nouveaute / organisateur / inscrit / passee
-        //TODO : préremplir les dates à aujourd'hui
+
+        $date = new \DateTime('now');
+
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $options = array(
                 $campusRepository->find($_POST['campusSelect']),
@@ -43,7 +46,7 @@ class MainController extends AbstractController
                 if (!is_null($options[$i]) && $options[$i] == true && $options[$i] != ""){
                     $campusChoisi = $campusRepository->filtreCampus($options[$i]->getId());
 
-                    $sorties = $sortieRepository->rechercherSortieFlitree($campusChoisi);
+                    // $sorties = $sortieRepository->rechercherSortieFiltree($campusChoisi);
                     $sorties = $sortieRepository->findAll();
 
                     dump($sorties);
@@ -63,6 +66,7 @@ class MainController extends AbstractController
         return $this->render('sortie/index.html.twig', [
             'sorties' => $sorties,
             'campuses' => $campusRepository->findAll(),
+            'date' => $date,
         ]);
     }
 
