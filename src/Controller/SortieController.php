@@ -151,13 +151,23 @@ class SortieController extends AbstractController
     }
 
     /**
-     * @Route("/{idS}/{idP}", name="sortie_ajoutPraticipant", methods={"GET","POST"})
+     * @Route("/{idS}/{idP}/{clic}", name="sortie_ajoutPraticipant", methods={"GET","POST"})
      */
-    public function ajoutParticipant(int $idS, int $idP,  EntityManagerInterface $entityManager, SortieRepository $sortieRepository, ParticipantRepository $participantRepository): Response
+    public function ajoutParticipant(string $clic, int $idS, int $idP, EtatRepository $etatRepository, EntityManagerInterface $entityManager, SortieRepository $sortieRepository, ParticipantRepository $participantRepository): Response
     {
         $participant = $participantRepository->find($idP);
         $sortie = $sortieRepository->find($idS);
         $sortie->addParticipant($participant);
+
+        //Conditions pour l'état d'une sortie :
+        if ($clic == "inscrire"){
+            // todo : Checker aussi que l'évenement est pas en cours grace aux dates puis mettre le code d'en dessous
+            $etatTemp = $etatRepository->findByLibelle("Fermée");
+            $sortie->setEtat($etatTemp);
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+        }
+
         $entityManager->persist($sortie);
         $entityManager->persist($participant);
         $entityManager->flush();
@@ -166,13 +176,24 @@ class SortieController extends AbstractController
         return $this->redirectToRoute('main_index', []);
     }
     /**
-     * @Route("/supp/{idS}/{idP}", name="sortie_suppPraticipant", methods={"GET","POST"})
+     * @Route("/supp/{idS}/{idP}/{clic}", name="sortie_suppPraticipant", methods={"GET","POST"})
      */
-    public function suppParticipant(int $idS, int $idP,  EntityManagerInterface $entityManager, SortieRepository $sortieRepository, ParticipantRepository $participantRepository): Response
+    public function suppParticipant(string $clic, int $idS, int $idP,EtatRepository $etatRepository, EntityManagerInterface $entityManager, SortieRepository $sortieRepository, ParticipantRepository $participantRepository): Response
     {
         $participant = $participantRepository->find($idP);
         $sortie = $sortieRepository->find($idS);
         $sortie->removeParticipant($participant);
+
+        //Conditions pour l'état d'une sortie :
+        if ($clic == "desister"){
+            // todo : Checker aussi que l'évenement est pas en cours avec les dates grace aux dates puis mettre le code d'en dessous
+            $etatTemp = $etatRepository->findByLibelle("Ouverte");
+            $sortie->setEtat($etatTemp);
+            $entityManager->persist($sortie);
+            $entityManager->flush();
+        }
+
+
         $entityManager->persist($sortie);
         $entityManager->persist($participant);
         $entityManager->flush();

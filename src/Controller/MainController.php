@@ -4,7 +4,10 @@ namespace App\Controller;
 
 
 use App\Repository\CampusRepository;
+use App\Repository\EtatRepository;
 use App\Repository\SortieRepository;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,7 +19,7 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="main_index")
      */
-    public function index(SortieRepository $sortieRepository, CampusRepository $campusRepository, Request $request): Response
+    public function index(EntityManagerInterface $entityManager, EtatRepository $etatRepository, SortieRepository $sortieRepository, CampusRepository $campusRepository, Request $request): Response
     {
         //todo : quand la date d'un evenemnt est à J+1 ou meme minute +1 : mettre l'état a 'passé'.
         //todo : quand la possibilité de s'inscrire est passée, on met l'état a 'cloturé'.
@@ -51,8 +54,25 @@ class MainController extends AbstractController
             //$sorties = "";
         }
 
+        $sortie = $sortieRepository->findAll();
+        $Ajdh = new \DateTime();
+        $test = $sortie[2]->getDateLimiteInscription();
+
+        if ($Ajdh < $test){
+
+        }
+
+        $desister = false;
+        //Conditions pour l'état d'une sortie :
+        for ($i = 0; $i < count($sortie); $i ++){
+            if (count($sortie[$i]->getParticipants()) == $sortie[$i]->getNbInscriptionsMax()){
+                $desister = true;
+            }
+        }
+
 
         return $this->render('sortie/index.html.twig', [
+            'desister' => $desister,
             'sorties' => $sortieRepository->findAll(),
             'campuses' => $campusRepository->findAll(),
         ]);

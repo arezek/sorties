@@ -119,8 +119,6 @@
 								{% endif %}
 
 							</td>
-							{# todo : si on est actif pour cet evenement (manque les relations) mettre un if puis 'X' si true #}
-							{# todo: verifier quand on fais l'inscription a une activité #}
 							<td>
 								{% if app.user %}
 									{% for participant in sortie.participants %}
@@ -165,26 +163,27 @@
 										{% endif %}
 									{% endif %}
 									{% if app.user.mail != sortie.organisateur.mail %}
-										{% if sortie.etat.libelle == 'Ouverte' %}
-											{# todo: ajouter le if :relation avec une sortie spécifique, si on participe pas, on peut s'inscrire #}
-											{% set value = '0' %}
-											{% for participant in sortie.participants %}
-												{% if participant.id == app.user.id %}
-													{% set value = '1'%}
+												{# todo: ajouter le if :relation avec une sortie spécifique, si on participe pas, on peut s'inscrire #}
+												{% set value = '0' %}
+												{% for participant in sortie.participants %}
+													{% if participant.id == app.user.id %}
+														{% set value = '1'%}
+													{% endif %}
+												{% endfor %}
+											{% if sortie.etat.libelle == 'Ouverte' %}
+												{% if sortie.participants | length != sortie.nbInscriptionsMax %}
+													{% if value == 0 %}
+													<a
+														href="{{ path('sortie_ajoutPraticipant',{'idS' : sortie.id, 'idP': app.user.id, 'clic' : 'inscrire'} )}}" class="AncreBtnTableau">
+														Participer</a>
+													{% endif %}
 												{% endif %}
-											{% endfor %}
-											{% if value == 0 %}
-											<a
-												href="{{ path('sortie_ajoutPraticipant',{'idS' : sortie.id, 'idP': app.user.id} )}}" class="AncreBtnTableau">
-												Participer</a>
-											{% elseif value == 1 %}
-											<a
-												href="{{ path('sortie_suppPraticipant',{'idS' : sortie.id, 'idP': app.user.id} )}}" class="AncreBtnTableau">
-												Se désister</a>
 											{% endif %}
-											
-
-										{% endif %}
+												{% if value == 1 and desister == true %}
+												<a
+													href="{{ path('sortie_suppPraticipant',{'idS' : sortie.id, 'idP': app.user.id, 'clic' : 'desister'} )}}" class="AncreBtnTableau">
+													Se désister</a>
+												{% endif %}
 								{% endif %}
 								{% if sortie.etat.libelle == 'Cloturée' %}
 									{% if app.user.actif == 1  %}
