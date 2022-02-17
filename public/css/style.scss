@@ -282,7 +282,7 @@ body {
                 white-space: nowrap;
             }
             td.nomSortie:hover {
-                transform: scale(0.98);
+                transform: scale(1.01);
                 background-color: rgba(244, 169, 128, 0.509);
                 margin: 0px;
             }
@@ -290,6 +290,7 @@ body {
                 background-color: rgba(230, 179, 134, 0.475);
                 padding: 0.5em;
                 font-size: large;
+                width: auto;
                 a {
                     display: -webkit-box;
                     display: -webkit-flex;

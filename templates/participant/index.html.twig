@@ -7,7 +7,8 @@
 	<div>
 		<h1>Participant index</h1>
 
-		<table class="table">
+		<table
+			class="table">
 			<thead>
 				<tr>
 					<th>Pseudo</th>
@@ -25,34 +26,24 @@
 			</thead>
 			<tbody>
 				{% for participant in participants %}
-					<tr>
-						<td>{{ participant.pseudo }}</td>
-						<td>{{ participant.nom }}</td>
-						<td>{{ participant.prenom }}</td>
-						<td>{{ participant.mail }}</td>
-						{# <td>{{ participant.id }}</td> #}
-						{#<td>{{ participant.roles ? participant.roles|json_encode : '' }}</td>#}
-						{# <td>{{ participant.password }}</td> #}
-						{# <td>{{ participant.telephone }}</td> #}
-						{# <td>{{ participant.administrateur ? 'Yes' : 'No' }}</td> #}
-						{# <td>{{ participant.actif ? 'Yes' : 'No' }}</td> #}
-						
-						{# TODO:  à supp si inutile #}
-						{# {% if app.user.mail == participant.mail %}
-						<td class="CelluleBtnTableau"> 
-							<a href="{{ path('profil_show', {'id': participant.id}) }}">show</a>
-							<a href="{{ path('profil_edit', {'id': participant.id}) }}">edit</a>
-						</td>
-						{% endif %} #}
-					</tr>
-				{% else %}
-					<tr>
-						<td colspan="11">no records found</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+					<div>
+						<tr>
+							<td
+								class="nomSortie">
 
-		{# <a href="{{ path('app_register') }}">S'inscrire</a> #}
-	</div>
-{% endblock %}
+								<a
+									href="{{ path('profil_edit', {'id': participant.id}) }}">{{ participant.pseudo }}</a>
+							</td>
+					</td>
+					<td>{{ participant.nom }}</td>
+					<td>{{ participant.prenom }}</td>
+					<td>{{ participant.mail }}</td>
+				</tr>
+		</div>
+	{% else %}
+		<tr>
+			<td
+				colspan="11">Pas de participant trouvé</td>
+		</tr>
+	{% endfor %}
+</tbody></table></div>{% endblock %}
