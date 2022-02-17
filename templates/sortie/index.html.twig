@@ -12,13 +12,15 @@
 				{{  app.user.pseudo }}
 			{% endif %}
 		</h3>
-		<form method="post" action="">
+		<form
+			method="post"
+			action="">
 			<label>Campus :
 			</label>
 			<select
 				name="campusSelect">
 				<option
-						value="default">Choisir un campus</option>
+					value="default">Choisir un campus</option>
 				{% for campus in campuses %}
 					<option
 						value="{{ campus.id }}">{{campus.nom}}</option>
@@ -31,51 +33,42 @@
 			<label>Entre :
 			</label>
 			<input
-					name="dateDebut" value = "{{ date.format('Y-m-d') }}"
-					type="date">
+				name="dateDebut"
+				type="date">
 			<label>et</label>
 			<input
-					name="dateFin"  value = "{{ date.format('Y-m-d') }}"
-					type="date">
+				name="dateFin"
+				type="date">
 			<div>
 				<input
-						name="nouveaute"
-						type="checkbox"
-						value="3"
-						checked>
+					name="nouveaute"
+					type="checkbox"
+					value="3"
+					checked>
 				<label>Nouveautés</label>
 				<input
-						name="organisateur"
-						type="checkbox"
-						value="1">
+					name="organisateur"
+					type="checkbox"
+					value="1">
 				<label>Organisateur-trice</label>
 				<input
-						name="inscrit"
-						type="checkbox"
-						value="2">
+					name="inscrit"
+					type="checkbox"
+					value="2">
 				<label>Inscrit-e</label>
 				<input
-						name="passee"
-						type="checkbox"
-						value="4">
+					name="passee"
+					type="checkbox"
+					value="4">
 				<label>Joyeux Souvenirs</label>
 				<button
-						type="submit">Rechercher</button>
+					type="submit">Rechercher</button>
 			</div>
 		</form>
 	</div>
 
-	<div></div>
-
-
 	{# FORMULAIRE SORTIE #}
 	<div>
-		{% for register in app.flashes('register') %}
-			{{ register }}
-		{% endfor %}
-		{% for notice in app.flashes('notice') %}
-			{{ notice }}
-		{% endfor %}
 		<h1>Sorties disponibles</h1>
 		<div
 			class="scrollBox">
@@ -132,13 +125,15 @@
 								{% if app.user %}
 									{% for participant in sortie.participants %}
 										{% if participant.id == app.user.id %}
-											X
+											O
 										{% endif %}
 									{% endfor %}
 								{% endif %}
 							</td>
 							<td>
-								<a href="{{ path('profil_id',{ id : sortie.organisateur.id}) }}">{{sortie.organisateur.pseudo}}</a></td>
+								<a
+									href="{{ path('profil_id',{ id : sortie.organisateur.id}) }}">{{sortie.organisateur.pseudo}}</a>
+							</td>
 							{% if app.user %}
 								<td
 									class="CelluleBtnTableau">
@@ -157,7 +152,7 @@
 											<a
 												href="{{ path('sortie_edit',{'id' : sortie.id})}}" class="AncreBtnTableau">Modifier</a>
 											{# todo: rediriger vers la page annulation (de edit_etat)
-																																																																				<a href="{{ path('edit_etat',{'id' : sortie.id} )}}">Annuler</a>#}
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																<a href="{{ path('edit_etat',{'id' : sortie.id} )}}">Annuler</a>#}
 										{% endif %}
 										{% if sortie.etat.libelle == 'Annulée' %}
 											<a
@@ -166,64 +161,47 @@
 											<a
 												href="{{ path('sortie_edit',{'id' : sortie.id} )}}" class="AncreBtnTableau">Republier</a>
 											{# todo: rediriger vers la page annulation (de edit_etat)
-																																																																				<a href="{{ path('etat_edit',{'id' : sortie.id} )}}">Supprimer</a>#}
+																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																<a href="{{ path('etat_edit',{'id' : sortie.id} )}}">Supprimer</a>#}
 										{% endif %}
 									{% endif %}
-									{# todo: Changer les cjumeline par les {organisateur.id ou .mail} #}
 									{% if app.user.mail != sortie.organisateur.mail %}
 										{% if sortie.etat.libelle == 'Ouverte' %}
-											{% if app.user.actif == 0  %}
-												{# todo: ajouter le if :relation avec une sortie spécifique, si on participe pas, on peut s'inscrire #}
-												<a
-													href="{{ path('sortie_edit',{'id' : sortie.id} )}}" class="AncreBtnTableau">Participer</a>
-												<a
-													href="{{ path('sortie_edit',{'id' : sortie.id} )}}" class="AncreBtnTableau">Se désister</a>
+											{# todo: ajouter le if :relation avec une sortie spécifique, si on participe pas, on peut s'inscrire #}
+											{% set value = '0' %}
+											{% for participant in sortie.participants %}
+												{% if participant.id == app.user.id %}
+													{% set value = '1'%}
+												{% endif %}
+											{% endfor %}
+											{% if value == 0 %}
+											<a
+												href="{{ path('sortie_ajoutPraticipant',{'idS' : sortie.id, 'idP': app.user.id} )}}" class="AncreBtnTableau">
+												Participer</a>
+											{% elseif value == 1 %}
+											<a
+												href="{{ path('sortie_suppPraticipant',{'idS' : sortie.id, 'idP': app.user.id} )}}" class="AncreBtnTableau">
+												Se désister</a>
 											{% endif %}
+											
+
 										{% endif %}
-										{% if sortie.etat.libelle == 'Cloturée' %}
-											{% if app.user.actif == 1  %}
-												<a
-													href="{{ path('sortie_edit',{'id' : sortie.id} )}}" class="AncreBtnTableau">Se désister</a>
-											{% endif %}
-										{% endif %}
+								{% endif %}
+								{% if sortie.etat.libelle == 'Cloturée' %}
+									{% if app.user.actif == 1  %}
+										<a
+											href="{{ path('sortie_edit',{'id' : sortie.id} )}}" class="AncreBtnTableau">Se désister</a>
 									{% endif %}
-								</td>
-							{% endif %}
-						</tr>
-					{% else %}
-						<tr>
-							<td
-								colspan="9">Aucune sorties</td>
-						</tr>
-					{% endfor %}
-				</tbody>
-			</table>
-		</div>
-
-
+								{% endif %}
+							</td>
+						{% endif %}
+					</tr>
+				{% else %}
+					<tr>
+						<td
+							colspan="9">Aucune sorties</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
 	</div>
-
-	{{ "now" |format_datetime('long', 'short', locale='fr') }}
-
-
-	{# <a href="{{ path('sortie_new') }}">Creer une nouvelle Sortie</a> #}
-{% endblock %}
-
-
-{# {% if sortie == 'Afficher' %}
-                        <td>
-                            <a href="{{ path('sorties_details',{ id : sortie[0]}) }}">{{ sortie[i]}}</a>
-                        </td>
-                    {% elseif sortie[i] == 'Modifier' %}
-                        <td>
-                            <a href="{{ path('sorties_edit',{ id : sortie[0]}) }}">{{ sortie[i]}}</a>
-                        </td>
-                    {% else %}
-                            <td>{{ sortie[i]}}</td>
-                    {% endif %}#}
-
-
-{# //__________________________________________________________ #}
-{# // TODO: à vois si l'on ne dois pas mettre la connnexion en premier
-car sur la maquette la premier page est la connexion
- de sorte que seul les étudiant puissent voir les sorties  #}
+</div>{% endblock %}

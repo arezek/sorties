@@ -19,40 +19,6 @@ class SortieRepository extends ServiceEntityRepository
         parent::__construct($registry, Sortie::class);
     }
 
-    public function rechercherSortieFlitree (int $idCampus){
-        //$queryBuilder = $this->createQueryBuilder('sortie');
-        //$queryBuilder->from('sortie', 's');
-
-
-
-
-        /*
-         * $queryBuilder = $this->createQueryBuilder('sortie');
-        $queryBuilder->select('c.nom, s.nom, s.id');
-        $queryBuilder->from('App\Entity\Campus', 'c');
-        $queryBuilder->from('App\Entity\Sortie', 's');
-        $queryBuilder->where('c.id = 3');
-
-        //$queryBuilder->where('sortie.id = :id');
-        //$queryBuilder->setParameter('id', $idCampus); //remplace le :id
-        //$queryBuilder->groupBy('s.id');
-        $query = $queryBuilder->getQuery();
-
-        $resultats = $query->getResult();
-        dd($resultats);
-         */
-
-        //$queryBuilder->where('s.id = :id');
-        //$queryBuilder->setParameter('id', $idCampus); //remplace le :id
-        //$queryBuilder->groupBy('');
-        //$query = $queryBuilder->getQuery();
-
-        //$resultats = $query->getResult();
-        //dd($resultats);
-
-        //return $resultats;
-    }
-
     // /**
     //  * @return Sortie[] Returns an array of Sortie objects
     //  */

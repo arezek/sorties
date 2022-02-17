@@ -3,14 +3,13 @@
 namespace App\Controller;
 
 
-
 use App\Repository\CampusRepository;
 use App\Repository\SortieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\Validator\Constraints\Date;
 
 class MainController extends AbstractController
 {
@@ -22,14 +21,9 @@ class MainController extends AbstractController
         //todo : quand la date d'un evenemnt est à J+1 ou meme minute +1 : mettre l'état a 'passé'.
         //todo : quand la possibilité de s'inscrire est passée, on met l'état a 'cloturé'.
 
-        $sorties = $sortieRepository->findAll();
-
-
         //Searchbar :
         //Nom : campusSelect / motRecherche / dateDebut / dateFin / nouveaute / organisateur / inscrit / passee
-
-        $date = new \DateTime('now');
-
+        //TODO : préremplir les dates à aujourd'hui
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $options = array(
                 $campusRepository->find($_POST['campusSelect']),
@@ -44,12 +38,7 @@ class MainController extends AbstractController
 
             for ($i = 0; $i < count($options) ; $i++) {
                 if (!is_null($options[$i]) && $options[$i] == true && $options[$i] != ""){
-                    $campusChoisi = $campusRepository->filtreCampus($options[$i]->getId());
-
-                    // $sorties = $sortieRepository->rechercherSortieFiltree($campusChoisi);
-                    $sorties = $sortieRepository->findAll();
-
-                    dump($sorties);
+                    dump($options[$i]);
                 }
             }
 
@@ -64,9 +53,8 @@ class MainController extends AbstractController
 
 
         return $this->render('sortie/index.html.twig', [
-            'sorties' => $sorties,
+            'sorties' => $sortieRepository->findAll(),
             'campuses' => $campusRepository->findAll(),
-            'date' => $date,
         ]);
     }
 

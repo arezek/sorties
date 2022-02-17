@@ -19,26 +19,6 @@ class CampusRepository extends ServiceEntityRepository
         parent::__construct($registry, Campus::class);
     }
 
-    //On retourne l'id du campus selectionné
-    public function filtreCampus (int $id){
-        $queryBuilder = $this->createQueryBuilder('campus');
-        $queryBuilder->where('campus.id = :id');
-        $queryBuilder->setParameter('id', $id);
-        $query = $queryBuilder->getQuery();
-
-        $resultats = $query->getResult();
-
-        return $resultats[0]->getId();
-    }
-    /*
-     * for($i = 0; $i < count($resultats); $i++){
-            if ($resultats[$i]->getLibelle() == $libelle){
-                return $resultats[$i];
-            }
-        }
-     */
-
-
     // /**
     //  * @return Campus[] Returns an array of Campus objects
     //  */

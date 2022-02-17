@@ -111,7 +111,7 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     private $pseudo;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Sortie::class, inversedBy="participants",cascade={"persist"})
+     * @ORM\ManyToMany(targetEntity=Sortie::class, inversedBy="participants")
      */
     private $sorties;
 
@@ -306,12 +306,6 @@ class Participant implements UserInterface, PasswordAuthenticatedUserInterface
     public function getSorties(): Collection
     {
         return $this->sorties;
-    }
-    public function setSorties(Sortie $sorty): self
-    {
-        $this->sorties = $sorty;
-
-        return $this;
     }
 
     public function addSorty(Sortie $sorty): self
