@@ -76,7 +76,6 @@ body {
     background-color: rgb(36, 34, 34);
     background-image: url('../img/principal_wallpaper90D.jpg');
     background-size: cover;
-    background-repeat: no-repeat;
     background-attachment: fixed;
     @include GapGeneral;
     display: grid;
@@ -97,11 +96,12 @@ body {
             display: -webkit-box;
             display: -ms-flexbox;
             display: flex;
+            padding: 0.1em;
             -webkit-box-align: center;
             -ms-flex-align: center;
             align-items: center;
             a {
-                 :hover {
+                :hover {
                     -webkit-transition: all 2s ease;
                     transition: all 2s ease;
                     -webkit-transform: scale(1.10);
@@ -156,14 +156,14 @@ body {
             font-size: large;
             font-weight: bold;
             flex-wrap: wrap;
-             :hover {
+            :hover {
                 -webkit-transition: all 0.2s ease;
                 transition: all 0.2s ease;
                 -webkit-transform: scale(1.05);
                 transform: scale(1.05);
                 background-color: rgba(124, 67, 36, 0.563);
             }
-             :active {
+            :active {
                 -webkit-transform: scale(1.15);
                 transform: scale(1.15);
             }
@@ -461,6 +461,23 @@ body {
                     flex-direction: column;
                 }
             }
+        }
+    }
+}
+
+@media only screen and (max-width: 800px) {
+    header {
+        @include borderTest();
+        // display: unset;
+        display: block;
+        grid: unset;
+        // grid-template-columns: auto auto;
+        .logoEnTete {
+            // display: bl;
+            // flex-direction: column;
+        }
+        nav {
+            @include borderTest(); // display: unset; // display: inline;
         }
     }
 }
