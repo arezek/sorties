@@ -62,19 +62,31 @@ class MainController extends AbstractController
         for ($i = 0; $i < count($sortie); $i ++){
             $dateInscriptionSortie = $sortie[$i]->getDateLimiteInscription();
             $dateSortieDebut = $sortie[$i]->getDateHeureDebut();
+            $duree = $sortie[$i]->getDuree()->format("Hi");
+
             $etatDeBase = $sortie[$i]->getEtat();
 
+            if ($ajdh < $dateInscriptionSortie){
+                if ($etatDeBase->getLibelle() == "Passée" || $etatDeBase->getLibelle() == "Cloturée"){
+                    $etatTemp = $etatRepository->findByLibelle("Ouverte");
+                } else {
+                    $etatTemp = $etatRepository->findByLibelle($etatDeBase->getLibelle());
+                }
+            }
+
             if ($ajdh > $dateInscriptionSortie){
-                if ($ajdh > $dateSortieDebut){
-                    $etatTemp = $etatRepository->findByLibelle("Passée");
+                if ($ajdh >= $dateSortieDebut){
+                    if ($ajdh->format("Hi") <= $duree . $ajdh->format("Hi")){
+                        $etatTemp = $etatRepository->findByLibelle("En Cours");
+                    } else {
+                        $etatTemp = $etatRepository->findByLibelle("Passée");
+                    }
                 }
                 if ($ajdh < $dateSortieDebut){
                     $etatTemp = $etatRepository->findByLibelle("Cloturée");
                 }
             }
-            if ($ajdh < $dateInscriptionSortie){
-                $etatTemp = $etatRepository->findByLibelle($etatDeBase->getLibelle());
-            }
+
 
             if (count($sortie[$i]->getParticipants()) == $sortie[$i]->getNbInscriptionsMax()){
                 $desister = true;
@@ -87,6 +99,7 @@ class MainController extends AbstractController
 
 
         return $this->render('sortie/index.html.twig', [
+            'date' => $ajdh,
             'desister' => $desister,
             'sorties' => $sortieRepository->findAll(),
             'campuses' => $campusRepository->findAll(),
