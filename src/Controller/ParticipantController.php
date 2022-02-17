@@ -67,8 +67,8 @@ class ParticipantController extends AbstractController
         $participantMail = $participantRepository->findByMail($participant->getMail());
         $userMail = $user->getUserIdentifier();
         
-        
-        if ($participantMail != $userMail) {
+
+        if ($participantMail != $userMail && $participant->getAdministrateur() != false) {
             
             return $this->redirectToRoute('profil_show', ['id' => $participant->getId()], Response::HTTP_SEE_OTHER);
             
