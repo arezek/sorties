@@ -10,6 +10,8 @@ use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mailer\Mailer;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Csrf\CsrfToken;
+use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Contracts\Service\ResetInterface;
 
@@ -68,6 +70,9 @@ class SecurityController extends AbstractController
                 return $this->redirectToRoute("app_login");
 
             } else {
+
+
+                //Vérifie bien si le mail existe. Affiche seulement un message. Il faut faire en sorte que cela envoie un mail avec le mot de passe.
 
 
                 $this->addFlash('warning', "Un email a été envoyé");
