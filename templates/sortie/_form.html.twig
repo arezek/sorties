@@ -88,7 +88,7 @@
 	{% endif %}
 
 	{% if creer != 'oui' %}
-		{% if sortie.etat.libelle  == 'Ouverte' %}
+		{% if sortie.etat.libelle  == 'Ouverte' or sortie.etat.libelle  == 'Cloturée' %}
 			<button
 					class="btn"
 					name="Ouverte"
