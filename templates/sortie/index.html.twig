@@ -187,7 +187,7 @@
 													{% endif %}
 												{% endif %}
 											{% endif %}
-												{% if value == 1 and desister == true %}
+												{% if value == 1 %}
 												<a
 													href="{{ path('sortie_suppPraticipant',{'idS' : sortie.id, 'idP': app.user.id, 'clic' : 'desister'} )}}" class="AncreBtnTableau">
 													Se désister</a>

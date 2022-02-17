@@ -25,6 +25,8 @@ class MainController extends AbstractController
         //////////////////////////// SearchBar /////////////////////////////////////////////
         $sortie = $sortieRepository->findAll();
         $sorties = $sortieRepository->findAll();
+        $sortieFlitree = array();
+
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $options = array(
                 $campusRepository->find($_POST['campusSelect']),
@@ -42,15 +44,16 @@ class MainController extends AbstractController
                 if ($campus != null){
                     for ($i = 0; $i < count($sorties) ; $i++) {
                         if ($sorties[$i]->getCampus() === $campus) {
-                            $sorties[$i]->removeParticipant();
-                        }
+                            array_push($sortieFlitree, $sorties[$i]);
                         }
                     }
-
                 }
-
-
             }
+        }
+
+
+
+
 
         //////////////////////////// Gestion des cases du tableau 'ETAT' /////////////////////////////////////////////
         $ajdh = new \DateTime();
@@ -84,57 +87,29 @@ class MainController extends AbstractController
                 }
             }
 
+            dump(count($sortie[$i]->getParticipants()) . 'et' .
+                $sortie[$i]->getNbInscriptionsMax());
+            dump($sortie[$i]->getNbInscriptionsMax());
 
-            if (count($sortie[$i]->getParticipants()) == $sortie[$i]->getNbInscriptionsMax()){
-                $desister = true;
-            }
-            /////////////////////////// Fin Gestion des cases du tableau 'ETAT' /////////////////////////////////////////////
+
             $sortie[$i]->setEtat($etatTemp);
             $entityManager->persist($sortie[$i]);
             $entityManager->flush();
         }
+        /////////////////////////// Fin Gestion des cases du tableau 'ETAT' /////////////////////////////////////////////
 
+        //
+        if ($sortieFlitree != null){
+            $sorties=$sortieFlitree;
+        }
 
         return $this->render('sortie/index.html.twig', [
             'creer' => 'non',
             'date' => $ajdh,
-            'desister' => $desister,
-            'sorties' => $sortieRepository->findAll(),
+            'sorties' => $sorties,
             'campuses' => $campusRepository->findAll(),
         ]);
     }
-
-//{CS}/{MR}/{DD}/{DF}/{N}/{O}/{I}/{P}
-    /**
-     * @Route("/", name="main_filtres")
-     */
-    public function filtres(EntityManagerInterface $entityManager, EtatRepository $etatRepository, SortieRepository $sortieRepository, CampusRepository $campusRepository, Request $request): Response
-    {
-        $ajdh = new \DateTime();
-        $desister = false;
-
-        //Searchbar :
-        //Nom : campusSelect / motRecherche / dateDebut / dateFin / nouveaute / organisateur / inscrit / passee
-
-
-
-        //$villeTemp = $villeRepository->find($_POST['optionSelectVille']);
-        //$campusTemp = $campusRepository->find($_POST['optionSelectCampus']);
-        //$tok = strtok($_POST['optionSelectLieu'], " /");
-        //$lieuTemp = $lieuRepository->find($tok);
-        //dump($sorties);
-        //todo : trier en conséquence
-        //$sorties = "";
-        return $this->render('sortie/index.html.twig', [
-            'creer' => 'non',
-            'date' => $ajdh,
-            'desister' => $desister,
-            'sorties' => $sortieRepository->findAll(),
-            'campuses' => $campusRepository->findAll(),
-        ]);
-    }
-
-
 
 
 }
