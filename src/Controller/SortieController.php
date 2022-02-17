@@ -53,7 +53,7 @@ class SortieController extends AbstractController
             $sortie->setEtat($etatTemp);
         }
 
-        if ($form->isSubmitted() && $form->isValid()) {
+        if ($form->isSubmitted() && $form->isValid() ) {
             $villeTemp = $villeRepository->find($_POST['optionSelectVille']);
             $campusTemp = $campusRepository->find($_POST['optionSelectCampus']);
             $tok = strtok($_POST['optionSelectLieu'], " /");
@@ -69,7 +69,7 @@ class SortieController extends AbstractController
 
                 return $this->redirectToRoute('main_index', [], Response::HTTP_SEE_OTHER);
             } else {
-                $this->addFlash('message', ' selectionnez une valeur');  //todo : flash : selectionnez une valeur
+                $this->addFlash('message', ' selectionnez une valeur');  //todo : flash : selectionnez une valeur = fait
             }
         }
 

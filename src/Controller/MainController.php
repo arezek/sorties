@@ -26,7 +26,7 @@ class MainController extends AbstractController
 
         //Searchbar :
         //Nom : campusSelect / motRecherche / dateDebut / dateFin / nouveaute / organisateur / inscrit / passee
-        //TODO : préremplir les dates à aujourd'hui
+        //TODO : préremplir les dates à aujourd'hui  = fait
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $options = array(
                 $campusRepository->find($_POST['campusSelect']),
