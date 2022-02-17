@@ -76,18 +76,7 @@
 <div
 	class="btnSousFormulaire">
 
-	{% if sortie.etat != 'Ouverte' and sortie.etat != 'Créée' and sortie.etat != 'Annulée' %}
-		<button
-			class="btn"
-			name="Créée"
-			value="Créée">Enregistrer</button>
-		<button
-			class="btn"
-			name="Ouverte"
-			value="Ouverte">Publier</button>
-	{% endif %}
-
-	{% if sortie.etat == 'Ouverte' %}
+	{% if sortie.etat.libelle  == 'Ouverte' %}
 		<button
 			class="btn"
 			name="Ouverte"
@@ -95,10 +84,10 @@
 		<button
 			class="btn"
 			name="Annulée"
-			value="Annulée">Annuler</button>
+			value="Annulée">Annuler la sortie</button>
 	{% endif %}
 
-	{% if sortie.etat == 'Créée' %}
+	{% if sortie.etat.libelle  == 'Créée' %}
 		<button
 			class="btn"
 			name="Ouverte"
@@ -110,10 +99,10 @@
 		<button
 			class="btn"
 			name="Annulée"
-			value="Annulée">Annuler</button>
+			value="Annulée">Annuler la sortie</button>
 	{% endif %}
 
-	{% if sortie.etat == 'Annulée' %}
+	{% if sortie.etat.libelle  == 'Annulée' %}
 		<button
 			class="btn"
 			name="Ouverte"

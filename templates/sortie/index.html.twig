@@ -110,14 +110,18 @@
 								{% if sortie.etat.libelle == 'Ouverte' %}
 									Ouverte
 								{% endif %}
-								{% if sortie.etat.libelle == 'Cloturée' or sortie.etat.libelle == 'Passée' or sortie.etat.libelle == 'Fermée' %}
+								{% if sortie.etat.libelle == 'Cloturée' %}
+									Clôturée
+								{% endif %}
+								{% if sortie.etat.libelle == 'Passée' %}
+									Passée
+								{% endif %}
+								{% if sortie.etat.libelle == 'Fermée'%}
 									Fermée
 								{% endif %}
-								{# todo: dans main controller, gérer les dates pour afficher si activité en cours ou terminée #}
 								{% if sortie.etat.libelle == 'En Cours' %}
 									En cours
 								{% endif %}
-
 							</td>
 							<td>
 								{% if app.user %}
@@ -146,7 +150,7 @@
 												value="Ouverte">Publier</a>
 
 										{% endif %}
-										{% if sortie.etat.libelle == 'Ouverte' %}
+										{% if sortie.etat.libelle == 'Ouverte' or sortie.etat.libelle == 'Cloturée'%}
 											<a
 												href="{{ path('sortie_edit',{'id' : sortie.id})}}" class="AncreBtnTableau">Modifier</a>
 											{# todo: rediriger vers la page annulation (de edit_etat)

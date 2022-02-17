@@ -114,6 +114,8 @@ class SortieController extends AbstractController
         } else if (isset($_POST['Annulée'])) {
             $etatTemp = $etatRepository->findByLibelle("Annulée");
             $sortie->setEtat($etatTemp);
+            //todo: crud de etat pour etat_edit pour justifier via un form pourquoi on annule une sortie (dedans, intégrer le etatTemp)
+            //return $this->redirectToRoute('main_index', [], Response::HTTP_SEE_OTHER);
         }
 
         $sortie->setDateHeureDebut($sortie->getDateHeureDebut());

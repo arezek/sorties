@@ -55,19 +55,34 @@ class MainController extends AbstractController
         }
 
         $sortie = $sortieRepository->findAll();
-        $Ajdh = new \DateTime();
-        $test = $sortie[2]->getDateLimiteInscription();
-
-        if ($Ajdh < $test){
-
-        }
+        $ajdh = new \DateTime();
 
         $desister = false;
         //Conditions pour l'état d'une sortie :
         for ($i = 0; $i < count($sortie); $i ++){
+            $dateInscriptionSortie = $sortie[$i]->getDateLimiteInscription();
+            $dateSortieDebut = $sortie[$i]->getDateHeureDebut();
+            $etatDeBase = $sortie[$i]->getEtat();
+
+            if ($ajdh > $dateInscriptionSortie){
+                if ($ajdh > $dateSortieDebut){
+                    $etatTemp = $etatRepository->findByLibelle("Passée");
+                }
+                if ($ajdh < $dateSortieDebut){
+                    $etatTemp = $etatRepository->findByLibelle("Cloturée");
+                }
+            }
+            if ($ajdh < $dateInscriptionSortie){
+                $etatTemp = $etatRepository->findByLibelle($etatDeBase->getLibelle());
+            }
+
             if (count($sortie[$i]->getParticipants()) == $sortie[$i]->getNbInscriptionsMax()){
                 $desister = true;
             }
+
+            $sortie[$i]->setEtat($etatTemp);
+            $entityManager->persist($sortie[$i]);
+            $entityManager->flush();
         }
 
 
