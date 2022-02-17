@@ -99,6 +99,7 @@ class MainController extends AbstractController
 
 
         return $this->render('sortie/index.html.twig', [
+            'creer' => 'non',
             'date' => $ajdh,
             'desister' => $desister,
             'sorties' => $sortieRepository->findAll(),
