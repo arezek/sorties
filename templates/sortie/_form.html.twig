@@ -45,7 +45,7 @@
 				{% endfor %}
 			</select>
 			<a
-				href="{{ path('lieu_new',{ id : id}) }}">Ajouter Lieu</a>
+				href="{{ path('lieu_new',{ id : app.user.id}) }}">Ajouter Lieu</a>
 		</div>
 		<div
 			class="affichageLieu">

@@ -21,9 +21,6 @@ class MainController extends AbstractController
         //todo : quand la date d'un evenemnt est à J+1 ou meme minute +1 : mettre l'état a 'passé'.
         //todo : quand la possibilité de s'inscrire est passée, on met l'état a 'cloturé'.
 
-        $sorties = $sortieRepository->findAll();
-
-
         //Searchbar :
         //Nom : campusSelect / motRecherche / dateDebut / dateFin / nouveaute / organisateur / inscrit / passee
         //TODO : préremplir les dates à aujourd'hui
@@ -56,7 +53,7 @@ class MainController extends AbstractController
 
 
         return $this->render('sortie/index.html.twig', [
-            'sorties' => $sorties,
+            'sorties' => $sortieRepository->findAll(),
             'campuses' => $campusRepository->findAll(),
         ]);
     }
