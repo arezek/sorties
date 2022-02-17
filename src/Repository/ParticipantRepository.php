@@ -21,7 +21,20 @@ class ParticipantRepository extends ServiceEntityRepository implements PasswordU
     {
         parent::__construct($registry, Participant::class);
     }
+    public function findByMail(string $mail)
+    {
 
+        $queryBuilder = $this->createQueryBuilder('participant');
+        $query = $queryBuilder->getQuery();
+
+        $resultats = $query->getResult();
+
+        for ($i = 0; $i < count($resultats); $i++) {
+            if ($resultats[$i]->getMail() == $mail) {
+                return $resultats[$i]->getMail();
+            }
+        }       
+    }
     /**
      * Used to upgrade (rehash) the user's password automatically over time.
      */

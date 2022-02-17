@@ -1,54 +1,60 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Profil{% endblock %}
+{% block title %}Profil
+{% endblock %}
 
 {% block body %}
-<div id="ShowParticipant">
-<h1>{{ participant.pseudo }}</h1>
+	<div
+		id="ShowParticipant">
+		<h1>{{ participant.pseudo }}</h1>
+		<table
+			class="tableParticipant">
+			<tbody>
 
+				<tr>
+					<th>Prenom</th>
+					<td>{{ participant.prenom }}</td>
+				</tr>
+				<tr>
+					<th>Nom</th>
+					<td>{{ participant.nom }}</td>
+				</tr>
+				{% if app.user.id == participant.id %}
 
-    <table class="tableParticipant">
-        <tbody>
+					<tr>
+						<th>Telephone</th>
+						<td>{{ participant.telephone }}</td>
+					</tr>
+					<tr>
+						<th>Mail</th>
+						<td>{{ participant.mail }}</td>
+					</tr>
+				{% endif %}
+				<tr>
+					<th>Campus</th>
+					<td>{{ participant.campus.nom }}</td>
+				</tr>
+				{% if (participant.administrateur == 1) %}
+					<tr>
+						<th>Administrateur</th>
+						<td>{{ participant.administrateur ? 'oui' : 'Non' }}</td>
+					</tr>
+				{% endif %}
 
-            <tr>
-                <th>Prenom</th>
-                <td>{{ participant.prenom }}</td>
-            </tr>
-            <tr>
-                <th>Nom</th>
-                <td>{{ participant.nom }}</td>
-            </tr>
-            {% if app.user.id == participant.id %}
-
-                <tr>
-                    <th>Telephone</th>
-                    <td>{{ participant.telephone }}</td>
-                </tr>
-                <tr>
-                    <th>Mail</th>
-                    <td>{{ participant.mail }}</td>
-                </tr>
-            {% endif %}
-            <tr>
-                <th>Campus</th>
-                <td>{{ participant.campus.nom }}</td>
-            </tr>
-            {% if (participant.administrateur == 1) %}
-                <tr>
-                    <th>Administrateur</th>
-                    <td>{{ participant.administrateur ? 'oui' : 'Non' }}</td>
-                </tr>
-            {% endif %}
-
-        </tbody>
-    </table>
-    <div>
-        {% if app.user.id == participant.id %}
-            <a href="{{ path('profil_edit', {'id': participant.id}) }}">Modifier</a>
-        {% endif %}
-    </div>
-    {% if app.user.id == participant.id %}
-        {{ include('participant/_delete_form.html.twig') }}
-    {% endif %}
-</div>
+			</tbody>
+		</table>
+		<div>
+			{% if app.user.id == participant.id %}
+				<a
+					href="{{ path('profil_edit', {'id': participant.id}) }}">Modifier</a>
+			{% endif %}
+		</div>
+		{% if app.user.id == participant.id %}
+			{{ include('participant/_delete_form.html.twig') }}
+		{% endif %}
+		<div>
+			<a
+				href="{{ path('profil_index') }}">Afficher la liste des Profile</a>
+		</div>
+	</div>
 {% endblock %}
