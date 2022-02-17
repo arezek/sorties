@@ -132,6 +132,11 @@ class SortieController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
 
+            if ($sortie->getDateHeureDebut() < $sortie->getDateLimiteInscription()){
+                $this->addFlash('notice', ' La date limite doit être avant la sortie !');
+                return $this->redirectToRoute('sortie_new', ['id'=> $id], Response::HTTP_SEE_OTHER);
+            }
+
             return $this->redirectToRoute('main_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -171,10 +176,12 @@ class SortieController extends AbstractController
         //Conditions pour l'état d'une sortie :
         if ($clic == "inscrire"){
             // todo : Checker aussi que l'évenement est pas en cours grace aux dates puis mettre le code d'en dessous
-            $etatTemp = $etatRepository->findByLibelle("Fermée");
-            $sortie->setEtat($etatTemp);
-            $entityManager->persist($sortie);
-            $entityManager->flush();
+            if (count($sortie->getParticipants()) == $sortie->getNbInscriptionsMax()){
+                $etatTemp = $etatRepository->findByLibelle("Fermée");
+                $sortie->setEtat($etatTemp);
+                $entityManager->persist($sortie);
+                $entityManager->flush();
+            }
         }
 
         $entityManager->persist($sortie);
