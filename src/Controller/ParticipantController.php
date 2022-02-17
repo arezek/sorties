@@ -66,19 +66,23 @@ class ParticipantController extends AbstractController
 
         $participantMail = $participantRepository->findByMail($participant->getMail());
         $userMail = $user->getUserIdentifier();
-        
-        
-        if ($participantMail != $userMail) {
-            
-            return $this->redirectToRoute('profil_show', ['id' => $participant->getId()], Response::HTTP_SEE_OTHER);
-            
-        }
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->persist($participant);
-            $entityManager->flush();
+        // $userId = $this->getUser()->getId(); ne pas supprimer
+        $userAdmin = $this->getUser()->getAdministrateur();
 
+        if ($participantMail != $userMail && $userAdmin == false) {
+            
             return $this->redirectToRoute('profil_show', ['id' => $participant->getId()], Response::HTTP_SEE_OTHER);
+            
+        } else {
+            if ($form->isSubmitted() && $form->isValid()) {
+                $entityManager->persist($participant);
+                $entityManager->flush();
+
+                return $this->redirectToRoute('profil_show', ['id' => $participant->getId()], Response::HTTP_SEE_OTHER);
+            }
+
         }
+
 
         return $this->renderForm('participant/edit.html.twig', [
             'participant' => $participant,
