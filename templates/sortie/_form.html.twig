@@ -76,38 +76,52 @@
 <div
 	class="btnSousFormulaire">
 
-	{% if sortie.etat.libelle  == 'Ouverte' %}
+	{% if creer == 'oui' %}
 		<button
-			class="btn"
-			name="Ouverte"
-			value="Ouverte">Publier les modifications</button>
+				class="btn"
+				name="Ouverte"
+				value="Ouverte">Publier</button>
 		<button
-			class="btn"
-			name="Annulée"
-			value="Annulée">Annuler la sortie</button>
+				class="btn"
+				name="Créée"
+				value="Créée">Enregistrer</button>
 	{% endif %}
 
-	{% if sortie.etat.libelle  == 'Créée' %}
-		<button
-			class="btn"
-			name="Ouverte"
-			value="Ouverte">Publier</button>
-		<button
-			class="btn"
-			name="Créée"
-			value="Créée">Enregistrer</button>
-		<button
-			class="btn"
-			name="Annulée"
-			value="Annulée">Annuler la sortie</button>
+	{% if creer != 'oui' %}
+		{% if sortie.etat.libelle  == 'Ouverte' %}
+			<button
+					class="btn"
+					name="Ouverte"
+					value="Ouverte">Publier les modifications</button>
+			<button
+					class="btn"
+					name="Annulée"
+					value="Annulée">Annuler la sortie</button>
+		{% endif %}
+
+		{% if sortie.etat.libelle  == 'Créée' %}
+			<button
+					class="btn"
+					name="Ouverte"
+					value="Ouverte">Publier</button>
+			<button
+					class="btn"
+					name="Créée"
+					value="Créée">Enregistrer</button>
+			<button
+					class="btn"
+					name="Annulée"
+					value="Annulée">Annuler la sortie</button>
+		{% endif %}
+
+		{% if sortie.etat.libelle  == 'Annulée' %}
+			<button
+					class="btn"
+					name="Ouverte"
+					value="Ouverte">Publier à nouveau</button>
+			{{ include('sortie/_delete_form.html.twig') }}
+		{% endif %}
 	{% endif %}
 
-	{% if sortie.etat.libelle  == 'Annulée' %}
-		<button
-			class="btn"
-			name="Ouverte"
-			value="Ouverte">Publier à nouveau</button>
-		{{ include('sortie/_delete_form.html.twig') }}
-	{% endif %}
 </div>
 {{ form_end(form) }}
