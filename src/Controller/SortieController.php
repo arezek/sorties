@@ -60,6 +60,13 @@ class SortieController extends AbstractController
             $lieuTemp = $lieuRepository->find($tok);
 
             if (!is_null($villeTemp && !is_null($lieuTemp) && !is_null($campusTemp))) {
+
+                if ($sortie->getDateHeureDebut() < $sortie->getDateLimiteInscription()){
+                    $this->addFlash('notice', ' La date limite doit être avant la sortie !');
+                    return $this->redirectToRoute('sortie_new', ['id'=> $id], Response::HTTP_SEE_OTHER);
+                }
+
+
                 $sortie->setCampus($campusTemp);
                 $sortie->setLieu($lieuTemp);
 
