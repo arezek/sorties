@@ -21,12 +21,10 @@ class MainController extends AbstractController
      */
     public function index(EntityManagerInterface $entityManager, EtatRepository $etatRepository, SortieRepository $sortieRepository, CampusRepository $campusRepository, Request $request): Response
     {
-        //todo : quand la date d'un evenemnt est à J+1 ou meme minute +1 : mettre l'état a 'passé'.
-        //todo : quand la possibilité de s'inscrire est passée, on met l'état a 'cloturé'.
 
-        //Searchbar :
-        //Nom : campusSelect / motRecherche / dateDebut / dateFin / nouveaute / organisateur / inscrit / passee
-        //TODO : préremplir les dates à aujourd'hui  = fait
+        //////////////////////////// SearchBar /////////////////////////////////////////////
+        $sortie = $sortieRepository->findAll();
+        $sorties = $sortieRepository->findAll();
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $options = array(
                 $campusRepository->find($_POST['campusSelect']),
@@ -38,25 +36,24 @@ class MainController extends AbstractController
                 filter_has_var(INPUT_POST,'inscrit'),
                 filter_has_var(INPUT_POST,'passee'),
             );
+            $campus = $campusRepository->find($_POST['campusSelect']);
 
             for ($i = 0; $i < count($options) ; $i++) {
-                if (!is_null($options[$i]) && $options[$i] == true && $options[$i] != ""){
-                    dump($options[$i]);
+                if ($campus != null){
+                    for ($i = 0; $i < count($sorties) ; $i++) {
+                        if ($sorties[$i]->getCampus() === $campus) {
+                            $sorties[$i]->removeParticipant();
+                        }
+                        }
+                    }
+
                 }
+
+
             }
 
-            //$villeTemp = $villeRepository->find($_POST['optionSelectVille']);
-            //$campusTemp = $campusRepository->find($_POST['optionSelectCampus']);
-            //$tok = strtok($_POST['optionSelectLieu'], " /");
-            //$lieuTemp = $lieuRepository->find($tok);
-            //dump($sorties);
-            //todo : trier en conséquence
-            //$sorties = "";
-        }
-
-        $sortie = $sortieRepository->findAll();
+        //////////////////////////// Gestion des cases du tableau 'ETAT' /////////////////////////////////////////////
         $ajdh = new \DateTime();
-
         $desister = false;
         //Conditions pour l'état d'une sortie :
         for ($i = 0; $i < count($sortie); $i ++){
@@ -91,13 +88,43 @@ class MainController extends AbstractController
             if (count($sortie[$i]->getParticipants()) == $sortie[$i]->getNbInscriptionsMax()){
                 $desister = true;
             }
-
+            /////////////////////////// Fin Gestion des cases du tableau 'ETAT' /////////////////////////////////////////////
             $sortie[$i]->setEtat($etatTemp);
             $entityManager->persist($sortie[$i]);
             $entityManager->flush();
         }
 
 
+        return $this->render('sortie/index.html.twig', [
+            'creer' => 'non',
+            'date' => $ajdh,
+            'desister' => $desister,
+            'sorties' => $sortieRepository->findAll(),
+            'campuses' => $campusRepository->findAll(),
+        ]);
+    }
+
+//{CS}/{MR}/{DD}/{DF}/{N}/{O}/{I}/{P}
+    /**
+     * @Route("/", name="main_filtres")
+     */
+    public function filtres(EntityManagerInterface $entityManager, EtatRepository $etatRepository, SortieRepository $sortieRepository, CampusRepository $campusRepository, Request $request): Response
+    {
+        $ajdh = new \DateTime();
+        $desister = false;
+
+        //Searchbar :
+        //Nom : campusSelect / motRecherche / dateDebut / dateFin / nouveaute / organisateur / inscrit / passee
+
+
+
+        //$villeTemp = $villeRepository->find($_POST['optionSelectVille']);
+        //$campusTemp = $campusRepository->find($_POST['optionSelectCampus']);
+        //$tok = strtok($_POST['optionSelectLieu'], " /");
+        //$lieuTemp = $lieuRepository->find($tok);
+        //dump($sorties);
+        //todo : trier en conséquence
+        //$sorties = "";
         return $this->render('sortie/index.html.twig', [
             'creer' => 'non',
             'date' => $ajdh,
