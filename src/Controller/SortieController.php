@@ -96,8 +96,6 @@ class SortieController extends AbstractController
      */
     public function show(int $id, Sortie $sortie, SortieRepository $sortieRepository): Response
     {
-        //todo : accéder aux données de la table : participant_sortie sur phpmyadmin et comparer. Envoyer les pseudos vers le tableau
-        $sorties = $sortieRepository->find($id);
 
         return $this->render('sortie/show.html.twig', [
             'sortie' => $sortie,
