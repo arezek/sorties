@@ -69,6 +69,7 @@ class SecurityController extends AbstractController
 
             } else {
 
+
                 $this->addFlash('warning', "Un email a été envoyé");
                 return $this->redirectToRoute("main_index");
             }
