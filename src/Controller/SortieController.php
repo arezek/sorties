@@ -76,7 +76,7 @@ class SortieController extends AbstractController
 
                 return $this->redirectToRoute('main_index', [], Response::HTTP_SEE_OTHER);
             } else {
-                $this->addFlash('message', ' selectionnez une valeur');  //todo : flash : selectionnez une valeur = fait
+                $this->addFlash('message', ' selectionnez une valeur');
             }
         }
 
@@ -100,6 +100,19 @@ class SortieController extends AbstractController
         return $this->render('sortie/show.html.twig', [
             'sortie' => $sortie,
         ]);
+    }
+
+    /**
+     * @Route("/publier/{id}", name="sortie_publier", methods={"GET", "POST"})
+     */
+    public function publier(int $id, EtatRepository $etatRepository, Sortie $sortie, EntityManagerInterface $entityManager): Response
+    {
+         $etatTemp = $etatRepository->findByLibelle("Ouverte");
+         $sortie->setEtat($etatTemp);
+         $entityManager->flush();
+
+
+        return $this->redirectToRoute('main_index', [], Response::HTTP_SEE_OTHER);
     }
 
     /**
@@ -128,13 +141,13 @@ class SortieController extends AbstractController
         $sortie->setDateLimiteInscription($sortie->getDateLimiteInscription());
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager->flush();
 
             if ($sortie->getDateHeureDebut() < $sortie->getDateLimiteInscription()){
                 $this->addFlash('notice', ' La date limite doit être avant la sortie !');
                 return $this->redirectToRoute('sortie_new', ['id'=> $id], Response::HTTP_SEE_OTHER);
             }
 
+            $entityManager->flush();
             return $this->redirectToRoute('main_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -173,7 +186,6 @@ class SortieController extends AbstractController
 
         //Conditions pour l'état d'une sortie :
         if ($clic == "inscrire"){
-            // todo : Checker aussi que l'évenement est pas en cours grace aux dates puis mettre le code d'en dessous
             if (count($sortie->getParticipants()) == $sortie->getNbInscriptionsMax()){
                 $etatTemp = $etatRepository->findByLibelle("Fermée");
                 $sortie->setEtat($etatTemp);
@@ -200,7 +212,6 @@ class SortieController extends AbstractController
 
         //Conditions pour l'état d'une sortie :
         if ($clic == "desister"){
-            // todo : Checker aussi que l'évenement est pas en cours avec les dates grace aux dates puis mettre le code d'en dessous
             $etatTemp = $etatRepository->findByLibelle("Ouverte");
             $sortie->setEtat($etatTemp);
             $entityManager->persist($sortie);

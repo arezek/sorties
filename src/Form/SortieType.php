@@ -19,7 +19,6 @@ class SortieType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            //TODO : conditions sur la date de cloture et de sortie (cloture < creation mais pas dans le passé, sortie possible que futur
             ->add(
                 'nom',
                 TextType::class,

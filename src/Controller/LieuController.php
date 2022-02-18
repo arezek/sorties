@@ -49,7 +49,6 @@ class LieuController extends AbstractController
 
                 return $this->redirectToRoute('sortie_new', ['id'=>$id], Response::HTTP_SEE_OTHER);
             } else {
-                //todo: rajouter une erreur : merci de sélectionner une valeur pour la ville = fait
                 $this->addFlash('error', 'Merci de sélectionner une valeur pour la ville');
             }
         }

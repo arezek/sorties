@@ -41,7 +41,7 @@
 			<input
 				name="dateFin"
 				type="date"
-				value="{{ date.format('Y-m-d') }}">
+				value="{{ dateFin.format('Y-m-d') }}">
 			<div>
 				<input
 					name="nouveaute"
@@ -147,9 +147,8 @@
 										{% if sortie.etat.libelle == 'Créée' %}
 											<a
 												href="{{ path('sortie_edit',{'id' : sortie.id} )}}" class="AncreBtnTableau">Modifier</a>
-											{# todo: modifier comme bouton dans _form et modifier le mainController pour publier directement #}
 											<a
-												href="{{ path('sortie_edit',{'id' : sortie.id} )}}" class="AncreBtnTableau"
+												href="{{ path('sortie_publier',{'id' : sortie.id} )}}" class="AncreBtnTableau"
 												name="Ouverte"
 												value="Ouverte">Publier</a>
 
@@ -163,15 +162,15 @@
 										{% if sortie.etat.libelle == 'Annulée' %}
 											<a
 												href="{{ path('sortie_edit',{'id' : sortie.id} )}}" class="AncreBtnTableau">Modifier</a>
-											{# todo: modifier comme bouton dans _form et modifier le mainController pour publier directement #}
 											<a
-												href="{{ path('sortie_edit',{'id' : sortie.id} )}}" class="AncreBtnTableau">Republier</a>
+													href="{{ path('sortie_publier',{'id' : sortie.id} )}}" class="AncreBtnTableau"
+													name="Ouverte"
+													value="Ouverte">Republier</a>
 											{# todo: rediriger vers la page annulation (de edit_etat)
 																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																																<a href="{{ path('etat_edit',{'id' : sortie.id} )}}">Supprimer</a>#}
 										{% endif %}
 									{% endif %}
 									{% if app.user.mail != sortie.organisateur.mail %}
-												{# todo: ajouter le if :relation avec une sortie spécifique, si on participe pas, on peut s'inscrire #}
 												{% set value = '0' %}
 												{% for participant in sortie.participants %}
 													{% if participant.id == app.user.id %}

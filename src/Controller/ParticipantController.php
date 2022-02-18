@@ -34,10 +34,6 @@ class ParticipantController extends AbstractController
      */
     public function profil(ParticipantRepository $repository, int $id): Response
     {
-        //todo: afficher le nom du profil en title, si id = le miens un bouton apparait pour modifier le profil.
-        //todo: modifier le chemin de navbar car redirige vers le '2'
-        //todo : problème d'affichage du logo juste sur cette page...
-        // $participant = $repository->findAll();
         $participant = $repository->find($id);
 
         return $this->render('participant/show.html.twig', [
