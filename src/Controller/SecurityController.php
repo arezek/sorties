@@ -58,7 +58,6 @@ class SecurityController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
 
             $mail = $form->getData('mail');
-            var_dump($mail);
             $em = $this->getDoctrine()->getManager();
 
             $participant = $em->getRepository(Participant::class)

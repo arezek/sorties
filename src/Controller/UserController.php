@@ -29,7 +29,6 @@ class UserController extends AbstractController
     {
 
         $series = $part->findBy(['pseudo' => 'sdsdss']);
-        dump($series);
         return $this->render('main/rep.html.twig', [
             'series' => $series
         ]);
