@@ -292,9 +292,7 @@ body {
                     margin: 0px;
                 }
             }
-            td.nomSortie:hover {}
             td {
-                // background-color: rgba(230, 179, 134, 0.475);
                 background-color: rgba(181, 113, 84, 0.585);
                 padding: 0.5em;
                 font-size: large;
@@ -312,8 +310,6 @@ body {
             .CelluleBtnTableau {
                 // @include borderTest();
                 background-color: inherit;
-                // background-color: rgba(255, 255, 255, 0.489);
-                // display: grid;
                 display: -webkit-box;
                 display: -webkit-flex;
                 display: -ms-flexbox;
@@ -349,11 +345,11 @@ body {
         display: -ms-grid;
         display: grid;
         -ms-grid-columns: 10% auto;
-        grid-template-columns: 10% auto;
+        grid-template-columns: 20% auto;
         h3 {
             // @include borderTest();
             white-space: nowrap;
-            margin: auto;
+            // margin: auto;
         }
     }
     // ___________________________________________________________ Scroll
@@ -383,6 +379,10 @@ body {
                 display: block;
                 float: left;
             }
+        }
+        .mdpOublie {
+            text-align: center;
+            padding: 1em;
         }
     }
     // ___________________________________________________________________________Formulaire
