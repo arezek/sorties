@@ -20,7 +20,7 @@ class MainController extends AbstractController
     /**
      * @Route("/", name="main_index")
      */
-    public function index(UserInterface $user, EntityManagerInterface $entityManager, EtatRepository $etatRepository, SortieRepository $sortieRepository, CampusRepository $campusRepository, Request $request): Response
+    public function index( EntityManagerInterface $entityManager, EtatRepository $etatRepository, SortieRepository $sortieRepository, CampusRepository $campusRepository, Request $request): Response
     {
 
         //////////////////////////// SearchBar /////////////////////////////////////////////
@@ -34,11 +34,13 @@ class MainController extends AbstractController
         $sortieFlitreInscrit = array();
         $sortieFlitreHistorique = array();
 
+        $user = $this->getUser();
+
         $ajdh = new \DateTime();
         $dateFinRemplissage = new \DateTime();
         date_add($dateFinRemplissage, date_interval_create_from_date_string('1 month'));
 
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if ($_SERVER["REQUEST_METHOD"] == "POST" and $user->getUserIdentifier() != null) {
             $campus = $campusRepository->find($_POST['campusSelect']);
             $motRecherche = $_POST['motRecherche'];
             $dateDebut = $_POST['dateDebut'];
