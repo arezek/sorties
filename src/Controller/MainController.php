@@ -63,7 +63,6 @@ class MainController extends AbstractController
             }
             if ($motRecherche != null){
                     for ($i = 0; $i < count($sortieFlitreCampus) ; $i++) {
-                        dump(str_contains($sortieFlitreCampus[$i]->getNom(), $motRecherche ));
                         if (str_contains($sortieFlitreCampus[$i]->getNom(), $motRecherche )){
                             $sortieFlitreMot[] = $sortieFlitreCampus[$i];
                         }
@@ -116,7 +115,6 @@ class MainController extends AbstractController
             if ($organisateur != null){
                 for ($i = 0; $i < count($sortieFlitreNouveaute) ; $i++) {
                     $sortieOrga = $sortieFlitreNouveaute[$i]->getOrganisateur()->getMail();
-                    dump($sortieOrga);
                     if ($sortieOrga == $user->getUserIdentifier()){
                         $sortieFlitreOrganisateur[] = $sortieFlitreNouveaute[$i];
                     }
@@ -135,7 +133,6 @@ class MainController extends AbstractController
                                 $sortieFlitreInscrit[] = $sortieFlitreOrganisateur[$i];
                             }
                         }else {
-                            dump($sortieFlitreNouveaute);
                         }
                     }
                 }
